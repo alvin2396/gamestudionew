@@ -5,14 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-
   <link rel="stylesheet" href="/styles/custom.css" type="text/css">
   <link rel="stylesheet" href="/styles/theme.css" type="text/css"> </head>
 
 <body class="bg-dark">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="http://localhost:1337/"><p>LOGO</p></a>
+      <a class="navbar-brand" href="http://localhost:1337/">LOGO</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -141,71 +140,33 @@
     </div>
   </nav>
   <hr style="border: 1px solid white;" class="m-0 p-0 border border-info">
-  <div class="text-center text-white bg-dark py-1" style="background-image: url(&quot;image/background.jpg&quot;);">
-    <div class="container p-0 my-1">
-      <header>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox">
-            <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active">
-              <img src="image/Carousel 1.jpg" style="width: 100%;"> </div>
-            <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item">
-              <img src="image/Carousel 2.jpg" style="width: 100%;"> </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item">
-              <img src="image/Carousel 3.jpg" style="width: 100%;"> </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item">
-              <img src="image/Carousel 4.jpg" style="width: 100%;"> </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </header>
-    </div>
+  <div class="text-center text-white bg-dark py-1" style="background-image: url(&quot;/image/background.jpg&quot;);">
     <div class="container bg-light py-2 my-2" style="border-radius: 10px;">
       <div class="row">
         <div class="col-md-12">
-          <h4 class="text-center">
+          <h2 class="text-center">
             <b>
-              <a href="http://localhost:1337/games/popular/1" class="text-dark">POPULAR GAME</a>
+              <a href="http://localhost:1337/games/newgame/1" class="text-dark"> NEW GAME</a>
             </b>
-          </h4>
+          </h2>
         </div>
       </div>
       <div class="row">
-        <%  _.each(games,function(popular){ %>
-        <div class="col-md-3">
-          <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
+        <%  _.each(new_game,function(newgame){ %>
+        <div class="col-md-4 my-2">
+          <a href="http://localhost:1337/games/detailGame/<%= newgame.id %>"><img class="img-fluid d-block" src="<%= newgame.photo_url %>"></a>
           <div class="row">
-            <div class="col-md-12" style="height:35px;">
-              <h6 class="py-1 text-left m-0 judul">
-                <b><%= popular.game_name %></b>
+            <div class="col-md-12">
+              <h6 class="py-1 text-left m-0" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">
+                <b>
+                  <abbr title="<%= newgame.game_name %>" style="text-decoration:none;"><%= newgame.game_name %></abbr>
+                </b>
               </h6>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
-              <h6 class="py-1 m-0 text-left genre" style="font-size:14px;">
-                <%  _.each(popular.genreStrings,function(genre_list){ %>
-                          <a href="#">
-                            <%= genre_list.nama_genre %>,
-                          </a>
-                <%})%>
-              </h6>
+              <h6 class="py-1 m-0 text-left text-truncate" style="font-size:14px;">Action, Sports asa asas asas</h6>
             </div>
             <div class="col-md-6 text-right">
               <i class="fa fa-star" style="font-size:14px;"></i>
@@ -213,127 +174,53 @@
               <i class="fa fa-star" style="font-size:14px;"></i>
               <i class="fa fa-star" style="font-size:14px;"></i>
               <i class="fa fa-star" style="font-size:14px;"></i>
-              <span style="font-size:14px;"><%= popular.rating %></span>
+              <span style="font-size:14px;"><%= newgame.rating %></span>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
-              
-              <h6 class="py-1 m-0 text-left">
-                Rp.<%= popular.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %>
-              </h6>
-                
+              <h6 class="py-1 m-0 text-left">Rp.<%= newgame.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
             </div>
             <div class="col-md-6 text-right">
               <a class="btn btn-success btn-sm" href="#">Add</a>
             </div>
           </div>
         </div>
-        <%})%>
+        <%})%>        
       </div>
-
-    </div>
-    <div class="container bg-light py-2 my-2" style="border-radius: 10px;">
-      <div class="row">
-        <div class="col-md-12">
-          <h4 class="text-center">
-            <a href="http://localhost:1337/games/newgame/1" class="text-dark">
-              <b>NEW GAME</b>
-            </a>
-          </h4>
-        </div>
-      </div>
-      <div class="row">
-        <%  _.each(newgame,function(newgames){ %>
-        <div class="col-md-3">
-          <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
-          <div class="row">
-            <div class="col-md-12" style="height:45px;">
-              <h6 class="py-1 text-left m-0 judul">
-                <b><%= newgames.game_name %></b>
-              </h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <h6 class="py-1 m-0 text-left genre" style="font-size:14px;">Action, Sports asa asas asas</h6>
-            </div>
-            <div class="col-md-6 text-right">
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <span style="font-size:14px;"><%= newgames.rating %></span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <h6 class="py-1 m-0 text-left">
-                Rp.<%= newgames.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %>
-              </h6>
-            </div>
-            <div class="col-md-6 text-right">
-              <a class="btn btn-success btn-sm" href="#">Add</a>
-            </div>
-          </div>
-        </div>
-        <%})%>
-      </div>
-    </div>
-    <div class="container bg-light py-2 my-2" style="border-radius: 10px;">
-      <div class="row">
-        <div class="col-md-12">
-          <h4 class="text-center">
-            <a href="On Sale Game.html" class="text-dark">
-              <b> ON SALE GAME</b>
-            </a>
-          </h4>
-        </div>
-      </div>
-      <div class="row">
-        <%  _.each(newgame,function(newgames){ %>
-        <div class="col-md-3">
-          <a href="http://localhost:1337/games/detailGame/"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
-          <div class="row">
-            <div class="col-md-12" style="height:45px;">
-              <h6 class="py-1 text-left m-0 judul">
-                <b href="http://localhost:1337/games/detailGame/"><%= newgames.game_name %></b>
-              </h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <h6 class="py-1 m-0 text-left genre" style="font-size:14px;">
-                <%  _.each(newgames.genreStrings,function(genre_list){ %>
-                          <a href="#">
-                            <%= genre_list.nama_genre %>,
-                          </a>
-                <%})%>
-              </h6>
-            </div>
-            <div class="col-md-6 text-right">
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <span style="font-size:14px;"><%= newgames.rating %></span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <h6 class="py-1 m-0 text-left">
-                Rp.<%= newgames.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %>
-              </h6>
-            </div>
-            <div class="col-md-6 text-right">
-              <a class="btn btn-success btn-sm" href="#">Add</a>
-            </div>
-          </div>
-        </div>
-        <%})%>
-      </div>
+      <center>
+        <div class="col-md-2 ">
+            <% if (pages > 0) { %>
+              <ul class="pagination text-center">
+                  <% if (current == 1) { %>
+                      <li class="disabled page-item"><a class="page-link">First</a></li>
+                  <% } else { %>
+                      <li class="page-item"><a class="page-link" href="/games/newgame/1">First</a></li>
+                  <% } %>
+                  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                  <% if (i !== 1) { %>
+                      <li class="disabled page-item"><a>...</a></li>
+                  <% } %>
+                  <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                      <% if (i == current) { %>
+                          <li class="active page-item"><a class="page-link"><%= i %></a></li>
+                      <% } else { %>
+                          <li class="page-item"><a class="page-link" href="/games/newgame/<%= i %>"><%= i %></a></li>
+                      <% } %>
+                      <% if (i == Number(current) + 4 && i < pages) { %>
+                          <li class="disabled page-link"><a>...</a></li>
+                      <% } %>
+                  <% } %>
+                  <% if (current == pages) { %>
+                      <li class="disabled page-item"><a class="page-link">Last</a></li>
+                  <% } else { %>
+                      <li class="page-item"><a class="page-link" href="/games/newgame/<%= pages %>">Last</a></li>
+                  <% } %>
+              </ul>
+          <% } %>
+          
+       </div>
+      </center>
     </div>
   </div>
   <div class="py-5 text-white bg-dark">
@@ -345,28 +232,6 @@
       </div>
     </div>
   </div>
-  <script>
-    var length = 80;
-  
-    var text = document.getElementsByClassName("judul")
-    var string = text.innerHTML
-    var trimmedString = string.length > length ?
-      string.substring(0, length - 3) + "..." :
-      string
-  
-    text.innerHTML = trimmedString
-  </script>
-  <script>
-    var length = 20;
-  
-    var text = document.getElementsByClassName("genre")
-    var string = text.innerHTML
-    var trimmedString = string.length > length ?
-      string.substring(0, length - 3) + "..." :
-      string
-  
-    text.innerHTML = trimmedString
-  </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

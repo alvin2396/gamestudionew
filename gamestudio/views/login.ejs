@@ -5,28 +5,52 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
+  <link rel="stylesheet" href="styles/custom.css" type="text/css">
+  <link rel="stylesheet" href="/styles/theme.css" type="text/css"> 
 
-<body>
-  <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+</head>
+
+<body class="bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">LOGO</a>
+      <a class="navbar-brand" href="http://localhost:1337/">LOGO</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="http://localhost:1337/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Genre</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Adventure</a>
+              <a class="dropdown-item" href="#">Strategy</a>
+              <a class="dropdown-item" href="#">Simulation</a>
+              <a class="dropdown-item" href="#">RPG</a>
+              <a class="dropdown-item" href="#">Violent</a>
+              <a class="dropdown-item" href="#">Singleplayer</a>
+              <a class="dropdown-item" href="#">Massively Multiplayer</a>
+              <a class="dropdown-item" href="#">Sports</a>
+              <a class="dropdown-item" href="#">Racing</a>
+              <a class="dropdown-item" href="#">Multiplayer</a>
+              <a class="dropdown-item" href="#">Horror</a>
+              <a class="dropdown-item" href="#">Open World</a>
+              <a class="dropdown-item" href="#">Fantasy</a>
+              <a class="dropdown-item" href="#">Sci-fi</a>
+              <a class="dropdown-item" href="#">Indie</a>
+              <a class="dropdown-item" href="#">FPS</a>
+              <a class="dropdown-item" href="#">Mystery</a>
+              <a class="dropdown-item" href="#">Action</a>
+            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Genre</a>
+            <a class="nav-link" href="New Game.html">New Game</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">New Game</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">On Sale</a>
+            <a class="nav-link" href="On Sale Game.html">On Sale</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">My Specification</a>
@@ -34,21 +58,97 @@
         </ul>
         <form class="form-inline m-0">
           <input class="form-control mr-2" type="text" placeholder="Search"> </form>
-        <a class="btn btn-default navbar-btn">
-          <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
-        <a class="btn btn-default navbar-btn">
+        <div class="dropdown">
+          <a class="btn btn-default navbar-btn text-white" href="http://example.com" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="cart">
+            <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
+          <div class="container">
+            <ul class="dropdown-menu dropdown-cart" aria-labelledby="cart">
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <div class="col-md-12 text-right">
+                  <a class="btn btn-success btn-sm" href="#">Check Out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a class="btn btn-default navbar-btn text-white" href="http://localhost:1337/login">
           <i class="fa fa-user fa-fw"></i>Sign in</a>
       </div>
     </div>
   </nav>
-  <div class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3"> </div>
-        <div class="col-md-6">
+  <hr style="border: 1px solid white;" class="m-0 p-0 border border-info">
+  <div class="text-center text-white bg-dark py-1" style="background-image: url(&quot;/image/background.jpg&quot;);">
+    <div class="container w-50">
+      <div class="row my-3">
+        <div class="col-md-8 mx-auto">
           <div class="card text-white bg-dark p-4">
             <img class="img-fluid mx-auto" src="image/login.png" alt="Card image" height="16" width="150">
-            <div class="card-body">
+            <div class="card-body p-0 my-3" style="margin-bottom:0px !important;">
               <h2 class="mb-4 m-0 text-center" contenteditable="true">Login to Your Account</h2>
               <form method="post" action="/session/create">
                 <% if(flash && flash.err) { %>
@@ -64,7 +164,7 @@
                   <input name="password" type="password" class="form-control" placeholder="Password"> </div>
                 <button type="submit" class="btn btn-secondary btn-block">Login</button>
               </form>
-              <p class="text-light my-2">Register - Forgot Password</p>
+              <p class="text-light my-2"><a href="http://localhost:1337/register" class="text-white">Register</a> - <a href="http://localhost:1337/forgotpassword" class="text-white">Forgot Password</a></p>
             </div>
           </div>
         </div>
@@ -80,12 +180,9 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;
-    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
-  </pingendo>
 </body>
 
 </html>

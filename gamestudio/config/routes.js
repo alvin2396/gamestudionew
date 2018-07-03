@@ -55,11 +55,15 @@ module.exports.routes = {
     view:'admin/addGame',
 },
 
-'GET /games/popular' : {
+'GET /games/popular/:page' : {
   controller : 'games',
   action : "populargame",
 },
 
+'GET /games/newgame/:page' : {
+  controller : 'games',
+  action : "newgame",
+},
 
 'GET /genrelist/add' : {
   view:'admin/addGenreList'

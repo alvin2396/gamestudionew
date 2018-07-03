@@ -21,8 +21,9 @@ module.exports = {
         type : 'string'
     },
 
-    genre:{
-        type: 'string'
+    genre_lists:{
+        collection : 'genrelist',
+        via : 'game_id',
     },
 
     screenshot1_url : {
