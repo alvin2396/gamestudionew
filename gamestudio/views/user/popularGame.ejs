@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/styles/theme.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">LOGO</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Genre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">New Game</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">On Sale</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Specification</a>
+          </li>
+        </ul>
+        <form class="form-inline m-0">
+          <input class="form-control mr-2" type="text" placeholder="Search"> </form>
+        <a class="btn btn-default navbar-btn">
+          <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
+        <a class="btn btn-default navbar-btn">
+          <i class="fa fa-user fa-fw"></i>Sign in</a>
+      </div>
+    </div>
+  </nav>
+  <div class="p-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="py-2 text-center">Popular Game</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-0 my-3">
+    <div class="container">
+      <div class="row my-2">
+        <%  _.each(games_popular,function(popular){ %>
+        <div class="col-md-3 my-2">
+          <a href="localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="py-1 m-0" id="text" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><%= popular.game_name %></h6>
+            </div>
+            <div class="col-md-6">
+              <h6 class="text-right m-0 py-1">Rp.<%= popular.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="col-md-6 text-right">
+              <a class="btn btn-success btn-sm" href="#">Add</a>
+            </div>
+          </div>
+        </div>
+        <%})%>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-5 text-white bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mt-3 text-center">
+          <p>© Copyright 2017 Pingendo - All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var length = 22;
+  
+    var text = document.getElementById('text')
+    var string = text.innerHTML
+    var trimmedString = string.length > length ?
+      string.substring(0, length - 3) + "..." :
+      string
+  
+    text.innerHTML = trimmedString
+  </script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+</body>
+
+</html>

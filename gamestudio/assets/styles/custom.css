@@ -1,0 +1,73 @@
+ul.dropdown-menu{
+    min-width:300px;
+    margin-top: 12px;
+}
+ul.dropdown-cart li .item{
+    display:block;
+    padding:5px 0px;
+}
+ul.dropdown-cart li .item:hover{
+    background-color:#f3f3f3;
+}
+ul.dropdown-cart li .item:after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+ul.dropdown-cart li .item-left{
+    float:left;
+}
+ul.dropdown-cart li .item-left img,
+ul.dropdown-cart li .item-left span.item-info{
+    float:left;
+}
+ul.dropdown-cart li .item-left span.item-info{
+    margin-left:10px;   
+}
+ul.dropdown-cart li .item-left span.item-info span{
+    display:block;
+}
+ul.dropdown-cart li .item-right{
+    float:right;
+    margin-top: 25px;
+}
+ul img{
+    width: 100px;
+    height: auto;
+}
+.dropdown-menu.dropdown-cart{
+    left: -118px !important;
+}
+ul.dropdown-cart li .btn{
+    margin-top: 5px;
+}
+
+
+.gallery-container{
+  margin-top: 3px;
+}
+.tz-gallery .thumbnail {
+    padding: 0;
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: none;
+    transition: 0.15s ease-in-out;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+}
+
+.tz-gallery .thumbnail:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+.tz-gallery .lightbox img {
+    border-radius: 4px 4px 0 0;
+}
+
+.baguetteBox-button {
+    background-color: transparent !important;
+}
