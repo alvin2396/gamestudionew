@@ -4,15 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-  <link rel="stylesheet/less" href="/styles/star.less" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="/styles/custom.css" type="text/css">
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="/styles/theme.css" type="text/css">
-  <script src="/styles/bootstrap-rating-input.min.js"></script>
 </head>
   
 
@@ -158,8 +153,8 @@
                 <h4 class="text-left text-dark">
                   <b><%= games.game_name %></b>
                 </h4>
-                <div class="embed-responsive embed-responsive-4by3 my-2">
-                  <video src="<%= games.video_url %>" class="embed-responsive-item" controls="controls"> Your browser does not support HTML5 video. </video>
+                <div class="embed-responsive-4by3">
+                  <video src="<%= games.video_url %>" class="embed-responsive-item" controls="controls" style="width:100%;"> Your browser does not support HTML5 video. </video>
                 </div>
                 <div class="row my-2">
                   <div class="col-md-4">
@@ -269,8 +264,6 @@
                       </div>
                       <div class="col-md-8 text-left">
                         
-                       
-                        <input type="number" data-max="5" data-min="1" name="your_awesome_parameter" id="rating-readonly" class="rating" data-clearable="remove" value="3" data-readonly/> 
                          
                         <span style="font-size:14px;margin:7px;"><%= games.rating %></span>
                       </div>

@@ -69,15 +69,23 @@ module.exports.routes = {
   view:'admin/addGenreList'
 },
 
+'GET /ram/add' : {
+  view:'admin/addRam'
+},
+
+'GET /processor/add' : {
+  view:'admin/addProcessor'
+},
+
+'GET /vga/add' : {
+  view:'admin/addVga'
+},
+
  'GET /register':{
     controller: 'session',
     action: "register",
  },
 
- 'GET /autocomplete' : {
-  controller: 'games',
-  action : "searchlist",
- }
  
   
 

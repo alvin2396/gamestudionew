@@ -14,11 +14,11 @@ module.exports = {
     },
 
     ram_size: {
-        type: 'number'
+        type: 'string'
     },
 
     ram_score: {
-        type: 'number'
+        type: 'string'
     },
 
   },

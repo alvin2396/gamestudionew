@@ -124,18 +124,61 @@ module.exports = {
     },
 
 
-    populargame: function(req,res){
-        Games.find().sort('rating DESC').limit(30).populateAll().exec(function(err,games_popular){
-            if(err){
+    populargame: function(req,res,next){
+        var perPage = 21
+            if(!req.params.page){
+                var page =1
+            }
+            else{
+                var page = req.params.page
+            }
+        Games.find().sort('rating DESC')
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .populateAll().exec(function(err,games_popular){
+            Games.count().exec(function(err,count){
+                if(err){
                 return res.serverError(err);
             }
             else{
                 res.view('user/popularGame',{
                     status : 'OK',
                     title : 'Popular Games',
-                    games_popular : games_popular
+                    games_popular : games_popular,
+                    current: page,
+                    pages: Math.ceil(count / perPage)
                 })
             }
+            })
+        })
+    },
+
+    newgame: function(req,res,next){
+        var perPage = 21
+            if(!req.params.page){
+                var page =1
+            }
+            else{
+                var page = req.params.page
+            }
+        Games.find().sort('release_date DESC')
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .populateAll().exec(function(err,new_game){
+            Games.count().exec(function(err,count){
+                if(err){
+                return res.serverError(err);
+            }
+            else{
+                res.view('user/newGame',{
+                    status : 'OK',
+                    title : 'New Games',
+                    new_game : new_game,
+                    current: page,
+                    pages: Math.ceil(count / perPage)
+                })
+            }
+            })
         })
     },
 
@@ -197,7 +240,8 @@ module.exports = {
     },
 
     search: function (req, res, next) {
-        Games.find({ like: { game_name: '%' + req.param('search') + '%' } }).exec(function (err, search) {
+        Games.find({ like: { game_name: '%' + req.param('search') + '%' } })
+        .exec(function (err, search) {
             if (err) {
                 return res.serverError(err);
             }
@@ -205,10 +249,12 @@ module.exports = {
                 res.view("user/search/", {
                     status: 'OK',
                     title: 'Search Result',
-                    search: search
+                    search: search,
                 })
             }
-        })
+            
+       
+    })
     },
 
 
@@ -242,10 +288,6 @@ module.exports = {
 
     add:function(req,res){
         res.view('admin/addGame')
-    },
-
-    newGame : function(req,res,next){
-
     },
 
     updatetanggal : function(req,res){

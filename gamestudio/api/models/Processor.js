@@ -18,10 +18,11 @@ module.exports = {
     },
 
     processor_score : {
-        type: 'number'
+        type: 'string'
     },
 
   },
+  connection : 'database'
 
 };
 
