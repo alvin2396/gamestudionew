@@ -94,7 +94,7 @@ module.exports = {
         })
     },
 
-    cekTanggal: function(req,res,next){
+    cekTanggal: function(req,res){
         var tgl = "2018 - 07 - 02";
         Games.find({game_id : 'G000'}).where({release_date : {'>=' : tgl }}).populateAll().exec(function(err,tanggal){
             if(err){
@@ -107,7 +107,7 @@ module.exports = {
         })
     },
 
-    updatetgal:function(req,res,next){
+    updatetgal:function(req,res){
         var gameObj = {
             release_date:req.param('release_date')
         }
@@ -124,63 +124,22 @@ module.exports = {
     },
 
 
-    populargame: function(req,res,next){
-        var perPage = 21
-            if(!req.params.page){
-                var page =1
+    populargame: function(req,res){
+        Games.find().sort('rating DESC').limit(30).populateAll().exec(function(err,games_popular){
+            if(err){
+                return res.serverError(err);
             }
             else{
-                var page = req.params.page
-            }
-        Games.find().sort('rating DESC')
-        .skip((perPage * page) - perPage)
-        .limit(perPage).populateAll().exec(function(err,games_popular){
-            Games.count().exec(function(err,count){
-                if(err){
-                    return res.serverError(err);
-                }
-                else{
-                    res.view('user/popularGame',{
+                res.view('user/popularGame',{
                     status : 'OK',
                     title : 'Popular Games',
-                    games_popular : games_popular,
-                    current: page,
-                    pages: Math.ceil(count / perPage)
+                    games_popular : games_popular
                 })
-                }
-            })
+            }
         })
     },
 
-    newgame: function(req,res,next){
-        var perPage = 21
-            if(!req.params.page){
-                var page =1
-            }
-            else{
-                var page = req.params.page
-            }
-        Games.find().sort('release_date DESC')
-        .skip((perPage * page) - perPage)
-        .limit(perPage).populateAll().exec(function(err,new_game){
-            Games.count().exec(function(err,count){
-                if(err){
-                    return res.serverError(err);
-                }
-                else{
-                    res.view('user/newGame',{
-                    status : 'OK',
-                    title : 'New Games',
-                    new_game : new_game,
-                    current: page,
-                    pages: Math.ceil(count / perPage)
-                })
-                }
-            })
-        })
-    },
-
-    gamePopular: function(req,res,next){
+    gamePopular: function(req,res){
         
         Games.find().sort('rating DESC').limit(4).populateAll().exec(function(err,games){
             if(err)
@@ -211,12 +170,21 @@ module.exports = {
                                 return res.serverError(err);
                             }
                             else{
-                                res.view('homepage',{
-                                    status : 'OK',
-                                    title : 'Game Studio',
-                                    games : games,
-                                    newgame : newgame
+                                Games.find().populateAll().exec(function(err, listgame){
+                                    if(err){
+                                        return res.serverError(err);
+                                    }
+                                    else{
+                                        res.view('homepage',{
+                                        status : 'OK',
+                                        title : 'Game Studio',
+                                        games : games,
+                                        newgame : newgame,
+                                        listgame : listgame
+                                        })
+                                    }
                                 })
+                            
                             }
                         })
                     }
@@ -236,19 +204,49 @@ module.exports = {
             else {
                 res.view("user/search/", {
                     status: 'OK',
-                    title: 'Search',
+                    title: 'Search Result',
                     search: search
                 })
             }
         })
     },
 
-    
+
+    searchlist: function(req,res,next){
+        
+        Games.find().populateAll().exec(function(err,listgame){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                listgame.arr = []
+                async.each(listgame.game_name, function(gamearr, callback){
+                    if(err){
+                        callback(err)
+                    }
+                    else{
+                        listgame.arr.push({
+                    game_name: gamearr.game_name
+                        })
+                        callback()
+                    }
+                })
+                res.view("user/autocomplete", {
+                    status : 'OK',
+                    title : 'tes search',
+                    listgame:listgame
+                })
+            }
+        })
+    },
 
     add:function(req,res){
         res.view('admin/addGame')
     },
 
+    newGame : function(req,res,next){
+
+    },
 
     updatetanggal : function(req,res){
         res.view('admin/updatetgl')

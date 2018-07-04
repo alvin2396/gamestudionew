@@ -72,6 +72,11 @@ module.exports.routes = {
  'GET /register':{
     controller: 'session',
     action: "register",
+ },
+
+ 'GET /autocomplete' : {
+  controller: 'games',
+  action : "searchlist",
  }
  
   
