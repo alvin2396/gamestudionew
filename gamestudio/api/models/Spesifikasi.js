@@ -9,23 +9,36 @@ module.exports = {
 
   attributes: {
 
-   spesifikasi_id: {
-        type : 'string'
-   },
-
    ram_id: {
-        model: 'ram'
+        model: 'ram',
+        required : true,
    },
 
    processor_id: {
-        model: 'processor'
+        model: 'processor',
+        required : true,
    },
 
    vga_id: {
-        model: 'vga'
+        model: 'vga',
+        required : true,
    },
 
+   game_id : {
+    collection : 'games',
+    via : 'game_id',
+    required : true,
+   },
    
+   status : {
+    type : 'string',
+    required : true,
+   },
+
+   tipe : {
+    type : 'string',
+    required : true,
+   }
 
 
 

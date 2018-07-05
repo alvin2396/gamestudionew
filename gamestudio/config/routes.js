@@ -86,6 +86,14 @@ module.exports.routes = {
     action: "register",
  },
 
+ 'GET/spesifikasi/add' : {
+  view : 'admin/addSpesifikasi'
+ },
+
+'GET /games/updatespesifikasi' : {
+  view:"admin/updatespek"
+}
+
  
   
 

@@ -11,7 +11,8 @@ module.exports = {
         Games.findOne(req.param('id')).populateAll().exec(function (err, games) {
             if (err) {
                 return res.serverError(err);
-            } else {
+            }
+            else {
 
                 games.genreStrings = []
                 games.userStrings = []
@@ -33,56 +34,35 @@ module.exports = {
                     if (err)
                         return res.serverError(err);
                     else {
-                        async.each(games.ratings, function (user, callback) {
-
-                            User.findOne({ id: user.id_user }).exec(function (err, users) {
-                                if (err) {
-                                    callback(err)
-                                } else {
-                                    games.userStrings.push({
-                                        id: users.id,
-                                        nama: users.nama,
-                                        photo_url: users.photo_url, users,
-                                        review: user.review,
-                                        score: user.score,
-
-                                    })
-                                    callback()
-                                }
-                            })
-                        }, function (err) { // function ini akan jalan bila semua genre_lists telah diproses
-
-                            if (err)
+                        games.min_spek_intel = []
+                        Spesifikasi.findOne({id: games.min_requirement}).exec(function(err,min_intel){
+                            if(err){
                                 return res.serverError(err);
-                            else {
-                                async.each(games.ratings, function (user, callback) {
-
-                                    User.findOne({ id: user.id_user }).exec(function (err, users) {
-                                        if (err) {
-                                            callback(err)
-                                        } else {
-                                            games.userStrings.push({
-                                                id: users.id,
-                                                nama: users.nama,
-                                                photo_url: users.photo_url, users,
-                                                review: user.review,
-                                                score: user.score,
-
-                                            })
-                                            callback()
-                                        }
-                                    })
-                                }, function (err) { // function ini akan jalan bila semua genre_lists telah diproses
-
-                                    if (err)
+                            }
+                            else{
+                                games.min_spek_intel.push({
+                                    ram_id : games.min_requirement.ram_id,
+                                    processor_id : games.min_requirement.processor_id,
+                                    vga_id : games.min_requirement.vga_id
+                                })
+                                Ram.findOne({id: games.min_spek_intel[0].ram_id}).exec(function(err, ram_value){
+                                    if(err){
                                         return res.serverError(err);
-                                    else {
-                                        res.view("user/gameDetail/", {
-                                            status: 'OK',
-                                            title: 'Detail Game',
-                                            games: games
-                                        })
                                     }
+                                    else{
+                                        
+                                        games.min_spek_intel.push({
+                                            ram_name : ram_value.ram_size
+                                        })
+                                        console.log(games.min_spek_intel)
+                                    }
+                                })
+                                
+                                
+                                res.view("user/gameDetail/", {
+                                status: 'OK',
+                                title: 'Detail Game',
+                                games: games,
                                 })
                             }
                         })
@@ -123,6 +103,63 @@ module.exports = {
         })
     },
 
+    updatespeks:function(req,res,next){
+        var gameObj = {
+            min_requirement:req.param('min_requirement'),
+            recommended_requirement:req.param('recommended_requirement'),
+        }
+
+        Games.update(req.param('id'),gameObj,function(err, updated){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                return res.json(updated);
+            }
+        
+        })
+    },
+
+    updatespesifikasi:function(req,res){
+        res.view('admin/updatespek')
+    },
+
+    checkdataspek:function(req,res){
+        var spek = []
+        var spek_rec = []
+        Games.findOne({id : '5b376c7400217d253ccd2d73'}).exec(function(err,amd){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                console.log(amd);
+                
+                Spesifikasi.findOne({id : amd.min_requirement}).exec(function(err,Spesifikasi_min){
+                    if(err){
+                        return res.serverError(err);
+                    }
+                    else{
+                        console.log(amd.min_requirement);
+                        Spesifikasi.findOne({id : amd.recommended_requirement}).exec(function(err,spesifikasi_rec){
+                            if(err){
+                                return res.serverError(err);
+                            }
+                            else{
+                                console.log(spesifikasi_rec)
+                            }
+                        })
+                        /*spek.push({
+                            intel_proc : Spesifikasi_min.processor_id,
+                            intel_vga : Spesifikasi_min.vga_id,
+                            ram : Spesifikasi_min.ram_id
+                        })
+                        console.log(spek);
+                        return res.json(Spesifikasi_min);*/
+                    }
+                })
+            }
+    })
+    },
 
     populargame: function(req,res,next){
         var perPage = 21
@@ -290,8 +327,5 @@ module.exports = {
         res.view('admin/addGame')
     },
 
-    updatetanggal : function(req,res){
-        res.view('admin/updatetgl')
-    }
 };
 
