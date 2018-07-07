@@ -25,8 +25,7 @@ module.exports = {
    },
 
    game_id : {
-    collection : 'games',
-    via : 'game_id',
+    model : 'games',
     required : true,
    },
    

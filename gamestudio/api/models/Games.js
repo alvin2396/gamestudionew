@@ -51,11 +51,8 @@ module.exports = {
     },
 
     min_requirement : {
-        model : 'spesifikasi'
-    },
-
-    recommended_requirement : {
-        model : 'spesifikasi'
+        collection : 'spesifikasi',
+        via : 'game_id'
     },
 
     discount : {
@@ -78,30 +75,33 @@ module.exports = {
         type : 'string'
     },
 
-    Story_rating : {
-        type : 'number'
-    },
-
-    gameplay_rating : {
-        type : 'number'
-    },
-
-    controls_rating : {
-        type : 'number'
-    },
-
-    music_rating : {
-        type : 'number'
-    },
-
-    graphic_rating : {
-        type : 'number'
-    },
-
     publisher : {
         type : 'string'
     },
 
+    min_ram : {
+        model : 'ram'
+    },
+
+    min_vga : {
+        model : 'vga'
+    },
+
+    min_processor : {
+        model : 'processor'
+    },
+
+    rec_ram : {
+        model : 'ram'
+    },
+
+    rec_vga : {
+        model : 'vga'
+    },
+
+    rec_processor : {
+        model : 'processor'
+    }
 
 
   },

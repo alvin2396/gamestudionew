@@ -34,29 +34,54 @@ module.exports = {
                     if (err)
                         return res.serverError(err);
                     else {
-                        var min_spek_intel = []
-
-                        
-                           /* Spesifikasi.findOne({id:games.min_requirement.id}).exec(function(err, min_spek){
+                        games.min_spek_intel = []
+                            async.each(games.min_requirement,function(spek, callback){
+                                
+                                Spesifikasi.findOne({id:spek.id}).exec(function(err, min_spek){
+                                    
+                                    if(err){
+                                        callback(err)
+                                    }
+                                    else{
+                                        
+                                        games.min_spek_intel.push({
+                                            processor_id : min_spek.processor_id,
+                                            vga_id : min_spek.vga_id,
+                                            ram_id : min_spek.ram_id
+                                        })
+                                        callback()
+                                    }
+                                })
+                            },function(err){
+                                console.log(games.min_spek_intel[0].ram_id)
                                 if(err){
-                                    callback(err)
+                                    return res.serverError(err);
                                 }
                                 else{
-                                    var min_processor = min_spek.processor_id
-                                    var min_vga = min_spek.vga_id
-                                    var min_ram = min_spek.ram_id
-                                    console.log(min_spek.ram_id)
-                                    console.log(min_processor)
+                                    Ram.findOne({id:games.min_spek_intel[0].ram_id}).exec(function(err,getRam){
+                                        Processor.findOne({id:games.min_spek_intel[0].processor_id}).exec(function(err,getProc){
+                                            Vga.findOne({id:games.min_spek_intel[0].vga_id}).exec(function(err,getVga){
+                                                res.view("user/gameDetail/", {
+                                                status: 'OK',
+                                                title: 'Detail Game',
+                                                games: games,
+                                                getRam : getRam,
+                                                getProc : getProc,
+                                                getVga : getVga
+                                    })
+                                            })
+                                        })
+                                    
+                                        })
+
                                     
                                 }
-                            })*/
-                        
-                        res.view("user/gameDetail/", {
-                            status: 'OK',
-                            title: 'Detail Game',
-                            games: games,
-                            min_spek_intel : min_spek_intel
                             })
+                            
+
+                        
+                        
+
 
                     }
                 })
@@ -86,7 +111,7 @@ module.exports = {
     updatespeks:function(req,res,next){
         var gameObj = {
             min_requirement:req.param('min_requirement'),
-            recommended_requirement:req.param('recommended_requirement'),
+            recommended_requirement : req.param('recommended_requirement'),
         }
 
         Games.update(req.param('id'),gameObj,function(err, updated){
