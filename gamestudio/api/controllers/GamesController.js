@@ -34,38 +34,29 @@ module.exports = {
                     if (err)
                         return res.serverError(err);
                     else {
-                        games.min_spek_intel = []
-                        Spesifikasi.findOne({id: games.min_requirement}).exec(function(err,min_intel){
-                            if(err){
-                                return res.serverError(err);
-                            }
-                            else{
-                                games.min_spek_intel.push({
-                                    ram_id : games.min_requirement.ram_id,
-                                    processor_id : games.min_requirement.processor_id,
-                                    vga_id : games.min_requirement.vga_id
-                                })
-                                Ram.findOne({id: games.min_spek_intel[0].ram_id}).exec(function(err, ram_value){
-                                    if(err){
-                                        return res.serverError(err);
-                                    }
-                                    else{
-                                        
-                                        games.min_spek_intel.push({
-                                            ram_name : ram_value.ram_size
-                                        })
-                                        console.log(games.min_spek_intel)
-                                    }
-                                })
-                                
-                                
-                                res.view("user/gameDetail/", {
-                                status: 'OK',
-                                title: 'Detail Game',
-                                games: games,
-                                })
-                            }
-                        })
+                        var min_spek_intel = []
+
+                        
+                           /* Spesifikasi.findOne({id:games.min_requirement.id}).exec(function(err, min_spek){
+                                if(err){
+                                    callback(err)
+                                }
+                                else{
+                                    var min_processor = min_spek.processor_id
+                                    var min_vga = min_spek.vga_id
+                                    var min_ram = min_spek.ram_id
+                                    console.log(min_spek.ram_id)
+                                    console.log(min_processor)
+                                    
+                                }
+                            })*/
+                        
+                        res.view("user/gameDetail/", {
+                            status: 'OK',
+                            title: 'Detail Game',
+                            games: games,
+                            min_spek_intel : min_spek_intel
+                            })
 
                     }
                 })
@@ -74,18 +65,7 @@ module.exports = {
         })
     },
 
-    cekTanggal: function(req,res){
-        var tgl = "2018 - 07 - 02";
-        Games.find({game_id : 'G000'}).where({release_date : {'>=' : tgl }}).populateAll().exec(function(err,tanggal){
-            if(err){
-                return res.serverError(err);
-            }
-            else{
-                return res.json(tanggal);
-                }
-            
-        })
-    },
+   
 
     updatetgal:function(req,res){
         var gameObj = {

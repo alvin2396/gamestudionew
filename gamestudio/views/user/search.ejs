@@ -190,39 +190,7 @@
             </div>
             <%})%>
           </div>
-          <center>
-        <div class="col-md-6 ">
-            <% if (pages > 0) { %>
-              <ul class="pagination text-center">
-                  <% if (current == 1) { %>
-                      <li class="disabled page-item"><a class="page-link">First</a></li>
-                  <% } else { %>
-                      <li class="page-item"><a class="page-link" href="/games/popular/1">First</a></li>
-                  <% } %>
-                  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-                  <% if (i !== 1) { %>
-                      <li class="disabled page-item"><a>...</a></li>
-                  <% } %>
-                  <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-                      <% if (i == current) { %>
-                          <li class="active page-item"><a class="page-link"><%= i %></a></li>
-                      <% } else { %>
-                          <li class="page-item"><a class="page-link" href="/games/popular/<%= i %>"><%= i %></a></li>
-                      <% } %>
-                      <% if (i == Number(current) + 4 && i < pages) { %>
-                          <li class="disabled page-link"><a>...</a></li>
-                      <% } %>
-                  <% } %>
-                  <% if (current == pages) { %>
-                      <li class="disabled page-item"><a class="page-link">Last</a></li>
-                  <% } else { %>
-                      <li class="page-item"><a class="page-link" href="/games/popular/<%= pages %>">Last</a></li>
-                  <% } %>
-              </ul>
-          <% } %>
-          
-       </div>
-      </center>
+         
         </div>
       </div>
     </div>
@@ -239,6 +207,11 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="/js/dependencies/sails.io.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="/js/jquery-3.3.1.min.js"></script>
+  <script src="/js/popper.min.js"></script>
  
 </body>
 
