@@ -34,11 +34,6 @@ module.exports = {
     required : true,
    },
 
-   tipe : {
-    type : 'string',
-    required : true,
-   }
-
 
 
   },

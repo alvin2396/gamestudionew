@@ -78,30 +78,7 @@ module.exports = {
     publisher : {
         type : 'string'
     },
-
-    min_ram : {
-        model : 'ram'
-    },
-
-    min_vga : {
-        model : 'vga'
-    },
-
-    min_processor : {
-        model : 'processor'
-    },
-
-    rec_ram : {
-        model : 'ram'
-    },
-
-    rec_vga : {
-        model : 'vga'
-    },
-
-    rec_processor : {
-        model : 'processor'
-    }
+    
 
 
   },

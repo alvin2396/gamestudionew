@@ -46,7 +46,10 @@ module.exports.routes = {
   controller: 'user',
   action: "userProfile",
 },
-
+'GET /user/edit-profile/:id': {
+  controller: 'user',
+  action: "editProfile",
+},
  'GET /games/detailGame/:id':{
     controller:'games',
     action:"detailGame",
@@ -96,6 +99,11 @@ module.exports.routes = {
 
 'GET /spesifikasi/add' : {
   view : 'admin/addSpesifikasi'
+},
+
+'GET /games/rekomendasi' : {
+  controller : 'games',
+  action : "rekomendasi",
 }
 
  

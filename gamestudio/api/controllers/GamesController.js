@@ -49,11 +49,13 @@ module.exports = {
                                             vga_id : min_spek.vga_id,
                                             ram_id : min_spek.ram_id
                                         })
+                                        console.log(min_spek)
                                         callback()
                                     }
                                 })
                             },function(err){
-                                console.log(games.min_spek_intel[0].ram_id)
+                                
+
                                 if(err){
                                     return res.serverError(err);
                                 }
@@ -62,13 +64,14 @@ module.exports = {
                                         Processor.findOne({id:games.min_spek_intel[0].processor_id}).exec(function(err,getProc){
                                             Vga.findOne({id:games.min_spek_intel[0].vga_id}).exec(function(err,getVga){
                                                 res.view("user/gameDetail/", {
-                                                status: 'OK',
-                                                title: 'Detail Game',
-                                                games: games,
-                                                getRam : getRam,
-                                                getProc : getProc,
-                                                getVga : getVga
-                                    })
+                                                    status: 'OK',
+                                                    title: 'Detail Game',
+                                                    games: games,
+                                                    getRam : getRam,
+                                                    getProc : getProc,
+                                                    getVga : getVga,
+                                                    })
+                                                
                                             })
                                         })
                                     
@@ -110,8 +113,8 @@ module.exports = {
 
     updatespeks:function(req,res,next){
         var gameObj = {
-            min_requirement:req.param('min_requirement'),
-            recommended_requirement : req.param('recommended_requirement'),
+            OS : req.param('OS'),
+            HDD_space : req.param('HDD_space'),
         }
 
         Games.update(req.param('id'),gameObj,function(err, updated){
@@ -331,6 +334,42 @@ module.exports = {
     add:function(req,res){
         res.view('admin/addGame')
     },
+
+    rekomendasi:function(req,res){
+        var userpref = ['5b34f1d1f7460b278469cc33','5b34f1d3f7460b278469cc34','5b34f1d8f7460b278469cc37']
+        var FG1 = 0
+        var i;
+        var j;
+        var totalgames
+        
+        Games.find().populateAll().exec(function(err,games){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                async.each(games.genre_lists,function(genre,err){
+                    Genre.findOne({id:genre.id_genre}).exec(function(err, genres){
+                        if(err){
+                            callback(err)
+                        }
+                        else{
+                            console.log(genres)
+                            callback()
+                        }
+                    })
+                })
+            }
+        })
+
+
+        
+
+
+        
+        
+        
+        res.view("user/recommend")
+    }
 
 };
 

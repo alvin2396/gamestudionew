@@ -285,7 +285,21 @@
                         <h6 class="m-0">Playable</h6>
                       </div>
                       <div class="col-md-8">
-                        <img class="img-fluid d-block" src="/image/check.png" style="position:absolute;width:18px;top:0px;"> </div>
+                         <%
+                          var user_proc = 6473;
+                          var user_ram = 10;
+                          var user_vga = 4127;
+                          if(user_proc >= getProc.processor_score && user_ram >= getRam.ram_score && user_vga >= getVga.vga_score){%>
+                          <img class="img-fluid d-block" src="/image/Check.png" style="position:absolute;width:18px;top:0px;"> 
+                      
+                      <%}
+                      else{%>
+                        
+                        <img class="img-fluid d-block" src="/image/x.png" style="position:absolute;width:18px;top:0px;">
+                     <%}%>
+                      </div>
+                        
+
                     </div>
                   </li>
                 </ul>
@@ -373,7 +387,7 @@
                         <h6 class="m-0 text-left">OS</h6>
                       </div>
                       <div class="col-md-8">
-                        <h6 class="m-0 text-left">Lorem</h6>
+                        <h6 class="m-0 text-left"><%= games.OS %></h6>
                       </div>
                     </div>
                   </li>
@@ -413,7 +427,7 @@
                         <h6 class="m-0 text-left">Storage</h6>
                       </div>
                       <div class="col-md-8">
-                        <h6 class="m-0 text-left">lorem</h6>
+                        <h6 class="m-0 text-left"><%= games.HDD_space %></h6>
                       </div>
                     </div>
                   </li>
@@ -428,7 +442,7 @@
                         <h6 class="m-0 text-left">OS</h6>
                       </div>
                       <div class="col-md-8">
-                        <h6 class="m-0 text-left">Lorem</h6>
+                        <h6 class="m-0 text-left"><%= games.OS %></h6>
                       </div>
                     </div>
                   </li>
@@ -468,7 +482,7 @@
                         <h6 class="m-0 text-left">Storage</h6>
                       </div>
                       <div class="col-md-8">
-                        <h6 class="m-0 text-left">lorem</h6>
+                        <h6 class="m-0 text-left"><%= games.HDD_space %></h6>
                       </div>
                     </div>
                   </li>

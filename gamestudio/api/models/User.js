@@ -29,6 +29,18 @@ module.exports = {
       alamat:{
         type:'string',
       },
+
+      processor_score : {
+        type : 'string',
+      },
+
+      vga_score : {
+        type : 'string'
+      },
+
+      ram_score : {
+        type : 'string'
+      },
       
       toJSON: function(){
       var obj = this.toObject();
