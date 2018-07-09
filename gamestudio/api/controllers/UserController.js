@@ -42,10 +42,9 @@ module.exports = {
   updateProfile:function(req,res,next){
     var userObj = {
       nama: req.param('nama'),
-      tgl_lahir: req.param('tgl_lahir'),
+      alamat: req.param('alamat'),
       jenis_kelamin: req.param('jenis_kelamin'),
       email: req.param('email'),
-      no_hp: req.param('no_hp')
     }
     
     

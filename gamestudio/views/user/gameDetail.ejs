@@ -286,10 +286,7 @@
                       </div>
                       <div class="col-md-8">
                          <%
-                          var user_proc = 6473;
-                          var user_ram = 10;
-                          var user_vga = 4127;
-                          if(user_proc >= getProc.processor_score && user_ram >= getRam.ram_score && user_vga >= getVga.vga_score){%>
+                          if(req.session.User.processor_score >= getProc.processor_score && req.session.User.ram_score >= getRam.ram_score && req.session.User.vga_score >= getVga.vga_score){%>
                           <img class="img-fluid d-block" src="/image/Check.png" style="position:absolute;width:18px;top:0px;"> 
                       
                       <%}
@@ -316,9 +313,9 @@
                   </div>
                   <div class="col-md-8 p-0 m-0">
                     <div class="bar-container" style="width: 94%;
-    background-color: #f1f1f1;
-    text-align: center;
-    color: white;">
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    color: white;">
                       <div class="gameplay" style="width: 60%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
@@ -329,9 +326,9 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-    background-color: #f1f1f1;
-    text-align: center;
-    color: white;">
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    color: white;">
                       <div class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
@@ -342,9 +339,9 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-    background-color: #f1f1f1;
-    text-align: center;
-    color: white;">
+                      background-color: #f1f1f1;
+                      text-align: center;
+                      color: white;">
                       <div class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
@@ -355,9 +352,9 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-    background-color: #f1f1f1;
-    text-align: center;
-    color: white;">
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    color: white;">
                       <div class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
@@ -368,9 +365,9 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-    background-color: #f1f1f1;
-    text-align: center;
-    color: white;">
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    color: white;">
                       <div class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>

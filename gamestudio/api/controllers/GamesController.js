@@ -263,12 +263,56 @@ module.exports = {
                                         return res.serverError(err);
                                     }
                                     else{
-                                        res.view('homepage',{
-                                        status : 'OK',
-                                        title : 'Game Studio',
-                                        games : games,
-                                        newgame : newgame,
-                                        listgame : listgame
+                                        Games.find().sort('rating DESC').limit(3).populateAll().exec(function(err,limitgames){
+                                            if(err){
+                                                return res.serverError(err);
+                                            }
+                                            else{
+                                                Games.find().sort('release_date DESC').limit(3).populateAll().exec(function(err, limitnew){
+                                                    if(err){
+                                                        return res.serverError(err);
+                                                    }
+                                                    else{
+
+                                                        if(req.session.User){
+                                                            console.log('log in')
+                                                            User.findOne({id:req.session.User.id}).exec(function(err, user){
+                                                                if(err){
+                                                                    return res.serverError(err);
+                                                                }
+                                                                else{
+                                                                    console.log(user)
+                                                                    console.log(limitgames)
+                                                                    
+                                                                    res.view('homepage',{
+                                                                    status : 'OK',
+                                                                    title : 'Game Studio',
+                                                                    games : games,
+                                                                    newgame : newgame,
+                                                                    listgame : listgame,
+                                                                    limitgames : limitgames,
+                                                                    limitnew : limitnew,
+                                                                    user : user
+                                                                    })
+                                                                }
+                                                            })
+                                                            
+                                                        }
+                                                        else{
+                                                            console.log('not log in')
+                                                            res.view('homepage',{
+                                                            status : 'OK',
+                                                            title : 'Game Studio',
+                                                            games : games,
+                                                            newgame : newgame,
+                                                            listgame : listgame,
+                                                            limitgames : limitgames,
+                                                            limitnew : limitnew
+                                                            })
+                                                        }
+                                                    }
+                                                })
+                                            }
                                         })
                                     }
                                 })

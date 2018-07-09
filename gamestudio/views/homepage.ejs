@@ -188,13 +188,13 @@
               <div class="col-md-12">
                 <h4 class="text-center">
                   <b>
-                    <a href="Popular.html" class="text-dark"> POPULAR GAME</a>
+                    <a href="http://localhost:1337/games/popular/1" class="text-dark"> POPULAR GAME</a>
                   </b>
                 </h4>
               </div>
             </div>
             <div class="row">
-              <%  _.each(games,function(popular){ %>
+              <%  _.each(limitgames,function(popular){ %>
               <div class="col-md-4">
                 <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>">
                 <img class="img-fluid d-block" src="img/check.png" style="position:absolute;width:24px;top:0px;"></a>
@@ -237,13 +237,13 @@
               <div class="col-md-12">
                 <h4 class="text-center">
                   <b>
-                    <a href="New Game.html" class="text-dark">NEW GAME</a>
+                    <a href="http://localhost:1337/games/newgame/1" class="text-dark">NEW GAME</a>
                   </b>
                 </h4>
               </div>
             </div>
             <div class="row">
-              <%  _.each(newgame,function(newgames){ %>
+              <%  _.each(limitnew,function(newgames){ %>
               <div class="col-md-4">
                 <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
                 <img class="img-fluid d-block" src="img/x.png" style="position:absolute;width:24px;top:0px;">
@@ -293,7 +293,7 @@
               </div>
             </div>
             <div class="row">
-              <%  _.each(newgame,function(newgames){ %>
+              <%  _.each(limitnew,function(newgames){ %>
               <div class="col-md-4">
                 <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>">
                 <img class="img-fluid d-block" src="img/check.png" style="position:absolute;width:24px;top:0px;"></a>
@@ -756,6 +756,15 @@
   <script src="/js/jquery-3.2.1.slim.min.js"></script>
   <script src="/js/jquery-3.3.1.min.js"></script>
   <script src="/js/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="/js/jquery.barrating.min.js"></script>
+  <script type="text/javascript">
+     $(function() {
+        $('#example').barrating({
+          theme: 'fontawesome-stars'
+        });
+     });
+  </script>
 
 </body>
 
