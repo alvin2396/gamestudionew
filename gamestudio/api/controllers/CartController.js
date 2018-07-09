@@ -7,24 +7,15 @@
 
 module.exports = {
   
-	/*updatetCart : function(req,res,next){
-		async.each(Cart.user_id : req.session.User.id,function(user,callback){
-			var cartarr = {}
-			Games.findOne({id : user.game_id}).exec(function(err, games){
-				cartarr.push({
-					game_id : games.id,
-					harga : games.harga,
-					nama : games.game_name,
-				})
-			})
-		},function(err){
+	create : function(req,res,next){
+		Cart.create(req.body).exec(function(err, newcart){
 			if(err){
 				return res.serverError(err);
 			}
 			else{
-				
+				res.redirect('localhost:1337');
 			}
 		})
-	}*/
+	}
 };
 

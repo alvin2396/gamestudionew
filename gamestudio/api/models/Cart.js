@@ -14,9 +14,16 @@ module.exports = {
         required : true,
     },
 
-    game_id : {
-        model : 'games',
-        required : true,
+    nama_game : {
+      type : 'string'
+    },
+
+    id_game : {
+      type : 'string'
+    },
+
+    harga : {
+      type : 'string'
     },
 
   },

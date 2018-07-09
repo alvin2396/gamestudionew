@@ -35,6 +35,7 @@ module.exports = {
                         return res.serverError(err);
                     else {
                         games.min_spek_intel = []
+                        games.rec_spek =[]
                             async.each(games.min_requirement,function(spek, callback){
                                 
                                 Spesifikasi.findOne({id:spek.id}).exec(function(err, min_spek){
@@ -43,13 +44,26 @@ module.exports = {
                                         callback(err)
                                     }
                                     else{
-                                        
-                                        games.min_spek_intel.push({
+                                        if(min_spek.status == 'minimum'){
+                                        	games.min_spek_intel.push({
                                             processor_id : min_spek.processor_id,
                                             vga_id : min_spek.vga_id,
-                                            ram_id : min_spek.ram_id
+                                            ram_id : min_spek.ram_id,
+                                            status : min_spek.status
                                         })
-                                        console.log(min_spek)
+                                        }
+                                        if(min_spek.status == 'recommend'){
+
+                                        	games.rec_spek.push({
+                                            processor_id : min_spek.processor_id,
+                                            vga_id : min_spek.vga_id,
+                                            ram_id : min_spek.ram_id,
+                                            status : min_spek.status
+                                        })
+                                        }
+                                        
+                                        console.log("rec")
+                                        console.log( games.rec_spek)
                                         callback()
                                     }
                                 })
@@ -61,21 +75,29 @@ module.exports = {
                                 }
                                 else{
                                     Ram.findOne({id:games.min_spek_intel[0].ram_id}).exec(function(err,getRam){
-                                        Processor.findOne({id:games.min_spek_intel[0].processor_id}).exec(function(err,getProc){
-                                            Vga.findOne({id:games.min_spek_intel[0].vga_id}).exec(function(err,getVga){
-                                                res.view("user/gameDetail/", {
-                                                    status: 'OK',
-                                                    title: 'Detail Game',
-                                                    games: games,
-                                                    getRam : getRam,
-                                                    getProc : getProc,
-                                                    getVga : getVga,
-                                                    })
-                                                
-                                            })
-                                        })
-                                    
-                                        })
+                                    	Ram.findOne({id:games.rec_spek[0].ram_id}).exec(function(err, recRam){
+                                    		Processor.findOne({id:games.rec_spek[0].processor_id}).exec(function(err, recProc){
+                                    			Vga.findOne({id:games.rec_spek[0].vga_id}).exec(function(err, recVga){
+                                    				Processor.findOne({id:games.min_spek_intel[0].processor_id}).exec(function(err,getProc){
+			                                            Vga.findOne({id:games.min_spek_intel[0].vga_id}).exec(function(err,getVga){
+			                                                res.view("user/gameDetail/", {
+			                                                    status: 'OK',
+			                                                    title: 'Detail Game',
+			                                                    games: games,
+			                                                    getRam : getRam,
+			                                                    getProc : getProc,
+			                                                    getVga : getVga,
+			                                                    recProc : recProc,
+			                                                    recRam : recRam,
+			                                                    recVga : recVga
+			                                                    })
+			                                                
+			                                            })
+			                                        })
+                                    			})
+                                    		})
+                                    	})
+                                      })
 
                                     
                                 }
