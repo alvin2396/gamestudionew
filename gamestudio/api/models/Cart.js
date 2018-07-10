@@ -26,6 +26,9 @@ module.exports = {
       type : 'string'
     },
 
+    photo_url : {
+      type : 'string'
+    },
   },
   connection : 'database'
 

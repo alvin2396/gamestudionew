@@ -104,6 +104,11 @@ module.exports.routes = {
 'GET /games/rekomendasi' : {
   controller : 'games',
   action : "rekomendasi",
+},
+
+'GET /cart/checkcart' : {
+  controller : 'cart',
+  action : "checkcart",
 }
 
  

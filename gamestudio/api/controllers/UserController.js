@@ -17,10 +17,21 @@ module.exports = {
         console.log(err);
       }
       else{
-        return res.view('user/profile',{
-          status: 'OK',
-          title: 'Profil',
-          userProfil: userProfil
+        Vga.find().sort('vga_name ASC').exec(function(err,vga){
+          Ram.find().sort('ram_score ASC').exec(function(err,ram){
+            Processor.find().sort('processor_name ASC').exec(function(err,processor){
+              console.log(ram)
+              return res.view('user/profile',{
+              status: 'OK',
+              title: 'Profil',
+              userProfil: userProfil,
+              vga:vga,
+              ram:ram,
+              processor,
+              })
+
+            })
+          })
         })
       }
     })
@@ -115,26 +126,6 @@ module.exports = {
                 }
               });
             });
-            // console.log("ini pass "+passbaru)
-            // var passObj={
-            //   password : hash
-            // }
-            // User.update(req.param('id'),passObj,function(err){
-    
-            //       if(err){
-            //         console.log(err);
-            //       }
-            //       else{
-            //         var ubahPass = [
-            //           'Password berhasil diubah',
-            //         ]
-            //         req.session.flash = {
-            //           err: ubahPass
-            //         // If error redirect back to sign-up page
-            //         }
-            //         res.redirect('/user/profile/' + req.param('id'));
-            //       }
-            // })
           }
         })
       }

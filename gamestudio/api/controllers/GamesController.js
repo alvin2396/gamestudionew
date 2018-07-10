@@ -303,19 +303,27 @@ module.exports = {
                                                                     return res.serverError(err);
                                                                 }
                                                                 else{
-                                                                    console.log(user)
-                                                                    console.log(limitgames)
-                                                                    
-                                                                    res.view('homepage',{
-                                                                    status : 'OK',
-                                                                    title : 'Game Studio',
-                                                                    games : games,
-                                                                    newgame : newgame,
-                                                                    listgame : listgame,
-                                                                    limitgames : limitgames,
-                                                                    limitnew : limitnew,
-                                                                    user : user
+
+                                                                    Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+                                                                        if(err){
+                                                                            return res.serverError(err);
+                                                                        }
+                                                                        else{
+                                                                            
+                                                                            res.view('homepage',{
+                                                                            status : 'OK',
+                                                                            title : 'Game Studio',
+                                                                            games : games,
+                                                                            newgame : newgame,
+                                                                            listgame : listgame,
+                                                                            limitgames : limitgames,
+                                                                            limitnew : limitnew,
+                                                                            user : user,
+                                                                            updatecart : updatecart
+                                                                            })
+                                                                        }
                                                                     })
+                                                                    
                                                                 }
                                                             })
                                                             

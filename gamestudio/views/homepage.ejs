@@ -56,77 +56,34 @@
             <a class="nav-link" href="#">My Specification</a>
           </li>
         </ul>
-        <form class="form-inline m-0">
-          <input class="form-control mr-2" type="text" placeholder="Search"> </form>
+       <form class="form-inline m-0" action="/games/search/" method="POST">
+          <input class="form-control mr-2" type="search" name="search" placeholder="Search"> </form>
         <div class="dropdown">
           <a class="btn btn-default navbar-btn text-white" href="http://example.com" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="cart">
             <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
           <div class="container">
             <ul class="dropdown-menu dropdown-cart" aria-labelledby="cart">
+              <%  _.each(updatecart,function(cart){ %>
               <li>
                 <div class="col-md-12">
                   <span class="item">
                     <span class="item-left">
-                      <img src="img/1.jpg" alt="">
+                      <img src="<%= cart.photo_url %>" alt="">
                       <span class="item-info">
-                        <span>Item name</span>
-                        <span>23$</span>
+                        <span class="text-truncate" style="width: 130px;"><%= cart.nama_game %></span>
+                        <span>Rp.<%= cart.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></span>
                       </span>
                     </span>
                     <span class="item-right">
-                      <i class="fa fa-trash"></i>
+                      <form method="POST" action="/cart/remove">
+                        <input type="hidden" name="id" value="<%= cart.id %>">
+                        <button class="btn" type="submit" style="margin:0px !important;padding: 0px !important; border: none; background: transparent;"><i class="fa fa-trash"></i></button>
+                    </form>
                     </span>
                   </span>
                 </div>
               </li>
-              <li>
-                <div class="col-md-12">
-                  <span class="item">
-                    <span class="item-left">
-                      <img src="img/1.jpg" alt="">
-                      <span class="item-info">
-                        <span>Item name</span>
-                        <span>23$</span>
-                      </span>
-                    </span>
-                    <span class="item-right">
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </span>
-                </div>
-              </li>
-              <li>
-                <div class="col-md-12">
-                  <span class="item">
-                    <span class="item-left">
-                      <img src="img/1.jpg" alt="">
-                      <span class="item-info">
-                        <span>Item name</span>
-                        <span>23$</span>
-                      </span>
-                    </span>
-                    <span class="item-right">
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </span>
-                </div>
-              </li>
-              <li>
-                <div class="col-md-12">
-                  <span class="item">
-                    <span class="item-left">
-                      <img src="img/1.jpg" alt="">
-                      <span class="item-info">
-                        <span>Item name</span>
-                        <span>23$</span>
-                      </span>
-                    </span>
-                    <span class="item-right">
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </span>
-                </div>
-              </li>
+               <%})%>
               <li class="divider"></li>
               <li>
                 <div class="col-md-12 text-right">
@@ -196,19 +153,19 @@
             </div>
             <div class="row">
               <%  _.each(limitgames,function(popular){ %>
-              <form method="POST" action="/cart/create">
               <div class="col-md-4">
-                <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>">
-                <img class="img-fluid d-block" src="img/check.png" style="position:absolute;width:24px;top:0px;"></a>
+                <form method="POST" action="/cart/checkcart">
+                <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
+                <input type="hidden" name="photo_url" value="<%= popular.photo_url %>">
                 <div class="row">
                   <div class="col-md-12">
                     <h6 class="py-1 text-left m-0" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">
                       <b>
-                        <input type="hidden" value="<%= popular.game_name %>"><abbr title="<%= popular.game_name %>" style="text-decoration:none;"><%= popular.game_name %></abbr>
+                        <input type="hidden" value="<%= popular.game_name %>" name="nama_game"><abbr title="<%= popular.game_name %>" style="text-decoration:none;"><%= popular.game_name %></abbr>
                       </b>
                     </h6>
-                    <input type="hidden" value="<%= popular.id %>">
-                    <input type="hidden" value="req.session.User.id">
+                    <input type="hidden" value="<%= popular.id %>" name="id_game">
+                    <input type="hidden" value="<%=req.session.User.id%>" name="user_id">
                   </div>
                 </div>
                 <div class="row">
@@ -226,14 +183,14 @@
                 </div>
                 <div class="row">
                   <div class="col-md-8">
-                    <input type="hidden" value="<%= popular.harga %>"><h6 class="py-1 m-0 text-left">Rp.<%= popular.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
+                    <input type="hidden" value="<%= popular.harga %>" name="harga"><h6 class="py-1 m-0 text-left">Rp.<%= popular.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
                   </div>
                   <div class="text-right col-md-4">
-                    <a class="btn btn-success btn-sm" href="/cart/create?">Add</a>
+                    <button class="btn btn-success btn-sm" type="submit">Add</button>
                   </div>
                 </div>
+                </form>
               </div>
-            </form>
               <%})%>
             </div>
           </div>
@@ -251,7 +208,6 @@
               <%  _.each(limitnew,function(newgames){ %>
               <div class="col-md-4">
                 <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
-                <img class="img-fluid d-block" src="img/x.png" style="position:absolute;width:24px;top:0px;">
                 <div class="row">
                   <div class="col-md-12">
                     <h6 class="py-1 text-left m-0" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">
@@ -300,13 +256,12 @@
             <div class="row">
               <%  _.each(limitnew,function(newgames){ %>
               <div class="col-md-4">
-                <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>">
-                <img class="img-fluid d-block" src="img/check.png" style="position:absolute;width:24px;top:0px;"></a>
+                <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
                 <div class="row">
                   <div class="col-md-12">
                     <h6 class="py-1 text-left m-0" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">
                       <b>
-                        <abbr title="<%= newgames.game_name %>" style="text-decoration:none;"><%= newgames.game_name %></abbr>
+                        <abbr title="<%= newgames.game_name %>" style="text-decoration:none;"><span class="text-truncate"><%= newgames.game_name %></span></abbr>
                       </b>
                     </h6>
                   </div>

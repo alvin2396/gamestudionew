@@ -41,6 +41,11 @@ module.exports = {
       ram_score : {
         type : 'string'
       },
+
+      own_cart : {
+        collection : 'cart',
+        via : 'user_id'
+      },
       
       toJSON: function(){
       var obj = this.toObject();
