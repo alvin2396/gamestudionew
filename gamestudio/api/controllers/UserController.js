@@ -20,14 +20,25 @@ module.exports = {
         Vga.find().sort('vga_name ASC').exec(function(err,vga){
           Ram.find().sort('ram_score ASC').exec(function(err,ram){
             Processor.find().sort('processor_name ASC').exec(function(err,processor){
-              console.log(ram)
-              return res.view('user/profile',{
-              status: 'OK',
-              title: 'Profil',
-              userProfil: userProfil,
-              vga:vga,
-              ram:ram,
-              processor,
+              Genre.find().sort('genre_name ASC').exec(function(err, genre){
+                Vga.findOne({id:userProfil.vga_id}).exec(function(err,uservga){
+                  Ram.findOne({id:userProfil.ram_id}).exec(function(err,userram){
+                    Processor.findOne({id:userProfil.processor_id}).exec(function(err,userprocessor){
+                      return res.view('user/profile',{
+                        status: 'OK',
+                        title: 'Profil',
+                        userProfil: userProfil,
+                        vga:vga,
+                        ram:ram,
+                        processor,
+                        genre : genre,
+                        uservga : uservga,
+                        userram : userram,
+                        userprocessor : userprocessor,
+                        })
+                    })
+                  })
+                })
               })
 
             })
@@ -54,8 +65,13 @@ module.exports = {
     var userObj = {
       nama: req.param('nama'),
       alamat: req.param('alamat'),
-      jenis_kelamin: req.param('jenis_kelamin'),
-      email: req.param('email'),
+      genre1: req.param('genre1'),
+      genre2: req.param('genre2'),
+      genre3: req.param('genre3'),
+      genre4: req.param('genre4'),
+      ram_id : req.param('ram_id'),
+      processor_id : req.param('processor_id'),
+      vga_id : req.param('vga_id'),
     }
     
     
@@ -66,7 +82,7 @@ module.exports = {
         }
         else{
           var ubahSuccess = [
-            'Biodata Sudah berhasil diubah',
+            'Profile updated!',
           ]
           req.session.flash = {
             err: ubahSuccess
@@ -133,7 +149,7 @@ module.exports = {
   },
   uploadPhotoProfil: function(req, res) {
     req.file('photo_url') // this is the name of the file in your multipart form
-    .upload({ dirname: '../../assets/images/user' }, function(err, uploads) {
+    .upload({ dirname: '../../assets/image/user' }, function(err, uploads) {
       // try to always handle errors
       if (err) { return res.serverError(err) }
       // uploads is an array of files uploaded 

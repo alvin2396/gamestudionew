@@ -109,6 +109,11 @@ module.exports.routes = {
 'GET /cart/checkcart' : {
   controller : 'cart',
   action : "checkcart",
+},
+
+'GET /user/uploadPhotoProfil' : {
+  controller : 'user',
+  action : "uploadPhotoProfil",
 }
 
  

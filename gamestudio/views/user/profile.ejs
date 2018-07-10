@@ -148,11 +148,11 @@
           <div class="container bg-light my-2 py-2">
             <div class="row">
               <div class="text-center col-md-4">
-                <img class="img-fluid mx-auto" src="img/login.png" alt="Card image" height="16" width="150
+                <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150
 200">
                 <div class="row">
                   <div class="col-md-12 text-center">
-                    <a class="btn btn-success m-2" href="#myModal" data-toggle="modal">Change Photo</a>
+                    <a class="btn btn-success m-2" href="localhost:1337/user/uploadPhotoProfil" data-toggle="modal">Change Photo</a>
                   </div>
                 </div>
                 <div class="row">
@@ -167,7 +167,7 @@
                     <h5 class="text-left">Nama</h5>
                   </div>
                   <div class="col-md-9">
-                    <h5 class="text-left">: lorem</h5>
+                    <h5 class="text-left">: <%= userProfil.nama %></h5>
                   </div>
                 </div>
                 <div class="row">
@@ -175,7 +175,7 @@
                     <h5 class="text-left">Alamat</h5>
                   </div>
                   <div class="col-md-9">
-                    <h5 class="text-left">: lorem</h5>
+                    <h5 class="text-left">: <%= userProfil.alamat %></h5>
                   </div>
                 </div>
                 <div class="row">
@@ -183,7 +183,7 @@
                     <h5 class="text-left">Email</h5>
                   </div>
                   <div class="col-md-9">
-                    <h5 class="text-left">: lorem</h5>
+                    <h5 class="text-left">: <%= userProfil.email %></h5>
                   </div>
                 </div>
                 <div class="row">
@@ -207,7 +207,7 @@
                 </h4>
                 <div class="row">
                   <div class="col-md-9">
-                    <h3 class="text-left">Rp. 9.999.999,-</h3>
+                    <h3 class="text-left"><%= userProfil.wallet %></h3>
                   </div>
                   <div class="text-right col-md-3">
                     <a class="btn btn-success btn-sm" href="#">Top Up</a>
@@ -230,18 +230,10 @@
               <div class="col-md-12">
                 <div class="row">
                   <div class="px-4 col-md-2">
-                    <h5 class="text-left">OS</h5>
-                  </div>
-                  <div class="col-md-10">
-                    <h5 class="text-left">: lorem</h5>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="px-4 col-md-2">
                     <h5 class="text-left">Processor</h5>
                   </div>
                   <div class="col-md-10">
-                    <h5 class="text-left">: lorem</h5>
+                    <h5 class="text-left">: <%= userprocessor.processor_name %></h5>
                   </div>
                 </div>
                 <div class="row">
@@ -249,7 +241,7 @@
                     <h5 class="text-left">Memory</h5>
                   </div>
                   <div class="col-md-10">
-                    <h5 class="text-left">: lorem</h5>
+                    <h5 class="text-left">: <%= userram.ram_size %> GB</h5>
                   </div>
                 </div>
                 <div class="row">
@@ -257,15 +249,7 @@
                     <h5 class="text-left">Graphics</h5>
                   </div>
                   <div class="col-md-10">
-                    <h5 class="text-left">: lorem</h5>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="px-4 col-md-2">
-                    <h5 class="text-left">Storage</h5>
-                  </div>
-                  <div class="col-md-10">
-                    <h5 class="text-left">: lorem</h5>
+                    <h5 class="text-left">: <%= uservga.vga_name %></h5>
                   </div>
                 </div>
               </div>
@@ -285,27 +269,21 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <form>
+          <form method="POST" action="/user/updateProfile">
             <div class="row my-1">
               <div class="col-md-4">
                 <h5 class="text-left">Nama</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control" placeholder="Nama Sebelumnya"> </div>
+                <input type="hidden" name="id" value="<%= req.session.User.id %>">
+                <input type="text" class="form-control" name="nama" placeholder="Nama Sebelumnya"> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
                 <h5 class="text-left">Alamat</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control" placeholder="Alamat Sebelumnya"> </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-4">
-                <h5 class="text-left">Email</h5>
-              </div>
-              <div class="col-md-8">
-                <input type="email" class="form-control" placeholder="Email Sebelumnya"> </div>
+                <input type="text" name="alamat" class="form-control" placeholder="Alamat Sebelumnya"> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-12">
@@ -321,26 +299,10 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <select class="form-control" id="sel1">
-                      <option value="1">Action</option>
-                      <option value="2">Adventure</option>
-                      <option value="3">Strategy</option>
-                      <option value="4">Simulation</option>
-                      <option value="4">RPG</option>
-                      <option value="4">Violent</option>
-                      <option value="4">Singleplayer</option>
-                      <option value="4">Massively Multiplayer</option>
-                      <option value="4">Sports</option>
-                      <option value="4">Racing</option>
-                      <option value="4">Multiplayer</option>
-                      <option value="4">Horror</option>
-                      <option value="4">Open World</option>
-                      <option value="4">Fantasy</option>
-                      <option value="4">Sci-fi</option>
-                      <option value="4">Indie</option>
-                      <option value="4">FPS</option>
-                      <option value="4">Mystery</option>
-                      <option value="4">Action</option>
+                    <select class="form-control" name="genre1" id="sel1">
+                      <%  _.each(genre,function(genre){ %>
+                      <option value="<%= genre.id %>"><%= genre.genre_name %></option>
+                       <%})%>
                     </select>
                   </div>
                 </div>
@@ -353,26 +315,10 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <select class="form-control" id="sel1">
-                      <option value="1">Action</option>
-                      <option value="2">Adventure</option>
-                      <option value="3">Strategy</option>
-                      <option value="4">Simulation</option>
-                      <option value="4">RPG</option>
-                      <option value="4">Violent</option>
-                      <option value="4">Singleplayer</option>
-                      <option value="4">Massively Multiplayer</option>
-                      <option value="4">Sports</option>
-                      <option value="4">Racing</option>
-                      <option value="4">Multiplayer</option>
-                      <option value="4">Horror</option>
-                      <option value="4">Open World</option>
-                      <option value="4">Fantasy</option>
-                      <option value="4">Sci-fi</option>
-                      <option value="4">Indie</option>
-                      <option value="4">FPS</option>
-                      <option value="4">Mystery</option>
-                      <option value="4">Action</option>
+                    <select class="form-control" name="genre2" id="sel1">
+                      <%  _.each(genre,function(genre){ %>
+                      <option value="<%= genre.id %>"><%= genre.genre_name %></option>
+                       <%})%>
                     </select>
                   </div>
                 </div>
@@ -380,31 +326,15 @@
               <div class="col-md-3">
                 <div class="row">
                   <div class="col-md-12">
-                    <h6 class="text-left my-1">Genre 1 :</h6>
+                    <h6 class="text-left my-1">Genre 3 :</h6>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <select class="form-control" id="sel1">
-                      <option value="1">Action</option>
-                      <option value="2">Adventure</option>
-                      <option value="3">Strategy</option>
-                      <option value="4">Simulation</option>
-                      <option value="4">RPG</option>
-                      <option value="4">Violent</option>
-                      <option value="4">Singleplayer</option>
-                      <option value="4">Massively Multiplayer</option>
-                      <option value="4">Sports</option>
-                      <option value="4">Racing</option>
-                      <option value="4">Multiplayer</option>
-                      <option value="4">Horror</option>
-                      <option value="4">Open World</option>
-                      <option value="4">Fantasy</option>
-                      <option value="4">Sci-fi</option>
-                      <option value="4">Indie</option>
-                      <option value="4">FPS</option>
-                      <option value="4">Mystery</option>
-                      <option value="4">Action</option>
+                    <select class="form-control" name="genre3" id="sel1">
+                      <%  _.each(genre,function(genre){ %>
+                      <option value="<%= genre.id %>"><%= genre.genre_name %></option>
+                       <%})%>
                     </select>
                   </div>
                 </div>
@@ -412,31 +342,15 @@
               <div class="col-md-3">
                 <div class="row">
                   <div class="col-md-12">
-                    <h6 class="text-left my-1">Genre 1 :</h6>
+                    <h6 class="text-left my-1">Genre 4 :</h6>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <select class="form-control" id="sel1">
-                      <option value="1">Action</option>
-                      <option value="2">Adventure</option>
-                      <option value="3">Strategy</option>
-                      <option value="4">Simulation</option>
-                      <option value="4">RPG</option>
-                      <option value="4">Violent</option>
-                      <option value="4">Singleplayer</option>
-                      <option value="4">Massively Multiplayer</option>
-                      <option value="4">Sports</option>
-                      <option value="4">Racing</option>
-                      <option value="4">Multiplayer</option>
-                      <option value="4">Horror</option>
-                      <option value="4">Open World</option>
-                      <option value="4">Fantasy</option>
-                      <option value="4">Sci-fi</option>
-                      <option value="4">Indie</option>
-                      <option value="4">FPS</option>
-                      <option value="4">Mystery</option>
-                      <option value="4">Action</option>
+                    <select class="form-control" name="genre4" id="sel1">
+                      <%  _.each(genre,function(genre){ %>
+                      <option value="<%= genre.id %>" name="genre4"><%= genre.genre_name %></option>
+                       <%})%>
                     </select>
                   </div>
                 </div>
@@ -452,9 +366,9 @@
                 <h5 class="text-left">Processor</h5>
               </div>
               <div class="col-md-8">
-                <select class="form-control" id="sel1">
+                <select class="form-control" name="processor_id" id="sel1">
                   <%  _.each(processor,function(processor){ %>
-                  <option value="<%= processor.processor_score %>"><%= processor.processor_name %></option>
+                  <option value="<%= processor.id %>"><%= processor.processor_name %></option>
                   <%})%>
                 </select>
               </div>
@@ -464,9 +378,9 @@
                 <h5 class="text-left">Memory</h5>
               </div>
               <div class="col-md-8">
-                <select class="form-control" id="sel1">
+                <select class="form-control" name="ram_id" id="sel1">
                   <%  _.each(ram,function(ram){ %>
-                  <option value="<%= ram.ram_score %>"><%= ram.ram_size %></option>
+                  <option value="<%= ram.id %>"><%= ram.ram_size %></option>
                   <%})%>
                 </select>
               </div>
@@ -476,19 +390,19 @@
                 <h5 class="text-left">Graphics</h5>
               </div>
               <div class="col-md-8">
-                <select class="form-control" id="sel1">
+                <select class="form-control" name="vga_id" id="sel1">
                   <%  _.each(vga,function(vga){ %>
-                  <option value="<%= vga.vga_score %>"><%= vga.vga_name %></option>
+                  <option value="<%= vga.id %>"><%= vga.vga_name %></option>
                   <%})%>
                 </select>
               </div>
             </div>
-          </form>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer text-center">
-          <button type="button" class="btn btn-success btn-block btn-sm text-center">Save</button>
+          <button type="submit" class="btn btn-success btn-block btn-sm text-center">Save</button>
         </div>
+        </form>
       </div>
     </div>
   </div>

@@ -18,7 +18,7 @@ module.exports = {
    },
 
    vga_score: {
-        type: 'string'
+        type: 'number'
    },
 
   },

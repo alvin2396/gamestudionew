@@ -9,9 +9,490 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="/styles/theme.css" type="text/css">
 </head>
-  
+    <%
+    if(req.session.User){ %>
+    <body class="bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="http://localhost:1337/">LOGO</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:1337/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Genre</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Adventure</a>
+              <a class="dropdown-item" href="#">Strategy</a>
+              <a class="dropdown-item" href="#">Simulation</a>
+              <a class="dropdown-item" href="#">RPG</a>
+              <a class="dropdown-item" href="#">Violent</a>
+              <a class="dropdown-item" href="#">Singleplayer</a>
+              <a class="dropdown-item" href="#">Massively Multiplayer</a>
+              <a class="dropdown-item" href="#">Sports</a>
+              <a class="dropdown-item" href="#">Racing</a>
+              <a class="dropdown-item" href="#">Multiplayer</a>
+              <a class="dropdown-item" href="#">Horror</a>
+              <a class="dropdown-item" href="#">Open World</a>
+              <a class="dropdown-item" href="#">Fantasy</a>
+              <a class="dropdown-item" href="#">Sci-fi</a>
+              <a class="dropdown-item" href="#">Indie</a>
+              <a class="dropdown-item" href="#">FPS</a>
+              <a class="dropdown-item" href="#">Mystery</a>
+              <a class="dropdown-item" href="#">Action</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="New Game.html">New Game</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="On Sale Game.html">On Sale</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Specification</a>
+          </li>
+        </ul>
+        <form class="form-inline m-0">
+          <input class="form-control mr-2" type="text" placeholder="Search"> </form>
+        <div class="dropdown">
+          <a class="btn btn-default navbar-btn text-white" href="http://example.com" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="cart">
+            <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
+          <div class="container">
+            <ul class="dropdown-menu dropdown-cart" aria-labelledby="cart">
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <div class="col-md-12 text-right">
+                  <a class="btn btn-success btn-sm" href="#">Check Out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a class="btn btn-default navbar-btn text-white" href="http://localhost:1337/login">
+          <i class="fa fa-sign-out fa-fw"></i>Sign out</a>
+      </div>
+    </div>
+  </nav>
+  <hr style="border: 1px solid white;" class="m-0 p-0 border border-info">
+  <div class="text-center text-white bg-dark py-1" style="background-image: url(&quot;/image/background.jpg&quot;);">
+    <div class="container" style="border-radius: 10px;">
+      <div class="row">
+        <div class="col-md-8 m-0">
+          <div class="container bg-light my-2 py-2" style="border-radius: 10px;">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-left text-dark">
+                  <b><%= games.game_name %></b>
+                </h4>
+                <div class="embed-responsive-4by3">
+                  <video src="<%= games.video_url %>" class="embed-responsive-item" controls="controls" style="width:100%;"> Your browser does not support HTML5 video. </video>
+                </div>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <img class="img-fluid d-block" src="<%= games.screenshot1_url %>" style="width:100%;cursor:pointer" onclick="onClick(this)"> </div>
+                  <div class="col-md-4">
+                    <img class="img-fluid d-block" src="<%= games.screenshot2_url %>" style="width:100%;cursor:pointer" onclick="onClick(this)"> </div>
+                  <div class="col-md-4">
+                    <img class="img-fluid d-block" src="<%= games.screenshot3_url %>" style="width:100%;cursor:pointer" onclick="onClick(this)"> </div>
+                </div>
+                <div id="modal01" class="w3-modal text-dark" onclick="this.style.display='none'">
+                  <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">×</span>
+                  <div class="w3-modal-content w3-animate-zoom">
+                    <img id="img01" style="width:100%"> </div>
+                </div>
+                <h4 class="text-left text-dark">Description</h4>
+                <p class="text-justify text-dark"><%= games.description %></p>
+                <div class="row">
+                  <div class="col-md-9">
+                    <h4 class="text-left text-dark">Review</h4>
+                  </div>
+                  <div class="col-md-3 text-right">
+                    <a class="btn btn-success btn-sm" href="#">Add Review</a>
+                  </div>
+                </div>
+                <div class="row my-2" style="margin-top:0px !important;">
+                  <div class="col-md-9 text-dark">
+                    <h5 class="text-left m-0">User 1</h5>
+                  </div>
+                  <div class="col-md-3 text-right">
+                    <i class="fa fa-star text-dark"></i>
+                    <i class="fa fa-star text-dark"></i>
+                    <i class="fa fa-star text-dark"></i>
+                    <i class="fa fa-star text-dark"></i>
+                    <i class="fa fa-star text-dark"></i>
+                  </div>
+                  <div class="col-md-12">
+                    <p class="text-justify my-1 text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  </div>
+                </div>
+                <div class="row my-2" style="margin-top:0px !important;">
+                  <div class="col-md-9 text-dark">
+                    <h5 class="text-left m-0">User 2</h5>
+                  </div>
+                  <div class="col-md-3 text-right">
+                    <i class="fa fa-star text-dark"></i>
+                    <i class="fa fa-star text-dark"></i>
+                    <i class="fa fa-star text-dark"></i>
+                    <i class="fa fa-star text-dark"></i>
+                    <i class="fa fa-star text-dark"></i>
+                  </div>
+                  <div class="col-md-12">
+                    <p class="text-justify my-1 text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="container my-2 py-2 bg-light" style="border-radius: 10px;">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-dark text-left">Game Detail</h4>
+                <ul class="list-group list-group-flush bg-light">
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left" contenteditable="true">Publisher</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= games.publisher %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">Year</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= games.release_date %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">Genre</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left">
+                          <%  _.each(games.genreStrings,function(genre_list){ %>
+                          <a href="#" class="text-black" style="color: black;">
+                            <%= genre_list.nama_genre %>
+                          </a>
+                          <%})%>
+                        </h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4 text-left">
+                        <h6 class="m-0">Rating</h6>
+                      </div>
+                      <div class="col-md-8 text-left">
+                        
+                         
+                        <span style="font-size:14px;margin:7px;"><%= games.rating %></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4 text-left">
+                        <h6 class="m-0">Price</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left">Rp.<%= games.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4 text-left">
+                        <h6 class="m-0">Playable</h6>
+                      </div>
+                      <div class="col-md-8">
+                         <%
+                          if(userprocessor.processor_score >= getProc.processor_score && userram.ram_score >= getRam.ram_score && uservga.vga_score >= getVga.vga_score){%>
+                          <img class="img-fluid d-block" src="/image/Check.png" style="position:absolute;width:18px;top:0px;"> 
+                      
+                      <%}
+                      else{%>
+                        
+                        <img class="img-fluid d-block" src="/image/x.png" style="position:absolute;width:18px;top:0px;">
+                     <%}%>
+                      </div>
+                        
 
-<body class="bg-dark">
+                    </div>
+                  </li>
+                </ul>
+                <div class="row my-2">
+                  <div class="col-md-12 text-left">
+                    <a class="btn btn-success btn-sm" href="#">Add to cart</a>
+                  </div>
+                </div>
+                <h4 class="my-3 text-dark text-center">Feature Ratings
+                  <br> </h4>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <h6 class="m-0 text-dark text-left">Gameplay</h6>
+                  </div>
+                  <div class="col-md-8 p-0 m-0">
+                    <div class="bar-container" style="width: 94%;
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    color: white;">
+                      <div class="gameplay" style="width: 60%; height: 18px; background-color: #4CAF50;"> </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <h6 class="m-0 text-dark text-left">Graphics</h6>
+                  </div>
+                  <div class="p-0 m-0 col-md-8">
+                    <div class="bar-container" style="width: 94%;
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    color: white;">
+                      <div class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50;"> </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <h6 class="m-0 text-dark text-left">Controls</h6>
+                  </div>
+                  <div class="p-0 m-0 col-md-8">
+                    <div class="bar-container" style="width: 94%;
+                      background-color: #f1f1f1;
+                      text-align: center;
+                      color: white;">
+                      <div class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;"> </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <h6 class="m-0 text-dark text-left">Story</h6>
+                  </div>
+                  <div class="p-0 m-0 col-md-8">
+                    <div class="bar-container" style="width: 94%;
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    color: white;">
+                      <div class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;"> </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <h6 class="m-0 text-dark text-left">Music</h6>
+                  </div>
+                  <div class="p-0 m-0 col-md-8">
+                    <div class="bar-container" style="width: 94%;
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    color: white;">
+                      <div class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;"> </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 class="text-center my-3 text-dark">System Requirement
+                  <br> </h4>
+                <h6 class="text-dark text-left">
+                  <b>Minimum Requirement :</b>
+                </h6>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">OS</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= games.OS %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">Processor</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= getProc.processor_name %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">Memory</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= getRam.ram_size %> GB</h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4 text-left">
+                        <h6 class="m-0">Graphics</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= getVga.vga_name %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">Storage</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= games.HDD_space %></h6>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <h6 class="text-left text-dark" style="margin-top:30px;">
+                  <b>Recommended Requirement :</b>
+                </h6>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">OS</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= games.OS %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">Processor</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= recProc.processor_name %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">Memory</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= recRam.ram_size %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4 text-left">
+                        <h6 class="m-0">Graphics</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= recVga.vga_name %></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item p-0 list-group-item-info">
+                    <div class="row my-1">
+                      <div class="col-md-4">
+                        <h6 class="m-0 text-left">Storage</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <h6 class="m-0 text-left"><%= games.HDD_space %></h6>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%}
+     else{%>
+     <body class="bg-dark">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="http://localhost:1337/">LOGO</a>
@@ -284,16 +765,8 @@
                       <div class="col-md-4 text-left">
                         <h6 class="m-0">Playable</h6>
                       </div>
-                      <div class="col-md-8">
-                         <%
-                          if(req.session.User.processor_score >= getProc.processor_score && req.session.User.ram_score >= getRam.ram_score && req.session.User.vga_score >= getVga.vga_score){%>
-                          <img class="img-fluid d-block" src="/image/Check.png" style="position:absolute;width:18px;top:0px;"> 
-                      
-                      <%}
-                      else{%>
-                        
+                      <div class="col-md-8">                  
                         <img class="img-fluid d-block" src="/image/x.png" style="position:absolute;width:18px;top:0px;">
-                     <%}%>
                       </div>
                         
 
@@ -490,6 +963,7 @@
         </div>
       </div>
     </div>
+    <%}%>
   </div>
   <div class="py-5 text-white bg-dark">
     <div class="container">

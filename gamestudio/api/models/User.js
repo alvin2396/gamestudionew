@@ -22,6 +22,10 @@ module.exports = {
           required:true
       },
 
+      photo_url : {
+        type : 'string'
+      },
+
       nama:{
         type: 'string',
       },
@@ -42,9 +46,41 @@ module.exports = {
         type : 'string'
       },
 
+      processor_id :{
+        model : 'processor'
+      },
+
+      vga_id : {
+        model : 'vga'
+      },
+
+      ram_id : {
+        model : 'ram'
+      },
+
       own_cart : {
         collection : 'cart',
         via : 'user_id'
+      },
+
+      wallet : {
+        type : 'number'
+      },
+
+      genre1 : {
+        type : 'string'
+      },
+
+      genre2 : {
+        type : 'string'
+      },
+
+      genre3 : {
+        type : 'string'
+      },
+
+      genre4 : {
+        type : 'string'
       },
       
       toJSON: function(){

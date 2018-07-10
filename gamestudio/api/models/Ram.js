@@ -18,7 +18,7 @@ module.exports = {
     },
 
     ram_score: {
-        type: 'string'
+        type: 'number'
     },
 
   },

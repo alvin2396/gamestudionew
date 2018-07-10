@@ -18,7 +18,7 @@ module.exports = {
     },
 
     processor_score : {
-        type: 'string'
+        type: 'number'
     },
 
   },

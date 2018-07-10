@@ -61,9 +61,7 @@ module.exports = {
                                             status : min_spek.status
                                         })
                                         }
-                                        
-                                        console.log("rec")
-                                        console.log( games.rec_spek)
+                        
                                         callback()
                                     }
                                 })
@@ -80,17 +78,45 @@ module.exports = {
                                     			Vga.findOne({id:games.rec_spek[0].vga_id}).exec(function(err, recVga){
                                     				Processor.findOne({id:games.min_spek_intel[0].processor_id}).exec(function(err,getProc){
 			                                            Vga.findOne({id:games.min_spek_intel[0].vga_id}).exec(function(err,getVga){
-			                                                res.view("user/gameDetail/", {
-			                                                    status: 'OK',
-			                                                    title: 'Detail Game',
-			                                                    games: games,
-			                                                    getRam : getRam,
-			                                                    getProc : getProc,
-			                                                    getVga : getVga,
-			                                                    recProc : recProc,
-			                                                    recRam : recRam,
-			                                                    recVga : recVga
-			                                                    })
+			                                                User.findOne({id: req.session.User.id}).exec(function(err,user){
+                                                                Ram.findOne({id:user.ram_id}).exec(function(err,userram){
+                                                                    Vga.findOne({id:user.vga_id}).exec(function(err,uservga){
+                                                                        Processor.findOne({id:user.processor_id}).exec(function(err,userprocessor){
+                                                                            res.view("user/gameDetail/", {
+                                                                            status: 'OK',
+                                                                            title: 'Detail Game',
+                                                                            games: games,
+                                                                            getRam : getRam,
+                                                                            getProc : getProc,
+                                                                            getVga : getVga,
+                                                                            recProc : recProc,
+                                                                            recRam : recRam,
+                                                                            recVga : recVga,
+                                                                            uservga : uservga,
+                                                                            userram : userram,
+                                                                            userprocessor : userprocessor,
+                                                                            })
+                                                                            if(userprocessor.processor_score >= getProc.processor_score && userram.ram_score >= getRam.ram_score && uservga.vga_score >= getVga.vga_score){
+                                                                                console.log('true')
+                                                                            }
+                                                                            else{
+                                                                                console.log('false')
+                                                                                if(userprocessor.processor_score < getProc.processor_score){
+                                                                                    console.log('processor low')
+                                                                                }
+                                                                                else if(uservga.vga_score < getVga.vga_score){
+                                                                                    console.log('vga low')
+                                                                                    console.log(uservga.vga_score)
+                                                                                    console.log(getVga.vga_score)
+                                                                                }
+                                                                                else if(userram.ram_score < getRam.ram_score){
+                                                                                    console.log('ram low')
+                                                                                }
+                                                                            }
+                                                                        })
+                                                                    })
+                                                                })
+                                                            })
 			                                                
 			                                            })
 			                                        })
