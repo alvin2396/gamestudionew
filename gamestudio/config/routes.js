@@ -114,8 +114,11 @@ module.exports.routes = {
 'GET /user/uploadPhotoProfil' : {
   controller : 'user',
   action : "uploadPhotoProfil",
-}
+},
 
+'GET /vga/updatescore' : {
+  view : 'admin/updateVga'
+}
  
   
 

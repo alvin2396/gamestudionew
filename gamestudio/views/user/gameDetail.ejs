@@ -286,7 +286,7 @@
                       </div>
                       <div class="col-md-8">
                          <%
-                          if(userprocessor.processor_score >= getProc.processor_score && userram.ram_score >= getRam.ram_score && uservga.vga_score >= getVga.vga_score){%>
+                          if(parseInt(userprocessor.processor_score) >= parseInt(getProc.processor_score) && parseInt(userram.ram_score) >= parseInt(getRam.ram_score ) && parseInt(uservga.vga_score) >= parseInt(getVga.vga_score)){%>
                           <img class="img-fluid d-block" src="/image/Check.png" style="position:absolute;width:18px;top:0px;"> 
                       
                       <%}

@@ -207,7 +207,13 @@
                 </h4>
                 <div class="row">
                   <div class="col-md-9">
-                    <h3 class="text-left"><%= userProfil.wallet %></h3>
+                    <%
+                    if(userProfil.wallet == 'undefined'){%>
+                      <h3 class="text-right">Rp. 0</h3>
+                      <%}
+                      else{%>
+                        <h3 class="text-right"><%= userProfil.wallet %></h3>
+                      <%}%>
                   </div>
                   <div class="text-right col-md-3">
                     <a class="btn btn-success btn-sm" href="#">Top Up</a>
