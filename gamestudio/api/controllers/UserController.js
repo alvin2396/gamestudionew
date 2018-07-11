@@ -12,7 +12,7 @@ module.exports = {
   
 
   userProfile:function(req,res,next){
-    User.findOne(req.param('id'),function(err,userProfil){
+    User.findOne({id: req.session.User.id}).exec(function(err,userProfil){
       if(err){
         console.log(err);
       }
@@ -24,18 +24,19 @@ module.exports = {
                 Vga.findOne({id:userProfil.vga_id}).exec(function(err,uservga){
                   Ram.findOne({id:userProfil.ram_id}).exec(function(err,userram){
                     Processor.findOne({id:userProfil.processor_id}).exec(function(err,userprocessor){
-                      return res.view('user/profile',{
-                        status: 'OK',
-                        title: 'Profil',
-                        userProfil: userProfil,
-                        vga:vga,
-                        ram:ram,
-                        processor,
-                        genre : genre,
-                        uservga : uservga,
-                        userram : userram,
-                        userprocessor : userprocessor,
-                        })
+                        return res.view('user/profile',{
+                          status: 'OK',
+                          title: 'Profil',
+                          userProfil: userProfil,
+                          vga:vga,
+                          ram:ram,
+                          processor,
+                          genre : genre,
+                          uservga : uservga,
+                          userram : userram,
+                          userprocessor : userprocessor,
+                          })
+                      
                     })
                   })
                 })

@@ -73,6 +73,7 @@ module.exports = {
 				// Log user in
 				req.session.authenticated = true;
 				req.session.User = user;
+				console.log(req.session.User.id)
 				res.redirect('/user/profile/' + user.id);
 
 			});

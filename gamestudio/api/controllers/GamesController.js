@@ -79,7 +79,7 @@ module.exports = {
                                     				Processor.findOne({id:games.min_spek_intel[0].processor_id}).exec(function(err,getProc){
 			                                            Vga.findOne({id:games.min_spek_intel[0].vga_id}).exec(function(err,getVga){
 			                                                if(req.session.User){
-                                                                User.findOne({id:req.session.User.id}).exec(function(user){
+                                                                User.findOne({id:req.session.User.id}).exec(function(err,user){
                                                                     Processor.findOne({id:user.processor_id}).exec(function(err,userprocessor){
                                                                         Vga.findOne({id:user.vga_id}).exec(function(err,uservga){
                                                                             Ram.findOne({id:user.ram_id}).exec(function(err,userram){
@@ -96,6 +96,7 @@ module.exports = {
                                                                                     uservga : uservga,
                                                                                     userram : userram,
                                                                                     userprocessor : userprocessor,
+                                                                                    user : user,
                                                                                     })
                                                                                     if(parseInt(userprocessor.processor_score) >= parseInt(getProc.processor_score) && parseInt(userram.ram_score) >= parseInt(getRam.ram_score ) && parseInt(uservga.vga_score) >= parseInt(getVga.vga_score)){
                                                                                         console.log('true')
@@ -462,41 +463,7 @@ module.exports = {
         res.view('admin/addGame')
     },
 
-    rekomendasi:function(req,res){
-        var userpref = ['5b34f1d1f7460b278469cc33','5b34f1d3f7460b278469cc34','5b34f1d8f7460b278469cc37']
-        var FG1 = 0
-        var i;
-        var j;
-        var totalgames
-        
-        Games.find().populateAll().exec(function(err,games){
-            if(err){
-                return res.serverError(err);
-            }
-            else{
-                async.each(games.genre_lists,function(genre,err){
-                    Genre.findOne({id:genre.id_genre}).exec(function(err, genres){
-                        if(err){
-                            callback(err)
-                        }
-                        else{
-                            console.log(genres)
-                            callback()
-                        }
-                    })
-                })
-            }
-        })
-
-
-        
-
-
-        
-        
-        
-        res.view("user/recommend")
-    }
+    
 
 };
 

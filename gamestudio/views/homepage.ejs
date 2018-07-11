@@ -20,7 +20,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="Home.html">Home</a>
+            <a class="nav-link" href="http://localhost:1337/">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Genre</a>
@@ -47,7 +47,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="New Game.html">New Game</a>
+            <a class="nav-link" href="http://localhost:1337/games/newgame/1">New Game</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="On Sale Game.html">On Sale</a>
@@ -306,7 +306,7 @@
             </div>
             <%  _.each(games,function(popular){ %>
             <div class="row my-2" style="margin-top:0px !important;">
-              <div class="m-0 col-md-12 px-2" style="padding-right:0px; padding-top:0px; padding-botton:0px;">
+              <div class="m-0 col-md-12 px-2" style="padding-right:0px; padding-top:0px; padding-bottom:0px;">
                 <h6 class="text-truncate m-0 py-1 w-100">
                   <b>
                     <abbr title="<%= popular.game_name %>" style="text-decoration:none;"><%= popular.game_name %></abbr>
@@ -314,7 +314,7 @@
                 </h6>
               </div>
 
-              <div class="col-md-4 m-0" style="padding-right:0px; padding-top:0px; padding-botton:0px;">
+              <div class="col-md-4 m-0" style="padding-right:0px; padding-top:0px; padding-bottom:0px;">
                 <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>" width="100%">
                 </a> </div>
               <div class="col-md-8">
@@ -681,7 +681,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12 mt-3 text-center">
-          <p>© Copyright 2017 Pingendo - All rights reserved.</p>
+            <p>© Copyright 2018 Gamestudio - All rights reserved.</p>
         </div>
       </div>
     </div>
