@@ -214,5 +214,12 @@ module.exports = {
         })
       }
     })
+  },
+
+  topup:function(req,res,next){
+    res.view('user/topup',{
+      status : 'OK',
+      title : 'Top Up'
+    })
   }
 }
