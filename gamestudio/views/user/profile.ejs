@@ -62,7 +62,27 @@
             <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
             <div class="container">
                 <ul class="dropdown-menu dropdown-cart" aria-labelledby="cart">
-                  
+                  <%  _.each(updatecart,function(cart){ %>
+                    <li>
+                      <div class="col-md-12">
+                        <span class="item">
+                          <span class="item-left">
+                            <img src="<%= cart.photo_url %>" alt="">
+                            <span class="item-info">
+                              <span class="text-truncate" style="width: 130px;"><%= cart.nama_game %></span>
+                              <span>Rp.<%= cart.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></span>
+                            </span>
+                          </span>
+                          <span class="item-right">
+                            <form method="POST" action="/cart/remove">
+                              <input type="hidden" name="id" value="<%= cart.id %>">
+                              <button class="btn" type="submit" style="margin:0px !important;padding: 0px !important; border: none; background: transparent;"><i class="fa fa-trash"></i></button>
+                          </form>
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                     <%})%>
                   <li class="divider"></li>
                   <li>
                     <div class="col-md-12 text-right">
@@ -145,11 +165,11 @@
                 <div class="row">
                   <div class="col-md-9">
                     <%
-                    if(userProfil.wallet == 'undefined'){%>
+                    if(typeof(userProfil.wallet) == 'undefined'){%>
                       <h3 class="text-right">Rp. 0</h3>
                       <%}
                       else{%>
-                        <h3 class="text-right"><%= userProfil.wallet %></h3>
+                        <h3 class="text-right"></h3>
                       <%}%>
                   </div>
                   <div class="text-right col-md-3">

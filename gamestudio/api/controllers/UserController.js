@@ -24,18 +24,22 @@ module.exports = {
                 Vga.findOne({id:userProfil.vga_id}).exec(function(err,uservga){
                   Ram.findOne({id:userProfil.ram_id}).exec(function(err,userram){
                     Processor.findOne({id:userProfil.processor_id}).exec(function(err,userprocessor){
-                        return res.view('user/profile',{
-                          status: 'OK',
-                          title: 'Profil',
-                          userProfil: userProfil,
-                          vga:vga,
-                          ram:ram,
-                          processor,
-                          genre : genre,
-                          uservga : uservga,
-                          userram : userram,
-                          userprocessor : userprocessor,
-                          })
+                        Cart.find({user_id : userProfil.id}).exec(function(err,updatecart){
+                          console.log(updatecart)
+                          return res.view('user/profile',{
+                            status: 'OK',
+                            title: 'Profil',
+                            userProfil: userProfil,
+                            vga:vga,
+                            ram:ram,
+                            processor,
+                            genre : genre,
+                            uservga : uservga,
+                            userram : userram,
+                            userprocessor : userprocessor,
+                            updatecart : updatecart,
+                            })
+                        })
                       
                     })
                   })

@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/styles/theme.css" type="text/css"> </head>
 
 <body class="bg-dark">
+    <%
+    if(req.session.User){ %>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
       <a href="http://localhost:1337/"><img class="img-fluid d-block mx-2" src="/image/Logo Gaming Studio.png" style="width:40px; margin-left:0px !important;"></a>
@@ -41,7 +43,7 @@
               <a class="dropdown-item" href="#">Indie</a>
               <a class="dropdown-item" href="#">FPS</a>
               <a class="dropdown-item" href="#">Mystery</a>
-              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Crime</a>
             </div>
           </li>
           <li class="nav-item">
@@ -61,70 +63,27 @@
             <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
           <div class="container">
             <ul class="dropdown-menu dropdown-cart" aria-labelledby="cart">
-              <li>
-                <div class="col-md-12">
-                  <span class="item">
-                    <span class="item-left">
-                      <img src="img/1.jpg" alt="">
-                      <span class="item-info">
-                        <span>Item name</span>
-                        <span>23$</span>
+                <%  _.each(updatecart,function(cart){ %>
+                  <li>
+                    <div class="col-md-12">
+                      <span class="item">
+                        <span class="item-left">
+                          <img src="<%= cart.photo_url %>" alt="">
+                          <span class="item-info">
+                            <span class="text-truncate" style="width: 130px;"><%= cart.nama_game %></span>
+                            <span>Rp.<%= cart.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></span>
+                          </span>
+                        </span>
+                        <span class="item-right">
+                          <form method="POST" action="/cart/remove">
+                            <input type="hidden" name="id" value="<%= cart.id %>">
+                            <button class="btn" type="submit" style="margin:0px !important;padding: 0px !important; border: none; background: transparent;"><i class="fa fa-trash"></i></button>
+                        </form>
+                        </span>
                       </span>
-                    </span>
-                    <span class="item-right">
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </span>
-                </div>
-              </li>
-              <li>
-                <div class="col-md-12">
-                  <span class="item">
-                    <span class="item-left">
-                      <img src="img/1.jpg" alt="">
-                      <span class="item-info">
-                        <span>Item name</span>
-                        <span>23$</span>
-                      </span>
-                    </span>
-                    <span class="item-right">
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </span>
-                </div>
-              </li>
-              <li>
-                <div class="col-md-12">
-                  <span class="item">
-                    <span class="item-left">
-                      <img src="img/1.jpg" alt="">
-                      <span class="item-info">
-                        <span>Item name</span>
-                        <span>23$</span>
-                      </span>
-                    </span>
-                    <span class="item-right">
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </span>
-                </div>
-              </li>
-              <li>
-                <div class="col-md-12">
-                  <span class="item">
-                    <span class="item-left">
-                      <img src="img/1.jpg" alt="">
-                      <span class="item-info">
-                        <span>Item name</span>
-                        <span>23$</span>
-                      </span>
-                    </span>
-                    <span class="item-right">
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </span>
-                </div>
-              </li>
+                    </div>
+                  </li>
+                   <%})%>
               <li class="divider"></li>
               <li>
                 <div class="col-md-12 text-right">
@@ -135,7 +94,7 @@
           </div>
         </div>
         <a class="btn btn-default navbar-btn text-white" href="http://localhost:1337/login">
-          <i class="fa fa-user fa-fw"></i>Sign in</a>
+          <i class="fa fa-sign-out fa-fw"></i>Sign out</a>
       </div>
     </div>
   </nav>
@@ -223,6 +182,223 @@
       </center>
     </div>
   </div>
+  <%}
+     else{%>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+          <div class="container">
+            <a href="http://localhost:1337/"><img class="img-fluid d-block mx-2" src="/image/Logo Gaming Studio.png" style="width:40px; margin-left:0px !important;"></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="http://localhost:1337/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Genre</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Adventure</a>
+                    <a class="dropdown-item" href="#">Strategy</a>
+                    <a class="dropdown-item" href="#">Simulation</a>
+                    <a class="dropdown-item" href="#">RPG</a>
+                    <a class="dropdown-item" href="#">Violent</a>
+                    <a class="dropdown-item" href="#">Singleplayer</a>
+                    <a class="dropdown-item" href="#">Massively Multiplayer</a>
+                    <a class="dropdown-item" href="#">Sports</a>
+                    <a class="dropdown-item" href="#">Racing</a>
+                    <a class="dropdown-item" href="#">Multiplayer</a>
+                    <a class="dropdown-item" href="#">Horror</a>
+                    <a class="dropdown-item" href="#">Open World</a>
+                    <a class="dropdown-item" href="#">Fantasy</a>
+                    <a class="dropdown-item" href="#">Sci-fi</a>
+                    <a class="dropdown-item" href="#">Indie</a>
+                    <a class="dropdown-item" href="#">FPS</a>
+                    <a class="dropdown-item" href="#">Mystery</a>
+                    <a class="dropdown-item" href="#">Action</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="http://localhost:1337/games/newgame/1">New Game</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="On Sale Game.html">On Sale</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">My Specification</a>
+                </li>
+              </ul>
+              <form class="form-inline m-0">
+                <input class="form-control mr-2" type="text" placeholder="Search"> </form>
+              <div class="dropdown">
+                <a class="btn btn-default navbar-btn text-white" href="http://example.com" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="cart">
+                  <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
+                <div class="container">
+                  <ul class="dropdown-menu dropdown-cart" aria-labelledby="cart">
+                    <li>
+                      <div class="col-md-12">
+                        <span class="item">
+                          <span class="item-left">
+                            <img src="img/1.jpg" alt="">
+                            <span class="item-info">
+                              <span>Item name</span>
+                              <span>23$</span>
+                            </span>
+                          </span>
+                          <span class="item-right">
+                            <i class="fa fa-trash"></i>
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="col-md-12">
+                        <span class="item">
+                          <span class="item-left">
+                            <img src="img/1.jpg" alt="">
+                            <span class="item-info">
+                              <span>Item name</span>
+                              <span>23$</span>
+                            </span>
+                          </span>
+                          <span class="item-right">
+                            <i class="fa fa-trash"></i>
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="col-md-12">
+                        <span class="item">
+                          <span class="item-left">
+                            <img src="img/1.jpg" alt="">
+                            <span class="item-info">
+                              <span>Item name</span>
+                              <span>23$</span>
+                            </span>
+                          </span>
+                          <span class="item-right">
+                            <i class="fa fa-trash"></i>
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="col-md-12">
+                        <span class="item">
+                          <span class="item-left">
+                            <img src="img/1.jpg" alt="">
+                            <span class="item-info">
+                              <span>Item name</span>
+                              <span>23$</span>
+                            </span>
+                          </span>
+                          <span class="item-right">
+                            <i class="fa fa-trash"></i>
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <div class="col-md-12 text-right">
+                        <a class="btn btn-success btn-sm" href="#">Check Out</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a class="btn btn-default navbar-btn text-white" href="http://localhost:1337/login">
+                <i class="fa fa-user fa-fw"></i>Sign in</a>
+            </div>
+          </div>
+        </nav>
+        <hr style="border: 1px solid white;" class="m-0 p-0 border border-info">
+        <div class="text-center text-white bg-dark py-1" style="background-image: url(&quot;/image/background.jpg&quot;);">
+          <div class="container bg-light py-2 my-2" style="border-radius: 10px;">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="text-center">
+                  <b>
+                    <a href="http://localhost:1337/games/popular/1" class="text-dark"> POPULAR GAME</a>
+                  </b>
+                </h2>
+              </div>
+            </div>
+            <div class="row">
+              <%  _.each(games_popular,function(popular){ %>
+              <div class="col-md-4 my-2">
+                <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
+                <div class="row">
+                  <div class="col-md-12">
+                    <h6 class="py-1 text-left m-0" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">
+                      <b>
+                        <abbr title="<%= popular.game_name %>" style="text-decoration:none;"><%= popular.game_name %></abbr>
+                      </b>
+                    </h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6 class="py-1 m-0 text-left text-truncate" style="font-size:14px;">Action, Sports asa asas asas</h6>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <i class="fa fa-star" style="font-size:14px;"></i>
+                    <i class="fa fa-star" style="font-size:14px;"></i>
+                    <i class="fa fa-star" style="font-size:14px;"></i>
+                    <i class="fa fa-star" style="font-size:14px;"></i>
+                    <i class="fa fa-star" style="font-size:14px;"></i>
+                    <span style="font-size:14px;"><%= popular.rating %></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6 class="py-1 m-0 text-left">Rp.<%= popular.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <a class="btn btn-success btn-sm" href="#">Add</a>
+                  </div>
+                </div>
+              </div>
+              <%})%>        
+            </div>
+            <center>
+              <div class="col-md-6 ">
+                  <% if (pages > 0) { %>
+                    <ul class="pagination text-center">
+                        <% if (current == 1) { %>
+                            <li class="disabled page-item"><a class="page-link">First</a></li>
+                        <% } else { %>
+                            <li class="page-item"><a class="page-link" href="/games/popular/1">First</a></li>
+                        <% } %>
+                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                        <% if (i !== 1) { %>
+                            <li class="disabled page-item"><a>...</a></li>
+                        <% } %>
+                        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                            <% if (i == current) { %>
+                                <li class="active page-item"><a class="page-link"><%= i %></a></li>
+                            <% } else { %>
+                                <li class="page-item"><a class="page-link" href="/games/popular/<%= i %>"><%= i %></a></li>
+                            <% } %>
+                            <% if (i == Number(current) + 4 && i < pages) { %>
+                                <li class="disabled page-link"><a>...</a></li>
+                            <% } %>
+                        <% } %>
+                        <% if (current == pages) { %>
+                            <li class="disabled page-item"><a class="page-link">Last</a></li>
+                        <% } else { %>
+                            <li class="page-item"><a class="page-link" href="/games/popular/<%= pages %>">Last</a></li>
+                        <% } %>
+                    </ul>
+                <% } %>
+                
+             </div>
+            </center>
+          </div>
+        </div>
+      <%}%>
   <div class="py-5 text-white bg-dark">
     <div class="container">
       <div class="row">

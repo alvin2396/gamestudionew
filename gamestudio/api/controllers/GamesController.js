@@ -83,21 +83,25 @@ module.exports = {
                                                                     Processor.findOne({id:user.processor_id}).exec(function(err,userprocessor){
                                                                         Vga.findOne({id:user.vga_id}).exec(function(err,uservga){
                                                                             Ram.findOne({id:user.ram_id}).exec(function(err,userram){
-                                                                                res.view("user/gameDetail/", {
-                                                                                    status: 'OK',
-                                                                                    title: 'Detail Game',
-                                                                                    games: games,
-                                                                                    getRam : getRam,
-                                                                                    getProc : getProc,
-                                                                                    getVga : getVga,
-                                                                                    recProc : recProc,
-                                                                                    recRam : recRam,
-                                                                                    recVga : recVga,
-                                                                                    uservga : uservga,
-                                                                                    userram : userram,
-                                                                                    userprocessor : userprocessor,
-                                                                                    user : user,
-                                                                                    })
+                                                                                Cart.find({user_id:req.session.User.id}).exec(function(err,updatecart){
+                                                                                    console.log(updatecart)
+                                                                                    res.view("user/gameDetail/", {
+                                                                                        status: 'OK',
+                                                                                        title: 'Detail Game',
+                                                                                        games: games,
+                                                                                        getRam : getRam,
+                                                                                        getProc : getProc,
+                                                                                        getVga : getVga,
+                                                                                        recProc : recProc,
+                                                                                        recRam : recRam,
+                                                                                        recVga : recVga,
+                                                                                        uservga : uservga,
+                                                                                        userram : userram,
+                                                                                        userprocessor : userprocessor,
+                                                                                        user : user,
+                                                                                        updatecart : updatecart,
+                                                                                        })
+                                                                                })
                                                                                     if(parseInt(userprocessor.processor_score) >= parseInt(getProc.processor_score) && parseInt(userram.ram_score) >= parseInt(getRam.ram_score ) && parseInt(uservga.vga_score) >= parseInt(getVga.vga_score)){
                                                                                         console.log('true')
                                                                                     }
@@ -262,13 +266,27 @@ module.exports = {
                 return res.serverError(err);
             }
             else{
-                res.view('user/popularGame',{
-                    status : 'OK',
-                    title : 'Popular Games',
-                    games_popular : games_popular,
-                    current: page,
-                    pages: Math.ceil(count / perPage)
-                })
+                if(req.session.User){
+                    Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+                        res.view('user/popularGame',{
+                            status : 'OK',
+                            title : 'Popular Games',
+                            games_popular : games_popular,
+                            current: page,
+                            pages: Math.ceil(count / perPage),
+                            updatecart : updatecart,
+                        })
+                    })
+                }
+                else{
+                    res.view('user/popularGame',{
+                        status : 'OK',
+                        title : 'Popular Games',
+                        games_popular : games_popular,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    })
+                }
             }
             })
         })
@@ -291,13 +309,27 @@ module.exports = {
                 return res.serverError(err);
             }
             else{
-                res.view('user/newGame',{
-                    status : 'OK',
-                    title : 'New Games',
-                    new_game : new_game,
-                    current: page,
-                    pages: Math.ceil(count / perPage)
-                })
+                if(req.session.User){
+                    Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+                        res.view('user/newGame',{
+                            status : 'OK',
+                            title : 'New Games',
+                            new_game : new_game,
+                            current: page,
+                            pages: Math.ceil(count / perPage),
+                            updatecart : updatecart,
+                        })
+                    })
+                }
+                else{
+                    res.view('user/newGame',{
+                        status : 'OK',
+                        title : 'New Games',
+                        new_game : new_game,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    })
+                }
             }
             })
         })

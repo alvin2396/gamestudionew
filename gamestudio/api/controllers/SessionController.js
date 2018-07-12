@@ -10,10 +10,28 @@ var bcrypt = require('bcrypt');
 module.exports = {
 
 	register:function(req,res){
-		res.view('register')
+		Processor.find().sort('processor_name ASC').exec(function(err, processor){
+			Ram.find().sort('ram_size ASC').exec(function(err, ram){
+				Vga.find().sort('vga_name ASC').exec(function(err, vga){
+					res.view('register',{
+						status : 'OK',
+						title : 'Register',
+						processor : processor,
+						ram : ram,
+						vga : vga,
+
+					})
+				})
+			})
+
+		})
+		
 	  },
 	  login:function(req,res){
-		res.view('login')
+		res.view('login', {
+			status : 'OK',
+			title : 'Login'
+		})
 	  },
 
 	create: function(req, res, next) {

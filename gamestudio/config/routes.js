@@ -102,8 +102,7 @@ module.exports.routes = {
 },
 
 'GET /games/rekomendasi' : {
-  controller : 'games',
-  action : "rekomendasi",
+  view : 'user/recommend'
 },
 
 'GET /cart/checkcart' : {
