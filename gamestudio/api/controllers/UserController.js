@@ -221,5 +221,18 @@ module.exports = {
       status : 'OK',
       title : 'Top Up'
     })
+  },
+
+  topupcheckout : function(req,res,next){
+    var totaltopup = req.param('totaltopup2');
+    var bank = req.param('optradio');
+    var opt1qty = req.param('topup1');
+    var opt2qty = req.param('topup2');
+    var opt3qty = req.param('topup3');
+    var item = [];
+
+
+
+    
   }
 }

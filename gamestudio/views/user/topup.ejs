@@ -151,7 +151,7 @@
                 <h4 class="text-left text-dark">
                   <b>Top Up Balance</b>
                 </h4>
-                <form>
+                <form method="POST" action="/user/topupconfirm">
                 <div class="container bg-light my-2 border-dark border py-1">
                   <div class="row">
                     <div class="col-md-12">
@@ -165,7 +165,7 @@
                             </div>
                             <div class="col-md-6 text-right">
                               <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="minus()" value="-">
-                              <input type="text" id="count" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
+                              <input type="text" id="count" name="topup1" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
                               <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="plus()" value="+">
                             </div>
                             </div>
@@ -179,7 +179,7 @@
                                   </div>
                                   <div class="col-md-6 text-right">
                                         <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="minus2()" value="-">
-                                        <input type="text" id="count2" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
+                                        <input type="text" id="count2" name="topup2" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
                                         <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="plus2()" value="+">
                                       </div>
                                   </div>
@@ -193,7 +193,7 @@
                                   </div>
                                   <div class="col-md-6 text-right">
                                         <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="minus3()" value="-">
-                                        <input type="text" id="count3" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
+                                        <input type="text" id="count3" name="topup3" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
                                         <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="plus3()" value="+">
                                       </div>
                                   </div>
@@ -203,12 +203,12 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12 text-right">
-                        <h5 class="text-right">Total :</h5><input type="text" id="total" value="0" class="text-right" style="background: transparent; border: none; font-size: 18px;">
+                        <h5 class="text-right">Total :</h5><input type="text" name="totaltopup" id="total" value="0" class="text-right" style="background: transparent; border: none; font-size: 18px;">
                     </div>
                   </div>
       
                 </div>
-                </form>
+              </form>
                 <h5 class="text-dark text-left">
                   <b>Terms &amp; Conditions</b>
                 </h5>
@@ -233,7 +233,7 @@
                             <input type="radio" id="same-address1" name="optradio" value="BC">
                             <label for="same-address1">
                               <i class="fa fa-credit-card mx-2 fa-lg"></i>
-                              <span>Bank BCA</span>
+                              <span>Bank Transfer</span>
                             </label>
                           </div>
                         </li>
@@ -242,19 +242,10 @@
                             <input type="radio" id="same-address" name="optradio" value="MD">
                             <label for="same-address">
                               <i class="fa fa-credit-card mx-2 fa-lg"></i>
-                              <span>Bank Mandiri</span>
+                              <span>Paypal</span>
                             </label>
                           </div>
-                        </li>
-                        <li class="list-group-item p-0 list-group-item-info">
-                          <div class="radio text-left">
-                            <input type="radio" id="same-address" name="optradio" value="DM">
-                            <label for="same-address">
-                              <i class="fa fa-credit-card mx-2 fa-lg"></i>
-                              <span>Bank Danamon</span>
-                            </label>
-                          </div>
-                        </li>   
+                        </li> 
                       </ul>
                     </div>
                   </div>
@@ -263,16 +254,16 @@
                       <div class="row">
                         <div class="col-md-6 text-left">
                             <h5 class="text-left">Total :</h5>
-                            <input type="text" id="total2" value="0" class="text-left" style="background: transparent; border: none; font-size: 18px;">
+                            <input type="text" id="total2" name="totaltopup2" value="0" class="text-left" style="background: transparent; border: none; font-size: 18px;">
                         </div>
                       </div>
-                      
                     </div>
                   </div>
                   <div class="col-md-12">
                         <button type="submit" class="btn btn-success" href="/user/topupcheckout" >Top Up</button>
                       </div>
                 </div>
+              
               </div>
             </div>
           </div>
