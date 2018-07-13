@@ -1,6 +1,242 @@
-<form>
-    <h1>confirmation test</h1>
-    <p>Your order : </p>
-    <input type="text" name="serial">
-    <button type="submit">Confirm</button>
-</form>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/styles/custom.css" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="/styles/theme.css" type="text/css"> </head>
+
+<body class="bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="Home.html">LOGO</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="Home.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Genre</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Adventure</a>
+              <a class="dropdown-item" href="#">Strategy</a>
+              <a class="dropdown-item" href="#">Simulation</a>
+              <a class="dropdown-item" href="#">RPG</a>
+              <a class="dropdown-item" href="#">Violent</a>
+              <a class="dropdown-item" href="#">Singleplayer</a>
+              <a class="dropdown-item" href="#">Massively Multiplayer</a>
+              <a class="dropdown-item" href="#">Sports</a>
+              <a class="dropdown-item" href="#">Racing</a>
+              <a class="dropdown-item" href="#">Multiplayer</a>
+              <a class="dropdown-item" href="#">Horror</a>
+              <a class="dropdown-item" href="#">Open World</a>
+              <a class="dropdown-item" href="#">Fantasy</a>
+              <a class="dropdown-item" href="#">Sci-fi</a>
+              <a class="dropdown-item" href="#">Indie</a>
+              <a class="dropdown-item" href="#">FPS</a>
+              <a class="dropdown-item" href="#">Mystery</a>
+              <a class="dropdown-item" href="#">Action</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="New Game.html">New Game</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="On Sale Game.html">On Sale</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Specification</a>
+          </li>
+        </ul>
+        <form class="form-inline m-0">
+          <input class="form-control mr-2" type="text" placeholder="Search"> </form>
+        <div class="dropdown">
+          <a class="btn btn-default navbar-btn text-white" href="http://example.com" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="cart">
+            <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
+          <div class="container">
+            <ul class="dropdown-menu dropdown-cart" aria-labelledby="cart">
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="col-md-12">
+                  <span class="item">
+                    <span class="item-left">
+                      <img src="img/1.jpg" alt="">
+                      <span class="item-info">
+                        <span>Item name</span>
+                        <span>23$</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </span>
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <div class="col-md-12 text-right">
+                  <a class="btn btn-success btn-sm" href="#">Check Out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a class="btn btn-default navbar-btn text-white" href="http://localhost:1337/session/destroy">
+            <i class="fa fa-sign-out fa-fw"></i>Sign out</a>
+      </div>
+    </div>
+  </nav>
+  <hr style="border: 1px solid white;" class="m-0 p-0 border border-info">
+  <div class="text-center text-white bg-dark py-1" style="background-image: url(&quot;/image/background.jpg&quot;);">
+    <div class="container" style="border-radius: 10px;">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="m-0 col-md-6">
+            <form method="POST" action="/user/validatecode">
+          <div class="container bg-light my-2 py-2">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-dark text-center">
+                  <b>Confirm Your Order</b>
+                </h4>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-5">
+                <h4 class="text-dark text-left m-0">
+                  <b>Order ID</b>
+                </h4>
+              </div>
+              <div class="col-md-7">
+                <h4 class="text-dark text-left m-0">
+                  <b>: <%= transaksi.id %></b>
+                </h4>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-5">
+                <h4 class="text-dark text-left m-0">
+                  <b>Tipe</b>
+                </h4>
+              </div>
+              <div class="col-md-7">
+                <h4 class="text-dark text-left m-0">
+                  <b>: Top Up</b>
+                </h4>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-5">
+                <h4 class="text-dark text-left m-0">
+                  <b>Total</b>
+                </h4>
+              </div>
+              <div class="col-md-7">
+                <h4 class="text-dark text-left m-0">
+                  <b>: Rp. <%= transaksi.total.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></b>
+                </h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <h4 class="text-dark my-2 text-left">
+                  <b>Enter This Code</b>
+                </h4>
+              </div>
+              <div class="col-md-7">
+                <h4 class="text-dark my-2 text-left">
+                  <b>: <%= transaksi.confirmation_code %></b>
+                </h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <input type="text" class="form-control" name="confirmation_code" placeholder="input your confirmation code">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 m-2">
+                <button type="submit">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 text-white bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mt-3 text-center">
+            <p>© Copyright 2018 Gamestudio - All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/dependencies/sails.io.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="/js/jquery-3.3.1.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="/js/jquery.barrating.min.js"></script>
+</body>
+
+</html>

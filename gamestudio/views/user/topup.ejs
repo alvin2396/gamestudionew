@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="/styles/theme.css" type="text/css"> </head>
 
-<body class="bg-dark">
+<body class="bg-dark" onload='generate()'>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
         <a href="http://localhost:1337/"><img class="img-fluid d-block mx-2" src="/image/Logo Gaming Studio.png" style="width:40px; margin-left:0px !important;"></a>
@@ -151,7 +151,7 @@
                 <h4 class="text-left text-dark">
                   <b>Top Up Balance</b>
                 </h4>
-                <form method="POST" action="/user/topupconfirm">
+                <form method="POST" name="topup" action="/user/topupcreate">
                 <div class="container bg-light my-2 border-dark border py-1">
                   <div class="row">
                     <div class="col-md-12">
@@ -208,7 +208,7 @@
                   </div>
       
                 </div>
-              </form>
+              
                 <h5 class="text-dark text-left">
                   <b>Terms &amp; Conditions</b>
                 </h5>
@@ -230,7 +230,7 @@
                       <ul class="list-group list-group-flush bg-light">
                         <li class="list-group-item p-0 list-group-item-info">
                           <div class="radio text-left">
-                            <input type="radio" id="same-address1" name="optradio" value="BC">
+                            <input type="radio" id="same-address1" name="optradio" value="BC" required>
                             <label for="same-address1">
                               <i class="fa fa-credit-card mx-2 fa-lg"></i>
                               <span>Bank Transfer</span>
@@ -254,13 +254,16 @@
                       <div class="row">
                         <div class="col-md-6 text-left">
                             <h5 class="text-left">Total :</h5>
-                            <input type="text" id="total2" name="totaltopup2" value="0" class="text-left" style="background: transparent; border: none; font-size: 18px;">
+                            <input type="text" id="total2" name="total" value="0" class="text-left" style="background: transparent; border: none; font-size: 18px;">
+                            <input type="hidden" name="user_id" value="<%= req.session.User.id %>">
+                            <input type="hidden" name="status" value="pending">
+                            <input type="hidden" name="confirmation_code" id="confirmation">
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-12">
-                        <button type="submit" class="btn btn-success" href="/user/topupcheckout" >Top Up</button>
+                        <button type="submit" class="btn btn-success" onclick="checkvalue()" >Top Up</button>
                       </div>
                 </div>
               
@@ -270,6 +273,7 @@
         </div>
       </div>
     </div>
+    </form>
   </div>
   <div class="py-5 text-white bg-dark">
     <div class="container">
@@ -344,7 +348,27 @@
             countTotal2.value = countTotal.value;
         }  
         }
+        function checkvalue(){
+          if(countTotal2.value == 0){
+            window.alert("Value must higher than 0");
+            document.topup.action = "/user/topup";
+          }
+        }
+    
+          var ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          var ID_LENGTH = 6;
+          function generate() {
+          var rtn = '';
+          for (var i = 0; i < ID_LENGTH; i++) {
+            rtn += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
+          }
+          var confirmation = document.getElementById('confirmation');
+          confirmation.value = rtn;
+        }
+        
   </script>
+
+
 
   <script src="/js/dependencies/sails.io.js"></script>
   <script src="/js/bootstrap.min.js"></script>

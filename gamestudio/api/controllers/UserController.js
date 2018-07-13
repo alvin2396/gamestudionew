@@ -223,16 +223,95 @@ module.exports = {
     })
   },
 
+  topupcreate : function(req,res){
+    Transaksi.create(req.body).exec(function(err, new_transaksi){
+      if(err){
+        return res.serverError(err);
+      }
+      else{
+        res.redirect('/user/topupcheckout')
+      }
+    })
+  },
+
   topupcheckout : function(req,res,next){
-    var totaltopup = req.param('totaltopup2');
-    var bank = req.param('optradio');
-    var opt1qty = req.param('topup1');
-    var opt2qty = req.param('topup2');
-    var opt3qty = req.param('topup3');
-    var item = [];
+    Transaksi.findOne({user_id : req.session.User.id}).where({status : 'pending'}).exec(function(err, transaksi){
+      if(err){
+        return res.serverError(err);
+      }
+      else{
+        console.log(transaksi)
+        res.view('user/topupconfirm', {
+          status : 'OK',
+          title : 'Confirmation Order',
+          transaksi : transaksi,
+        })
+      }
+    })
+  },
+  
+  validatecode : function(req,res,next){
+    Transaksi.findOne({user_id : req.session.User.id}).where({status : 'pending'}).exec(function(err, transaksi){
+      if(transaksi.confirmation_code == req.param('confirmation_code')){
+        var transaksiObj = {
+          status: 'complete',
+        }
+          Transaksi.update(transaksi.id,transaksiObj,function(err){
+            if(err){
+              console.log(err);
+            }
+            else{
+              User.findOne({id : req.session.User.id}).exec(function(err, user){
+                var userObj = {
+                  wallet : parseInt(transaksi.total),
+                }
+                if(typeof(user.wallet) == 'undefined' ){
+                  User.update(req.session.User.id, userObj, function(err){
+                    if(err){
+                      return res.serverError(err);
+                    }
+                    else{
+                      var topupSuccess = [
+                        'Top Up Berhasil'
+                      ]
+                      req.session.flash = {
+                        err: topupSuccess
+                      }
+                      res.redirect('/user/profile/'+req.session.User.id)
+                    }
+                  })
+                }
+                else{
+                  var total = parseInt(user.wallet) + parseInt(transaksi.total);
+                  var userObj2 = {
+                    wallet : parseInt(total),
+                  }
+                  User.update(req.session.User.id, userObj2, function(err){
+                    if(err){
+                      return res.serverError(err);
+                    }
+                    else{
+                      var topupSuccess = [
+                        'Top Up Berhasil'
+                      ]
+                      req.session.flash = {
+                        err: topupSuccess
+                      }
+                      res.redirect('/user/profile/'+req.session.User.id)
+                    }
+                  })
+                }
+              })
+            }
+          })
+      }
+      else{
+        console.log('false')
+        res.redirect('/user/topup')
+      }
 
+    })
+  },
 
-
-    
-  }
+  
 }

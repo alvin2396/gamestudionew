@@ -64,7 +64,7 @@ module.exports = {
       },
 
       wallet : {
-        type : 'number'
+        type : 'string'
       },
 
       genre1 : {

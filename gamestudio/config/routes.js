@@ -117,7 +117,8 @@ module.exports.routes = {
 
 'GET /vga/updatescore' : {
   view : 'admin/updateVga'
-}
+},
+
  
   
 
