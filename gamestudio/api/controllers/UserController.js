@@ -217,10 +217,14 @@ module.exports = {
   },
 
   topup:function(req,res,next){
-    res.view('user/topup',{
-      status : 'OK',
-      title : 'Top Up'
+    Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+      res.view('user/topup',{
+        status : 'OK',
+        title : 'Top Up',
+        updatecart : updatecart,
+      })
     })
+    
   },
 
   topupcreate : function(req,res){
@@ -241,11 +245,15 @@ module.exports = {
       }
       else{
         console.log(transaksi)
-        res.view('user/topupconfirm', {
-          status : 'OK',
-          title : 'Confirmation Order',
-          transaksi : transaksi,
+        Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+          res.view('user/topupconfirm', {
+            status : 'OK',
+            title : 'Confirmation Order',
+            transaksi : transaksi,
+            updatecart : updatecart,
+          })
         })
+        
       }
     })
   },
@@ -306,8 +314,15 @@ module.exports = {
           })
       }
       else{
-        console.log('false')
-        res.redirect('/user/topup')
+        console.log('wrong code')
+        var code_wrong = [
+          'Confirmation Code not Match'
+        ]
+        req.session.flash = {
+          err : code_wrong
+        }
+        
+        res.redirect('/user/topupcheckout')
       }
 
     })
