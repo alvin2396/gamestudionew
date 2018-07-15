@@ -101,8 +101,9 @@ module.exports.routes = {
   view : 'admin/addSpesifikasi'
 },
 
-'GET /games/rekomendasi' : {
-  view : 'user/recommend'
+'GET /rekomendasi/rekomendasi' : {
+  controller : 'rekomendasi',
+  action : "matriks",
 },
 
 'GET /cart/checkcart' : {
