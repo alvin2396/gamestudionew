@@ -32,6 +32,42 @@
                 <div class="form-group">
                   <input type="password" class="form-control" name="password" placeholder="Password"> </div>
                   <input type="hidden" name="wallet" value="0">
+                  <div class="row my-1">
+                    <div class="col-md-4">
+                      <h6 class="text-left">Processor</h6>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="sel1" name="processor_id">
+                        <%  _.each(processor,function(processor){ %>
+                          <option value="<%= processor.id %>"><%= processor.processor_name %></option>
+                          <%})%>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row my-2">
+                    <div class="col-md-4">
+                      <h6 class="text-left">VGA</h6>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="sel1" name="vga_id">
+                        <%  _.each(vga,function(vga){ %>
+                          <option value="<%= vga.id %>"><%= vga.vga_name %></option>
+                          <%})%>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row my-1">
+                    <div class="col-md-4">
+                      <h6 class="text-left">RAM</h6>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="sel1" name="ram_id">
+                        <%  _.each(ram,function(ram){ %>
+                          <option value="<%= ram.id %>"><%= ram.ram_size %></option>
+                          <%})%>
+                      </select>
+                    </div>
+                  </div>
                 <button type="submit" class="btn btn-secondary btn-block">Register</button>
               </form>
               <p class="text-light my-2">Already has an account? <a href="http://localhost:1337/login" class="text-white">Login</a></p>

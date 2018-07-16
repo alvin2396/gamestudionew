@@ -37,7 +37,13 @@
                     <h5 class="text-left">Nama</h5>
                   </div>
                   <div class="col-md-9">
-                    <h5 class="text-left">: <%= userProfil.nama %></h5>
+                    <%
+                    if(typeof(userProfil.nama) == 'undefined'){%>
+                      <h5 class="text-left">: User</h5>
+                      <%}
+                      else{%>
+                        <h5 class="text-left">: <%= userProfil.nama %></h5>
+                      <%}%>
                   </div>
                 </div>
                 <div class="row">
@@ -45,7 +51,13 @@
                     <h5 class="text-left">Alamat</h5>
                   </div>
                   <div class="col-md-9">
-                    <h5 class="text-left">: <%= userProfil.alamat %></h5>
+                    <%
+                    if(typeof(userProfil.alamat) == 'undefined'){%>
+                      <h5 class="text-left">: Jl. Thamrin No. 86</h5>
+                      <%}
+                      else{%>
+                        <h5 class="text-left">: <%= userProfil.alamat %></h5>
+                      <%}%>
                   </div>
                 </div>
                 <div class="row">
@@ -128,6 +140,11 @@
                     <h5 class="text-left">: <%= uservga.vga_name %></h5>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-12 text-left px-4">
+                    <button class="btn btn-success" href="#myModal2" data-toggle="modal">Update</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -137,7 +154,7 @@
   </div>
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" style="width:100%;">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title text-center w-100" contenteditable="true">Update Profile</h4>
@@ -147,98 +164,142 @@
         <div class="modal-body">
           <form method="POST" action="/user/updateProfile">
             <div class="row my-1">
+                <input type="hidden" value="<%= req.session.User.id %>" name="id">
               <div class="col-md-4">
                 <h5 class="text-left">Nama</h5>
               </div>
               <div class="col-md-8">
-                <input type="hidden" name="id" value="<%= req.session.User.id %>">
-                <input type="text" class="form-control" name="nama" placeholder="Nama Sebelumnya"> </div>
+                <input type="text" class="form-control" placeholder="Nama Sebelumnya" value="<%= userProfil.nama %>" name="nama"> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
                 <h5 class="text-left">Alamat</h5>
               </div>
               <div class="col-md-8">
-                <input type="text" name="alamat" class="form-control" placeholder="Alamat Sebelumnya"> </div>
+                <input type="text" class="form-control" placeholder="Alamat Sebelumnya" value="<%= userProfil.alamat %>" name="alamat"> </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-4">
+                <h5 class="text-left">Email</h5>
+              </div>
+              <div class="col-md-8">
+                <input type="email" class="form-control" placeholder="Email Sebelumnya" value="<%= userProfil.email %>" disabled> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-12">
                 <h5 class="text-left m-0">Preference</h5>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-3">
-                <div class="row">
-                  <div class="col-md-12">
-                    <h6 class="text-left my-1">Genre 1 :</h6>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <select class="form-control" name="genre1" id="sel1">
-                      <%  _.each(genre,function(genre){ %>
-                      <option value="<%= genre.id %>"><%= genre.genre_name %></option>
-                       <%})%>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="row">
-                  <div class="col-md-12">
-                    <h6 class="text-left my-1">Genre 2 :</h6>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <select class="form-control" name="genre2" id="sel1">
-                      <%  _.each(genre,function(genre){ %>
-                      <option value="<%= genre.id %>"><%= genre.genre_name %></option>
-                       <%})%>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="row">
-                  <div class="col-md-12">
-                    <h6 class="text-left my-1">Genre 3 :</h6>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <select class="form-control" name="genre3" id="sel1">
-                      <%  _.each(genre,function(genre){ %>
-                      <option value="<%= genre.id %>"><%= genre.genre_name %></option>
-                       <%})%>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="row">
-                  <div class="col-md-12">
-                    <h6 class="text-left my-1">Genre 4 :</h6>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <select class="form-control" name="genre4" id="sel1">
-                      <%  _.each(genre,function(genre){ %>
-                      <option value="<%= genre.id %>" name="genre4"><%= genre.genre_name %></option>
-                       <%})%>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="row my-1">
-              <div class="col-md-12 text-center">
-                <h5 class="text-center my-2">My Specification</h5>
+              <div class="col-md-3">
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d1f7460b278469cc33" name="genre[]">
+                  <label for="same-address">Action</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d8f7460b278469cc37" name="genre[]">
+                  <label for="same-address">RPG</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1def7460b278469cc3b" name="genre[]">
+                  <label for="same-address">Sports</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f248f7460b278469cc3f" name="genre[]">
+                  <label for="same-address">Open Wo...</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f250f7460b278469cc43" name="genre[]">
+                  <label for="same-address">FPS</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d3f7460b278469cc34" name="genre[]">
+                  <label for="same-address">Adventure</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d9f7460b278469cc38" name="genre[]">
+                  <label for="same-address">Violent</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1e0f7460b278469cc3c" name="genre[]">
+                  <label for="same-address">Racing</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f24af7460b278469cc40" name="genre[]">
+                  <label for="same-address">Fantasy</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f253f7460b278469cc44" name="genre[]">
+                  <label for="same-address">Mystery</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d5f7460b278469cc35" name="genre[]">
+                  <label for="same-address">Strategy</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1dbf7460b278469cc39" name="genre[]">
+                  <label for="same-address">Singleplayer</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f244f7460b278469cc3d" name="genre[]">
+                  <label for="same-address">Multiplayer</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f24cf7460b278469cc41" name="genre[]">
+                  <label for="same-address">Sci-fi</label>
+                </div>
+                <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f255f7460b278469cc45" name="genre[]">
+                    <label for="same-address">Crimme</label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d6f7460b278469cc36" name="genre[]">
+                  <label for="same-address">Simulation</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1ddf7460b278469cc3a" name="genre[]">
+                  <label for="same-address">Massively...</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f246f7460b278469cc3e" name="genre[]">
+                  <label for="same-address">Horror</label>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" class="test" id="same-address" value="5b34f24ef7460b278469cc42" name="genre[]">
+                  <label for="same-address">Indie</label>
+                </div>
               </div>
             </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer text-center">
+          <button type="submit" class="btn btn-success btn-block btn-sm text-center">Save</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal2">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title text-center w-100" contenteditable="true">Update Specification</h4>
+          <button type="button" class="close m-0 p-0" data-dismiss="modal">×</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form method="POST" action="/user/updateSpek">
             <div class="row my-1">
               <div class="col-md-4">
+                <input type="hidden" value="<%= req.session.User.id %>" name="id">
                 <h5 class="text-left">Processor</h5>
               </div>
               <div class="col-md-8">
@@ -278,10 +339,11 @@
         <div class="modal-footer text-center">
           <button type="submit" class="btn btn-success btn-block btn-sm text-center">Save</button>
         </div>
-        </form>
+      </form>
       </div>
     </div>
   </div>
+  
   <div class="py-5 text-white bg-dark">
     <div class="container">
       <div class="row">
@@ -296,6 +358,14 @@
       document.getElementById("img01").src = element.src;
       document.getElementById("modal01").style.display = "block";
     }
+  </script>
+  <script>
+    $('.test').change(function(){
+    if($('input.test').filter(':checked').length == 4)
+        $('input.test:not(:checked)').attr('disabled', 'disabled');
+    else
+        $('input.test').removeAttr('disabled');
+});
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

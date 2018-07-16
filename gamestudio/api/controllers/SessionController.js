@@ -11,7 +11,7 @@ module.exports = {
 
 	register:function(req,res){
 		Processor.find().sort('processor_name ASC').exec(function(err, processor){
-			Ram.find().sort('ram_size ASC').exec(function(err, ram){
+			Ram.find().sort('ram_score ASC').exec(function(err, ram){
 				Vga.find().sort('vga_name ASC').exec(function(err, vga){
 					res.view('register',{
 						status : 'OK',

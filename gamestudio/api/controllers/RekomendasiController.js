@@ -132,9 +132,16 @@ module.exports = {
                                                                 korelasigenre.push([jlh2genre[i][0], jlh2genre[i][1], (jlh2genre[i][2]/jumlah)*100 ])
                                                             }
                                                         }
-                                                        
-                                                        userprefrence = ['5b34f1d1f7460b278469cc33', '5b34f1d3f7460b278469cc34', '5b34f1d8f7460b278469cc37']
-                                                        var recommendationdata = []
+                                                        var userprefrence = []
+                                                        if(req.session.User){
+                                                            console.log('login')
+                                                            User.findOne({id : req.session.User.id}).populateAll().exec(function(err, datauser){
+                                                                console.log(datauser.genre)
+                                                                
+                                                                for(var i=0;i<datauser.genre.length;i++){
+                                                                    userprefrence.push(datauser.genre[i])
+                                                                }
+                                                                var recommendationdata = []
                                                         for(var i =0 ;i<get_genre.length;i++){
                                                             var recompoint = 0;
                                                             var datarelasi = []
@@ -171,12 +178,10 @@ module.exports = {
                                                         })
 
                                                         // console.log(listgame[0])
-                                                        console.log(datakorelasi)
                                                         // console.log(listgame.length)
                                                         // console.log(get_genre.length)
                                                         // console.log(get_genre[0])
                                                         // console.log(recommendationdata)
-
                                                         //console.log(datakorelasi)
                                                         //console.log(genre)
                                                         return res.json(recommendationdata)
@@ -185,6 +190,63 @@ module.exports = {
                                                             title : 'rekomendasi',
                 
                                                         })
+
+                                                            })
+                                                        }
+                                                        else{
+                                                            console.log('masuk else')
+                                                            userprefrence = ['5b34f1d1f7460b278469cc33', '5b34f1d8f7460b278469cc37', '5b34f1d3f7460b278469cc34']
+                                                            var recommendationdata = []
+                                                        for(var i =0 ;i<get_genre.length;i++){
+                                                            var recompoint = 0;
+                                                            var datarelasi = []
+                                                            var dataVn = 0;
+                                                            getsama = false;
+                                                            for(var j=0;j<userprefrence.length;j++){
+                                                                var vsama = 0
+                                                                for(var k=0; k<get_genre[i].length;k++){
+                                                                    var beda = 0;
+                                                                    var sama = 0;
+                                                                    if(userprefrence[j].toString() == get_genre[i][k].toString() ){
+                                                                        vsama = 100;
+                                                                        sama +=1;
+                                                                        getsama = true;
+                                                                        //datarelasi.push(vsama)
+                                                                    }
+                                                                    else{
+                                                                        for(gen1 = 0 ;gen1<korelasigenre.length;gen1++){
+                                                                            if(korelasigenre[gen1][0].toString() == userprefrence[j] && korelasigenre[gen1][1].toString() == get_genre[i][k].toString() ){
+                                                                                beda += korelasigenre[gen1][2];
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    dataVn += (vsama + (beda/get_genre[i].length-sama));
+                                                                    //dataVn.push(datarelasi)
+                                                                }
+
+                                                            }
+                                                            recompoint = (dataVn*listgame[i].rating)/userprefrence.length;
+                                                            recommendationdata.push([listgame[i]._id,recompoint])
+                                                        }
+                                                        recommendationdata = recommendationdata.sort(function(a,b){
+                                                            return b[1] - a[1];
+                                                        })
+
+                                                        // console.log(listgame[0])
+                                                        // console.log(listgame.length)
+                                                        // console.log(get_genre.length)
+                                                        // console.log(get_genre[0])
+                                                        // console.log(recommendationdata)
+                                                        //console.log(datakorelasi)
+                                                        //console.log(genre)
+                                                        return res.json(recommendationdata)
+                                                        res.view('user/recommend', {
+                                                            status : 'OK',
+                                                            title : 'rekomendasi',
+                
+                                                        })
+                                                        }
+                                                        
                                                     }
                                                 })
 

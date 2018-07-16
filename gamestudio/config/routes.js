@@ -120,6 +120,11 @@ module.exports.routes = {
   view : 'admin/updateVga'
 },
 
+'GET /user/updateSpek' : {
+  controller : 'user',
+  action : "updateSpek",
+},
+
  
   
 

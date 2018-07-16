@@ -67,21 +67,10 @@ module.exports = {
         type : 'string'
       },
 
-      genre1 : {
-        type : 'string'
+      genre : {
+        type : 'array'
       },
 
-      genre2 : {
-        type : 'string'
-      },
-
-      genre3 : {
-        type : 'string'
-      },
-
-      genre4 : {
-        type : 'string'
-      },
       
       toJSON: function(){
       var obj = this.toObject();

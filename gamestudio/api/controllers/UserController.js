@@ -12,7 +12,7 @@ module.exports = {
   
 
   userProfile:function(req,res,next){
-    User.findOne({id: req.session.User.id}).exec(function(err,userProfil){
+    User.findOne({id: req.session.User.id}).populateAll().exec(function(err,userProfil){
       if(err){
         console.log(err);
       }
@@ -21,11 +21,12 @@ module.exports = {
           Ram.find().sort('ram_score ASC').exec(function(err,ram){
             Processor.find().sort('processor_name ASC').exec(function(err,processor){
               Genre.find().sort('genre_name ASC').exec(function(err, genre){
-                Vga.findOne({id:userProfil.vga_id}).exec(function(err,uservga){
-                  Ram.findOne({id:userProfil.ram_id}).exec(function(err,userram){
-                    Processor.findOne({id:userProfil.processor_id}).exec(function(err,userprocessor){
-                        Cart.find({user_id : userProfil.id}).exec(function(err,updatecart){
-                          console.log(updatecart)
+                Cart.find({user_id : userProfil.id}).exec(function(err,updatecart){
+                  User.findOne({id:req.session.User.id}).exec(function(err, user){
+                    Processor.findOne({id:user.processor_id}).exec(function(err,userprocessor){
+                      Vga.findOne({id:user.vga_id}).exec(function(err,uservga){
+                        Ram.findOne({id:user.ram_id}).exec(function(err,userram){
+                          console.log(uservga)
                           return res.view('user/profile',{
                             status: 'OK',
                             title: 'Profil',
@@ -34,15 +35,16 @@ module.exports = {
                             ram:ram,
                             processor,
                             genre : genre,
+                            userprocessor : userprocessor,
                             uservga : uservga,
                             userram : userram,
-                            userprocessor : userprocessor,
                             updatecart : updatecart,
                             })
                         })
-                      
+                      })
                     })
                   })
+                          
                 })
               })
 
@@ -70,13 +72,7 @@ module.exports = {
     var userObj = {
       nama: req.param('nama'),
       alamat: req.param('alamat'),
-      genre1: req.param('genre1'),
-      genre2: req.param('genre2'),
-      genre3: req.param('genre3'),
-      genre4: req.param('genre4'),
-      ram_id : req.param('ram_id'),
-      processor_id : req.param('processor_id'),
-      vga_id : req.param('vga_id'),
+      genre : req.param('genre')
     }
     
     
@@ -98,6 +94,35 @@ module.exports = {
       })
     
   },
+
+  updateSpek:function(req,res,next){
+    var userObj = {
+      ram_id : req.param('ram_id'),
+      processor_id : req.param('processor_id'),
+      vga_id : req.param('vga_id'),
+    }
+    
+
+      User.update(req.param('id'),userObj,function(err){
+      
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log('spek updated')
+          var ubahSuccess = [
+            'Profile updated!',
+          ]
+          req.session.flash = {
+            err: ubahSuccess
+          // If error redirect back to sign-up page
+          }
+          res.redirect('/user/profile/' + req.param('id'));
+        }
+      })
+    
+  },
+
   updateProfilPassword:function(req,res,next){
     User.findOne(req.param('id'), function(err,pass){
       if(err){
