@@ -166,16 +166,20 @@ module.exports = {
                                                             recompoint = (dataVn*listgame[i].rating)/userprefrence.length;
                                                             recommendationdata.push([listgame[i]._id,recompoint])
                                                         }
+                                                        recommendationdata = recommendationdata.sort(function(a,b){
+                                                            return b[1] - a[1];
+                                                        })
 
                                                         // console.log(listgame[0])
-                                                        // console.log(gamedata[0])
+                                                        console.log(datakorelasi)
                                                         // console.log(listgame.length)
                                                         // console.log(get_genre.length)
                                                         // console.log(get_genre[0])
-                                                        console.log(recommendationdata)
+                                                        // console.log(recommendationdata)
 
                                                         //console.log(datakorelasi)
                                                         //console.log(genre)
+                                                        return res.json(recommendationdata)
                                                         res.view('user/recommend', {
                                                             status : 'OK',
                                                             title : 'rekomendasi',
