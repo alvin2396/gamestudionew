@@ -17,6 +17,7 @@ module.exports = {
         console.log(err);
       }
       else{
+        var genrename = [];
         Vga.find().sort('vga_name ASC').exec(function(err,vga){
           Ram.find().sort('ram_score ASC').exec(function(err,ram){
             Processor.find().sort('processor_name ASC').exec(function(err,processor){
@@ -26,20 +27,35 @@ module.exports = {
                     Processor.findOne({id:user.processor_id}).exec(function(err,userprocessor){
                       Vga.findOne({id:user.vga_id}).exec(function(err,uservga){
                         Ram.findOne({id:user.ram_id}).exec(function(err,userram){
-                          console.log(uservga)
-                          return res.view('user/profile',{
-                            status: 'OK',
-                            title: 'Profil',
-                            userProfil: userProfil,
-                            vga:vga,
-                            ram:ram,
-                            processor,
-                            genre : genre,
-                            userprocessor : userprocessor,
-                            uservga : uservga,
-                            userram : userram,
-                            updatecart : updatecart,
+                          
+                            Genre.find({id : user.genre}).exec(function(err, getgenre){
+                              if(err){
+                                return res.serverError(err);
+                              }
+                              else{
+                                
+                                
+                                console.log(getgenre[0].genre_name)
+                                return res.view('user/profile',{
+                                  status: 'OK',
+                                  title: 'Profil',
+                                  userProfil: userProfil,
+                                  user : user,
+                                  vga:vga,
+                                  ram:ram,
+                                  processor,
+                                  genre : genre,
+                                  userprocessor : userprocessor,
+                                  uservga : uservga,
+                                  userram : userram,
+                                  updatecart : updatecart,
+                                  getgenre : getgenre,
+                                  })
+                              }
                             })
+                          
+                            
+                          
                         })
                       })
                     })

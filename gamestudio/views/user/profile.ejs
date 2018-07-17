@@ -73,7 +73,9 @@
                     <h5 class="text-left">Preference</h5>
                   </div>
                   <div class="col-md-9">
-                    <h5 class="text-left">: lorem</h5>
+                      <%  _.each(getgenre,function(genrename){ %>
+                        <h5> <%= genrename.genre_name %> </h5>
+                        <%})%>
                   </div>
                 </div>
               </div>
@@ -193,86 +195,181 @@
             <div class="row my-1">
               <div class="col-md-3">
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1d1f7460b278469cc33" name="genre[]">
-                  <label for="same-address">Action</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d1f7460b278469cc33" name="genre[]" 
+                  <%
+                  if(user.genre.indexOf("5b34f1d1f7460b278469cc33") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Action</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1d8f7460b278469cc37" name="genre[]">
-                  <label for="same-address">RPG</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d8f7460b278469cc37" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1d8f7460b278469cc37") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>RPG</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1def7460b278469cc3b" name="genre[]">
-                  <label for="same-address">Sports</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1def7460b278469cc3b" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1def7460b278469cc3b") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Sports</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f248f7460b278469cc3f" name="genre[]">
-                  <label for="same-address">Open Wo...</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f248f7460b278469cc3f" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f248f7460b278469cc3f") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Open Wo...</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f250f7460b278469cc43" name="genre[]">
-                  <label for="same-address">FPS</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f250f7460b278469cc43" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f250f7460b278469cc43") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>FPS</label>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1d3f7460b278469cc34" name="genre[]">
-                  <label for="same-address">Adventure</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d3f7460b278469cc34" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1d3f7460b278469cc34") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Adventure</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1d9f7460b278469cc38" name="genre[]">
-                  <label for="same-address">Violent</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d9f7460b278469cc38" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1d9f7460b278469cc38") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Violent</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1e0f7460b278469cc3c" name="genre[]">
-                  <label for="same-address">Racing</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1e0f7460b278469cc3c" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1e0f7460b278469cc3c") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Racing</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f24af7460b278469cc40" name="genre[]">
-                  <label for="same-address">Fantasy</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f24af7460b278469cc40" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f24af7460b278469cc40") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Fantasy</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f253f7460b278469cc44" name="genre[]">
-                  <label for="same-address">Mystery</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f253f7460b278469cc44" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f253f7460b278469cc44") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Mystery</label>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1d5f7460b278469cc35" name="genre[]">
-                  <label for="same-address">Strategy</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d5f7460b278469cc35" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1d5f7460b278469cc35") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Strategy</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1dbf7460b278469cc39" name="genre[]">
-                  <label for="same-address">Singleplayer</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1dbf7460b278469cc39" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1dbf7460b278469cc39") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Singleplayer</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f244f7460b278469cc3d" name="genre[]">
-                  <label for="same-address">Multiplayer</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f244f7460b278469cc3d" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f244f7460b278469cc3d") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Multiplayer</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f24cf7460b278469cc41" name="genre[]">
-                  <label for="same-address">Sci-fi</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f24cf7460b278469cc41" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f24cf7460b278469cc41") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Sci-fi</label>
                 </div>
                 <div class="text-left">
-                    <input type="checkbox" class="test" id="same-address" value="5b34f255f7460b278469cc45" name="genre[]">
-                    <label for="same-address">Crimme</label>
+                    <input type="checkbox" class="test" id="same-address" value="5b34f255f7460b278469cc45" name="genre[]"
+                    <%
+                    if(user.genre.indexOf("5b34f255f7460b278469cc45") > -1){%>
+                      checked="checked"
+                      <%}%>
+                    >
+                    <label>Crime</label>
                   </div>
               </div>
               <div class="col-md-3">
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1d6f7460b278469cc36" name="genre[]">
-                  <label for="same-address">Simulation</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1d6f7460b278469cc36" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1d6f7460b278469cc36") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Simulation</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f1ddf7460b278469cc3a" name="genre[]">
-                  <label for="same-address">Massively...</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f1ddf7460b278469cc3a" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f1ddf7460b278469cc3a") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Massively...</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f246f7460b278469cc3e" name="genre[]">
-                  <label for="same-address">Horror</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f246f7460b278469cc3e" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f246f7460b278469cc3e") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Horror</label>
                 </div>
                 <div class="text-left">
-                  <input type="checkbox" class="test" id="same-address" value="5b34f24ef7460b278469cc42" name="genre[]">
-                  <label for="same-address">Indie</label>
+                  <input type="checkbox" class="test" id="same-address" value="5b34f24ef7460b278469cc42" name="genre[]"
+                  <%
+                  if(user.genre.indexOf("5b34f24ef7460b278469cc42") > -1){%>
+                    checked="checked"
+                    <%}%>
+                  >
+                  <label>Indie</label>
                 </div>
               </div>
             </div>
@@ -360,13 +457,14 @@
     }
   </script>
   <script>
-    $('.test').change(function(){
-    if($('input.test').filter(':checked').length == 4)
-        $('input.test:not(:checked)').attr('disabled', 'disabled');
-    else
-        $('input.test').removeAttr('disabled');
-});
+        $('.test').change(function(){
+        if($('input.test').filter(':checked').length == 4)
+            $('input.test:not(:checked)').attr('disabled', 'disabled');
+        else
+            $('input.test').removeAttr('disabled');
+    });
   </script>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
