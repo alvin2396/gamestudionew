@@ -23,7 +23,6 @@ module.exports = {
   },
   confirmation_code : {
     type : 'string',
-    required : true,
   }
 
 

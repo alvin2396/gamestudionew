@@ -125,6 +125,11 @@ module.exports.routes = {
   action : "updateSpek",
 },
 
+'GET /cart/checkout' : {
+  controller : 'cart',
+  action : "checkout",
+}
+
  
   
 

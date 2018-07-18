@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/styles/custom.css" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="/styles/theme.css" type="text/css"> </head>
+
+<body class="bg-dark">
+  <hr style="border: 1px solid white;" class="m-0 p-0 border border-info">
+  <div class="text-center text-white bg-dark py-1" style="background-image: url(&quot;/image/background.jpg&quot;);">
+    <div class="container" style="border-radius: 10px;">
+      <div class="row">
+        <div class="col-md-8 m-0">
+          <div class="container bg-light my-2 py-2">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-left text-dark">
+                  <b>Your Order</b>
+                </h4>
+                <%  _.each(updatecart,function(cart){ %>
+                <div class="row my-2" style="margin-top:0px !important;">
+                  <div class="m-0 col-md-4" style="padding-right:0px; padding-top:0px; padding-botton:0px;">
+                    <img class="img-fluid d-block" src="<%= cart.photo_url %>" width="100%"> </div>
+                  <div class="col-md-8">
+                    <h5 class="w-100 text-left my-2" style="line-height:1.5;margin-top:0px !important;">
+                      <b>
+                        <abbr title="<%= cart.nama_game %>" style="text-decoration:none;"><%= cart.nama_game %></abbr>
+                      </b>
+                    </h5>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <h5 class="text-left m-0" id="harga">Rp.<%= cart.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h5>
+                      </div>
+                      <div class="col-md-7 text-right">
+                        <i class="fa fa-trash" style="font-size:24px;"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%})%>
+              
+                <h4 class="text-dark text-right">
+                  <b>Order Total : Rp. 9.999.999,-</b>
+                </h4>
+                <h5 class="text-dark text-left">
+                  <b>Terms &amp; Conditions</b>
+                </h5>
+                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="container my-2 py-2 bg-light">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-left text-dark m-0">
+                  <b>Wallet Balance</b>
+                </h4>
+                <div class="row">
+                  <div class="col-md-9">
+                    <h3 class="text-left">Rp.<%= user.wallet.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h3>
+                  </div>
+                  <div class="text-right col-md-3">
+                    <a class="btn btn-success btn-sm" href="/user/topup">Top Up</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container my-2 py-2 bg-light">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-left text-dark">
+                  <b>Payment</b>
+                </h4>
+                <h4 class="text-left text-dark m-0">
+                  <b>Your Order</b>
+                </h4>
+                <div class="row">
+                  <div class="col-md-9">
+                    <h3 class="text-left">Rp. 9.999.999,-</h3>
+                  </div>
+                  <div class="text-right col-md-3">
+                    <a class="btn btn-success btn-sm" href="#">Submit</a>
+                  </div>
+                </div>
+                <div class="text-left">
+                  <input type="checkbox" id="same-address" value="on">
+                  <label for="same-address">Terms &amp; Conditions</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 text-white bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mt-3 text-center">
+            <p>© Copyright 2018 Gamestudio - All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function onClick(element) {
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
+    }
+  </script>
+  <script>
+      var count = 0;
+      var input = document.getElementById("harga").element;
+        alert(input.value);
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="/js/dependencies/sails.io.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="/js/jquery-3.3.1.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+</body>
+
+</html>

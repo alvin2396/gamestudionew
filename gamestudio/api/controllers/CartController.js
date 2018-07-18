@@ -40,6 +40,24 @@ module.exports = {
 		})
 
 		
+	},
+
+	checkout: function(req,res,next){
+		Cart.find({user_id : req.session.User.id}).exec(function(err,updatecart){
+			if(err){
+				return res.serverError(err);
+			}
+			else{
+				User.findOne({id:req.session.User.id}).exec(function(err,user){
+					res.view('user/checkout',{
+						status : 'OK',
+						title : 'Check Out',
+						updatecart : updatecart,
+						user : user,
+					})
+				})
+			}
+		})
 	}
 
 };
