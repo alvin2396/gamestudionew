@@ -18,16 +18,27 @@
           <div class="container bg-light my-2 py-2">
             <div class="row">
               <div class="text-center col-md-4">
-                <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150
-200">
+                <form method="POST" action="/user/uploadPhotoProfil" enctype="multipart/form-data">
+                  <%
+                    if(userProfil.photo_url){%>
+                        <img class="img-thumbnail" src="/images/user/<%=userProfil.photo_url%>">
+                    <%}
+                    else{%>
+                      <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150">
+                    <%}
+                  %>
+                <input class="form-control" type="file" name="photo_url" accept="image/*" >
+                <input type="hidden" name="id" value="<%= req.session.User.id %>">
+
                 <div class="row">
                   <div class="col-md-12 text-center">
-                    <a class="btn btn-success m-2" href="localhost:1337/user/uploadPhotoProfil" data-toggle="modal">Change Photo</a>
+                    <button class="btn btn-success m-2" type="submit" data-toggle="modal">Change Photo</button>
                   </div>
+                </form>
                 </div>
                 <div class="row">
                   <div class="col-md-12 text-center">
-                    <a class="btn btn-success" href="#myModal" data-toggle="modal">Update Profile</a>
+                    <button class="btn btn-success" href="#myModal" data-toggle="modal">Update Profile</button>
                   </div>
                 </div>
               </div>
@@ -72,10 +83,14 @@
                   <div class="col-md-3">
                     <h5 class="text-left">Preference</h5>
                   </div>
-                  <div class="col-md-9">
-                      <%  _.each(getgenre,function(genrename){ %>
-                        <h5> <%= genrename.genre_name %> </h5>
-                        <%})%>
+                  <div class="col-md-9 text-left">
+                        <h5 class="text-left" style="display: inline;">
+                          :
+                        <%  _.each(getgenre,function(genrename){ %>
+                          <%= genrename.genre_name %>,
+                          <%})%>
+                        </h5>
+                        
                   </div>
                 </div>
               </div>
@@ -93,10 +108,10 @@
                   <div class="col-md-9">
                     <%
                     if(typeof(userProfil.wallet) == 'undefined'){%>
-                      <h3 class="text-right">Rp. 0</h3>
+                      <h3 class="text-left">Rp. 0</h3>
                       <%}
                       else{%>
-                        <h3 class="text-right">Rp. <%= userProfil.wallet.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h3>
+                        <h3 class="text-left">Rp. <%= userProfil.wallet.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h3>
                       <%}%>
                   </div>
                   <div class="text-right col-md-3">

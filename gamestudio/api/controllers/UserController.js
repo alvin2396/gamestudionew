@@ -203,18 +203,18 @@ module.exports = {
       if (uploads.length === 0) { return res.badRequest('No file was uploaded') }
       // if file was uploaded create a new registry
       // at this point the file is phisicaly available in the hard drive
-      var id =User.id;
+      var id =req.session.User.id;
       var photo = User.photo;
       var fd = uploads[0].fd;
       var nameImage = fd.substring(124)
-      
+      console.log(id)
       User.update({id:req.param('id')}
                 ,
                 {photo_url: nameImage
               }).exec(function(err, file) {
                 if (err) { return res.serverError(err) }
                 // if it was successful return the registry in the response
-                res.redirect('/user/profile/' + req.param('id'));
+                res.redirect('/user/profile/' + id);
     })
     })
     

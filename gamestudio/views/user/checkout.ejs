@@ -22,7 +22,7 @@
                   <b>Your Order</b>
                 </h4>
                 <%  _.each(updatecart,function(cart){ %>
-                <div class="row my-2" style="margin-top:0px !important;">
+                <div class="row my-2" id="item" style="margin-top:0px !important;">
                   <div class="m-0 col-md-4" style="padding-right:0px; padding-top:0px; padding-botton:0px;">
                     <img class="img-fluid d-block" src="<%= cart.photo_url %>" width="100%"> </div>
                   <div class="col-md-8">
@@ -43,8 +43,8 @@
                 </div>
                 <%})%>
               
-                <h4 class="text-dark text-right">
-                  <b>Order Total : Rp. 9.999.999,-</b>
+                <h4 class="text-dark text-right" id="totalharga2" >
+      
                 </h4>
                 <h5 class="text-dark text-left">
                   <b>Terms &amp; Conditions</b>
@@ -64,7 +64,7 @@
                 </h4>
                 <div class="row">
                   <div class="col-md-9">
-                    <h3 class="text-left">Rp.<%= user.wallet.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h3>
+                    <h5 class="text-left">Rp.<%= user.wallet.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h5>
                   </div>
                   <div class="text-right col-md-3">
                     <a class="btn btn-success btn-sm" href="/user/topup">Top Up</a>
@@ -84,10 +84,10 @@
                 </h4>
                 <div class="row">
                   <div class="col-md-9">
-                    <h3 class="text-left">Rp. 9.999.999,-</h3>
+                    <h5 class="text-left" id="totalharga"></h5>
                   </div>
                   <div class="text-right col-md-3">
-                    <a class="btn btn-success btn-sm" href="#">Submit</a>
+                    <button class="btn btn-success" type="submit">Pay Order</button>
                   </div>
                 </div>
                 <div class="text-left">
@@ -118,8 +118,18 @@
   </script>
   <script>
       var count = 0;
-      var input = document.getElementById("harga").element;
-        alert(input.value);
+      var item = document.querySelectorAll("[id = 'harga']");
+      for(var i =0 ; i<item.length;i++){
+        var input = item[i].innerHTML;
+        input = input.replace("Rp.","");
+        input = input.replace(/\./g,"");
+        count+=parseFloat(input);
+      }
+      var totalharga = count.toString();
+      totalharga = totalharga.replace(/([0-9]+?)([0-9]{3})(?=.*?\.|$)/mg, "$1.$2");
+      document.getElementById('totalharga2').innerHTML = "Order Total Rp."+totalharga;
+      document.getElementById('totalharga').innerHTML = "Rp."+totalharga;
+      
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
