@@ -194,6 +194,7 @@ module.exports = {
     })
   },
   uploadPhotoProfil: function(req, res) {
+
     req.file('photo_url') // this is the name of the file in your multipart form
     .upload({ dirname: '../../assets/image/user' }, function(err, uploads) {
       // try to always handle errors
@@ -206,17 +207,31 @@ module.exports = {
       var id =req.session.User.id;
       var photo = User.photo;
       var fd = uploads[0].fd;
-      var nameImage = fd.substring(124)
-      console.log(id)
-      User.update({id:req.param('id')}
-                ,
-                {photo_url: nameImage
-              }).exec(function(err, file) {
-                if (err) { return res.serverError(err) }
-                // if it was successful return the registry in the response
-                res.redirect('/user/profile/' + id);
+      var nameImage = fd.substring(50,51)
+      console.log(nameImage)
+
+      var userObj = {
+       photo_url : fd,
+      }
+      User.update(req.param('id'),userObj,function(err){
+      
+        if(err){
+          console.log(err);
+        }
+        else{
+          var ubahSuccess = [
+            'Profile updated!',
+          ]
+          req.session.flash = {
+            err: ubahSuccess
+          // If error redirect back to sign-up page
+          }
+          res.redirect('/user/profile/' + req.param('id'));
+        }
+      })
+      
     })
-    })
+    
     
 },
   
@@ -368,6 +383,40 @@ module.exports = {
 
     })
   },
+
+  gamebuy : function(req,res){
+    User.findOne({id : req.session.User.id}).exec(function(err,user){
+      var total = req.param('totalinput');
+      var sisa = parseFloat(user.wallet) - parseFloat(total);
+      var userObj2 = {
+        wallet : sisa,
+      }
+      User.update(req.session.User.id, userObj2, function(err){
+        if(err){
+          return res.serverError(err);
+        }
+        else{
+          var Success = [
+            'Pembelian Berhasil'
+          ]
+          req.session.flash = {
+            err: Success
+          }
+          Cart.destroy({user_id : req.session.User.id}).exec(function(err, deleteitem){
+            if(err){
+              return res.serverError(err);
+            }
+            else{
+              console.log('cart deleted')
+              res.redirect('/user/profile/'+req.session.User.id)
+            }
+          })
+        }
+      })
+
+
+    })
+  }
 
   
 }

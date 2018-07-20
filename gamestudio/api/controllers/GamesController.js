@@ -309,21 +309,7 @@ module.exports = {
                         return res.serverError(err);
                     }
                     else {
-                        if (req.session.User) {
-                            Cart.find({ user_id: req.session.User.id }).exec(function (err, updatecart) {
-                                res.view('user/popularGame', {
-                                    status: 'OK',
-                                    title: 'Popular Games',
-                                    games_popular: games_popular,
-                                    current: page,
-                                    pages: Math.ceil(count / perPage),
-                                    updatecart: updatecart,
-                                })
-                            })
-                        }
-                        else {
-                            return res.json(games_popular);
-                        }
+                        return res.json(games_popular);
                     }
                 })
             })
