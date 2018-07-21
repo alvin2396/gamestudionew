@@ -93,7 +93,7 @@
               <a class="nav-link" href="On Sale Game.html">On Sale</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My Specification</a>
+              <a class="nav-link" href="http://localhost:1337/rekomendasi/rekomendasi">My Recommendation</a>
             </li>
           </ul>
          <form class="form-inline m-0" action="/games/search/" method="POST">
@@ -107,7 +107,7 @@
                   if(typeof(updatecart) == 'undefined'){%>
                     <li>
                         <div class="col-md-12">
-                          <span class="item">
+                          <!-- <span class="item">
                             <span class="item-left">
                               <img src="img/1.jpg" alt="">
                               <span class="item-info">
@@ -118,7 +118,7 @@
                             <span class="item-right">
                               <i class="fa fa-trash"></i>
                             </span>
-                          </span>
+                          </span> -->
                         </div>
                       </li>
                     <%}
@@ -205,90 +205,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="http://localhost:1337/games/popular/1">Popular Game</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">My Specification</a>
-              </li>
+            
             </ul>
             <form class="form-inline m-0" action="/games/search/" method="POST">
               <input class="form-control mr-2" type="search" name="search" placeholder="Search"> </form>
-            <div class="dropdown">
-              <a class="btn btn-default navbar-btn text-white" href="http://example.com" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="cart">
-                <i class="fa fa-shopping-cart fa-fw"></i>Cart</a>
-              <div class="container">
-                <ul class="dropdown-menu dropdown-cart" aria-labelledby="cart">
-                  <li>
-                    <div class="col-md-12">
-                      <span class="item">
-                        <span class="item-left">
-                          <img src="img/1.jpg" alt="">
-                          <span class="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
-                          </span>
-                        </span>
-                        <span class="item-right">
-                          <i class="fa fa-trash"></i>
-                        </span>
-                      </span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="col-md-12">
-                      <span class="item">
-                        <span class="item-left">
-                          <img src="img/1.jpg" alt="">
-                          <span class="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
-                          </span>
-                        </span>
-                        <span class="item-right">
-                          <i class="fa fa-trash"></i>
-                        </span>
-                      </span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="col-md-12">
-                      <span class="item">
-                        <span class="item-left">
-                          <img src="img/1.jpg" alt="">
-                          <span class="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
-                          </span>
-                        </span>
-                        <span class="item-right">
-                          <i class="fa fa-trash"></i>
-                        </span>
-                      </span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="col-md-12">
-                      <span class="item">
-                        <span class="item-left">
-                          <img src="img/1.jpg" alt="">
-                          <span class="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
-                          </span>
-                        </span>
-                        <span class="item-right">
-                          <i class="fa fa-trash"></i>
-                        </span>
-                      </span>
-                    </div>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <div class="col-md-12 text-right">
-                      <a class="btn btn-success btn-sm" href="#">Check Out</a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            
             <a class="btn btn-default navbar-btn text-white" href="http://localhost:1337/login">
               <i class="fa fa-user fa-fw"></i>Sign in</a>
           </div>

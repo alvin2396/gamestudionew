@@ -388,6 +388,9 @@ module.exports = {
     User.findOne({id : req.session.User.id}).exec(function(err,user){
       var total = req.param('totalinput');
       var sisa = parseFloat(user.wallet) - parseFloat(total);
+      console.log(user.wallet)
+      console.log(total)
+      console.log(sisa)
       var userObj2 = {
         wallet : sisa,
       }

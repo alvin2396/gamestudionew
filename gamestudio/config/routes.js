@@ -128,6 +128,11 @@ module.exports.routes = {
 'GET /cart/checkout' : {
   controller : 'cart',
   action : "checkout",
+},
+
+'GET /games/populargameMobile' : {
+  controller : 'games',
+  action : "populargameMobile",
 }
 
  

@@ -58,6 +58,10 @@ module.exports = {
                                                 gamelist.find({},{
                                                     game_id : true,
                                                     rating : true,
+                                                    harga : true,
+                                                    photo_url : true,
+                                                    game_name : true,
+                                                    release_date : true,
                                                 }).toArray(function(err, listgame){
                                                     if(err){
                                                         return res.serverError(err);
@@ -171,10 +175,10 @@ module.exports = {
 
                                                             }
                                                             recompoint = (dataVn*listgame[i].rating)/userprefrence.length;
-                                                            recommendationdata.push([listgame[i]._id,recompoint])
+                                                            recommendationdata.push({id : listgame[i]._id,rp :recompoint,game_name : listgame[i].game_name,photo_url : listgame[i].photo_url,rating : listgame[i].rating,release_date :listgame[i].release_date, harga : listgame[i].harga})
                                                         }
                                                         recommendationdata = recommendationdata.sort(function(a,b){
-                                                            return b[1] - a[1];
+                                                            return b.rp - a.rp;
                                                         })
 
                                                         // console.log(listgame[0])
@@ -184,18 +188,19 @@ module.exports = {
                                                         // console.log(recommendationdata)
                                                         //console.log(datakorelasi)
                                                         //console.log(genre)
-                                                        return res.json(recommendationdata)
+                                                        // return res.json(recommendationdata)
                                                         res.view('user/recommend', {
                                                             status : 'OK',
-                                                            title : 'rekomendasi',
+                                                            title : 'Recommendation',
+                                                            recommendationdata : recommendationdata,
                 
                                                         })
 
-                                                            })
+                                                        })
                                                         }
                                                         else{
                                                             console.log('masuk else')
-                                                            userprefrence = ['5b34f1d1f7460b278469cc33', '5b34f1d8f7460b278469cc37', '5b34f1d3f7460b278469cc34']
+                                                            userprefrence = ['5b34f1d3f7460b278469cc34', '5b34f1d1f7460b278469cc33', '5b34f1d8f7460b278469cc37']
                                                             var recommendationdata = []
                                                         for(var i =0 ;i<get_genre.length;i++){
                                                             var recompoint = 0;
@@ -226,25 +231,27 @@ module.exports = {
 
                                                             }
                                                             recompoint = (dataVn*listgame[i].rating)/userprefrence.length;
-                                                            recommendationdata.push([listgame[i]._id,recompoint])
+                                                            recommendationdata.push({id : listgame[i]._id,rp :recompoint,game_name : listgame[i].game_name,photo_url : listgame[i].photo_url,rating : listgame[i].rating,release_date :listgame[i].release_date, harga : listgame[i].harga})
                                                         }
                                                         recommendationdata = recommendationdata.sort(function(a,b){
-                                                            return b[1] - a[1];
+                                                            return b.rp - a.rp;
                                                         })
 
-                                                        // console.log(listgame[0])
+                                                        console.log(recommendationdata[0])
                                                         // console.log(listgame.length)
                                                         // console.log(get_genre.length)
                                                         // console.log(get_genre[0])
                                                         // console.log(recommendationdata)
                                                         //console.log(datakorelasi)
                                                         //console.log(genre)
-                                                        return res.json(recommendationdata)
-                                                        res.view('user/recommend', {
-                                                            status : 'OK',
-                                                            title : 'rekomendasi',
-                
-                                                        })
+                                                        // return res.json(recommendationdata
+                                                            res.view('user/recommend', {
+                                                                status : 'OK',
+                                                                title : 'rekomendasi',
+                                                                recommendationdata : recommendationdata,
+                    
+                                                            })
+                                                     
                                                         }
                                                         
                                                     }
