@@ -293,18 +293,40 @@ module.exports = {
     },
 
     populargameMobile: function (req, res, next) {
-        
+        var item_count = req.param('item_count')
+        var page_number = req.param('page_number')
         Games.find().sort('rating DESC')
-          .exec(function (err, games_popular) {
-                Games.count().exec(function (err, count) {
-                    if (err) {
-                        return res.serverError(err);
-                    }
-                    else {
-                        return res.json(games_popular);
-                    }
+            .skip((item_count * page_number) - item_count)
+            .limit(item_count)
+            .exec(function (err, games_popular) {
+                    Games.count().exec(function (err, count) {
+                        if (err) {
+                            return res.serverError(err);
+                        }
+                        else {
+                            return res.json(games_popular);
+                        }
+                    })
                 })
-            })
+    },
+
+
+    newgameMobile: function (req, res, next) {
+        var item_count = req.param('item_count')
+        var page_number = req.param('page_number')
+        Games.find().sort('release_date DESC')
+            .skip((item_count * page_number) - item_count)
+            .limit(item_count)
+            .exec(function (err, games_new) {
+                    Games.count().exec(function (err, count) {
+                        if (err) {
+                            return res.serverError(err);
+                        }
+                        else {
+                            return res.json(games_new);
+                        }
+                    })
+                })
     },
 
     newgame: function (req, res, next) {

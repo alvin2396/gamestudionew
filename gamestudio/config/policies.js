@@ -35,7 +35,7 @@ module.exports.policies = {
     updateProfile:'flash',
     userProfile:['flash','authenticated'],
     
-    '*' : 'authenticated'
+  
   }
 
   /***************************************************************************

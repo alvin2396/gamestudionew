@@ -138,6 +138,16 @@ module.exports.routes = {
 'POST /masuk' : {
   controller : 'UserMobile',
   action : "mobilelogin",
+},
+
+'POST /games/populargameMobile' : {
+  controller : 'games',
+  action : "populargameMobile",
+},
+
+'POST /games/newgameMobile' : {
+  controller : 'games',
+  action : "newgameMobile",
 }
 
  

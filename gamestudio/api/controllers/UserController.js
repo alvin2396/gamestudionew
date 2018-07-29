@@ -448,7 +448,24 @@ module.exports = {
          }
        })
     }
-  }
+  },
+
+  UserprofileMobile: function(req, res, next){
+    var email = req.param('email')
+    User.findOne({email:email}).populateAll().exec(function(err,user){
+        if (err) {
+            return res.serverError(err);
+          }
+          if (!user) {
+            return res.notFound('Could not find email, sorry.');
+          }
+        
+          //sails.log('Found "%s"', finn.fullName);
+          
+            res.json(user)
+        });
+        
+    }
 
   
 }
