@@ -465,7 +465,46 @@ module.exports = {
             res.json(user)
         });
         
-    }
+    },
+
+    Userprocessor : function(req,res,next){
+      var email = req.param('email')
+      User.findOne({email:email}).populateAll().exec(function(err,user){
+        if (err) {
+            return res.serverError(err);
+          }
+          else{
+            res.json(user.processor_id)
+          }
+          
+        });
+    },
+
+    Uservga : function(req,res,next){
+      var email = req.param('email')
+      User.findOne({email:email}).populateAll().exec(function(err,user){
+        if (err) {
+            return res.serverError(err);
+          }
+          else{
+            res.json(user.vga_id)
+          }
+          
+        });
+    },
+
+    Userram : function(req,res,next){
+      var email = req.param('email')
+      User.findOne({email:email}).populateAll().exec(function(err,user){
+        if (err) {
+            return res.serverError(err);
+          }
+          else{
+            res.json(user.ram_id)
+          }
+          
+        });
+    },
 
   
 }
