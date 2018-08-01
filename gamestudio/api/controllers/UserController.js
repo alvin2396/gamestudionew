@@ -506,5 +506,48 @@ module.exports = {
         });
     },
 
+    Usergenre : function(req,res,next){
+      var email = req.param('email')
+      var genrelist = []
+      User.findOne({email:email}).populateAll().exec(function(err,usergenre){
+        if(err){
+          return res.serverError(err);
+        }
+        else{
+          async.each(usergenre.genre,function(datagenre,callback){
+            Genre.findOne({id:datagenre}).exec(function(err,getgenre){
+              if(err){
+                return res.serverError(err);
+              }
+              else{
+                genrelist.push({nama_genre : getgenre.genre_name,
+                  id : getgenre.id
+                })
+                callback()
+              }
+            })
+          },function(err){
+            if(err){
+              return res.serverError(err)
+            }
+            else{
+              res.json(genrelist)
+            }
+          })
+          
+        }
+      })
+    },
+
+    updateprofileMobile: function(req, res, next){
+      User.update(req.param('id'),req.params.all(), function userUpdated(err,user){
+          if(err){
+              return res.redirect('/user/' + req.param('id'));
+          }
+    if(user)
+      res.json(user);
+      });
+  },
+
   
 }
