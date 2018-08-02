@@ -10,5 +10,16 @@ module.exports = {
         res.view('admin/addRam')
     },
 
+    getram : function(req,res){
+        Ram.find().sort('ram_score ASC').exec(function(err, ram){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                return res.json(ram);
+            }
+        })
+    }
+
 };
 

@@ -40,5 +40,16 @@ module.exports = {
   	res.view('/admin/updateVga')
   },
 
+  getvga : function(req,res){
+    Vga.find().sort('vga_name ASC').exec(function(err, vga){
+        if(err){
+            return res.serverError(err);
+        }
+        else{
+            return res.json(vga);
+        }
+    })
+}
+
 };
 

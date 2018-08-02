@@ -10,6 +10,17 @@ module.exports = {
         res.view('admin/addProcessor')
     },
 
+    getprocesssor : function(req,res){
+        Processor.find().sort('processor_name ASC').exec(function(err, processor){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                return res.json(processor);
+            }
+        })
+    }
+
 
 };
 
