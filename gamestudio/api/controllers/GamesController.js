@@ -374,7 +374,7 @@ module.exports = {
 
     gamePopular: function (req, res) {
 
-        Games.find().sort('rating DESC').limit(4).populateAll().exec(function (err, games) {
+        Games.find().sort('rating DESC').limit(8).populateAll().exec(function (err, games) {
             if (err)
                 return res.serverError(err);
             else {
@@ -398,7 +398,7 @@ module.exports = {
                         return res.serverError(err);
                     }
                     else {
-                        Games.find().sort('release_date DESC').limit(4).exec(function (err, newgame) {
+                        Games.find().sort('release_date DESC').limit(8).exec(function (err, newgame) {
                             if (err) {
                                 return res.serverError(err);
                             }
@@ -408,12 +408,12 @@ module.exports = {
                                         return res.serverError(err);
                                     }
                                     else {
-                                        Games.find().sort('rating DESC').limit(3).populateAll().exec(function (err, limitgames) {
+                                        Games.find().sort('rating DESC').limit(6).populateAll().exec(function (err, limitgames) {
                                             if (err) {
                                                 return res.serverError(err);
                                             }
                                             else {
-                                                Games.find().sort('release_date DESC').limit(3).populateAll().exec(function (err, limitnew) {
+                                                Games.find().sort('release_date DESC').limit(6).populateAll().exec(function (err, limitnew) {
                                                     if (err) {
                                                         return res.serverError(err);
                                                     }

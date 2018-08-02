@@ -60,7 +60,7 @@
               <div class="col-md-12">
                 <h4 class="text-center">
                   <b>
-                    <a href="http://localhost:1337/games/popular/1" class="text-dark"> POPULAR GAME</a>
+                    <a href="/games/popular/1" class="text-dark"> POPULAR GAME</a>
                   </b>
                 </h4>
               </div>
@@ -69,13 +69,13 @@
               <%  _.each(limitgames,function(popular){ %>
               <div class="col-md-4">
                 <form method="POST" action="/cart/checkcart">
-                <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
+                <a href="/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
                 <input type="hidden" name="photo_url" value="<%= popular.photo_url %>">
                 <div class="row">
                   <div class="col-md-12">
                     <h6 class="py-1 text-left m-0" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">
                       <b>
-                        <input type="hidden" value="<%= popular.game_name %>" name="nama_game"><abbr title="<%= popular.game_name %>" style="text-decoration:none;"><%= popular.game_name %></abbr>
+                        <input type="hidden" value="<%= popular.game_name %>" name="nama_game"><abbr title="<%= popular.game_name %>" style="text-decoration:none;"><a class="text-dark" href="/games/detailGame/<%= popular.id %>"><%= popular.game_name %></a></abbr>
                       </b>
                     </h6>
                     <input type="hidden" value="<%= popular.id %>" name="id_game">
@@ -113,7 +113,7 @@
               <div class="col-md-12">
                 <h4 class="text-center">
                   <b>
-                    <a href="http://localhost:1337/games/newgame/1" class="text-dark">NEW GAME</a>
+                    <a href="/games/newgame/1" class="text-dark">NEW GAME</a>
                   </b>
                 </h4>
               </div>
@@ -122,13 +122,13 @@
               <%  _.each(limitnew,function(newgames){ %>
                 <div class="col-md-4">
                     <form method="POST" action="/cart/checkcart">
-                    <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
+                    <a href="/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
                     <input type="hidden" name="photo_url" value="<%= newgames.photo_url %>">
                     <div class="row">
                       <div class="col-md-12">
                         <h6 class="py-1 text-left m-0" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">
                           <b>
-                            <input type="hidden" value="<%= newgames.game_name %>" name="nama_game"><abbr title="<%= newgames.game_name %>" style="text-decoration:none;"><%= newgames.game_name %></abbr>
+                            <input type="hidden" value="<%= newgames.game_name %>" name="nama_game"><abbr title="<%= newgames.game_name %>" style="text-decoration:none;"><a class="text-dark" href="/games/detailGame/<%= newgames.id %>"><%= newgames.game_name %></a></abbr>
                           </b>
                         </h6>
                         <input type="hidden" value="<%= newgames.id %>" name="id_game">
@@ -162,60 +162,7 @@
               
             </div>
           </div>
-          <div class="container bg-light my-2 py-2" style="border-radius: 10px;">
-            <div class="row">
-              <div class="col-md-12">
-                <h4 class="text-center">
-                  <b>
-                    <a href="On Sale Game.html" class="text-dark"> ON SALE GAME</a>
-                  </b>
-                </h4>
-              </div>
-            </div>
-            <div class="row">
-              <%  _.each(limitnew,function(newgames){ %>
-                <div class="col-md-4">
-                    <form method="POST" action="/cart/checkcart">
-                    <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
-                    <input type="hidden" name="photo_url" value="<%= newgames.photo_url %>">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <h6 class="py-1 text-left m-0" style="display: -webkit-box;height: 45px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">
-                          <b>
-                            <input type="hidden" value="<%= newgames.game_name %>" name="nama_game"><abbr title="<%= newgames.game_name %>" style="text-decoration:none;"><%= newgames.game_name %></abbr>
-                          </b>
-                        </h6>
-                        <input type="hidden" value="<%= newgames.id %>" name="id_game">
-                        <input type="hidden" value="<%=req.session.User.id%>" name="user_id">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-5">
-                        <h6 class="py-1 m-0 text-left text-truncate" style="font-size:14px;"><%= newgames.release_date %></h6>
-                      </div>
-                      <div class="text-right col-md-7">
-                        <i class="fa fa-star" style="font-size:14px;"></i>
-                        <i class="fa fa-star" style="font-size:14px;"></i>
-                        <i class="fa fa-star" style="font-size:14px;"></i>
-                        <i class="fa fa-star" style="font-size:14px;"></i>
-                        <i class="fa fa-star" style="font-size:14px;"></i>
-                        <span style="font-size:14px;"><%= newgames.rating %></span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-8">
-                        <input type="hidden" value="<%= newgames.harga %>" name="harga"><h6 class="py-1 m-0 text-left">Rp.<%= newgames.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
-                      </div>
-                      <div class="text-right col-md-4">
-                        <button class="btn btn-success btn-sm" type="submit">Add</button>
-                      </div>
-                    </div>
-                    </form>
-                  </div>
-              <%})%>
-              
-            </div>
-          </div>
+         
         </div>
         <div class="col-md-4">
           <div class="container bg-light py-2 my-2" style="border-radius: 10px;">
@@ -223,7 +170,7 @@
               <div class="col-md-12">
                 <h4 class="text-center m-0">
                   <b>
-                    <a href="http://localhost:1337/rekomendasi/rekomendasi" class="text-dark"> RECOMMENDED</a>
+                    <a href="/rekomendasi/rekomendasi" class="text-dark"> RECOMMENDED</a>
                   </b>
                 </h4>
               </div>
@@ -233,14 +180,18 @@
               <form method="POST" action="/cart/checkcart">
               <div class="m-0 col-md-12 px-2" style="padding-right:0px; padding-top:0px; padding-bottom:0px;">
                 <h6 class="text-truncate m-0 py-1 w-100">
-                  <b>
-                    <abbr title="<%= popular.game_name %>" style="text-decoration:none;"><%= popular.game_name %></abbr>
+                  <b class="text-left">
+                    <abbr title="<%= popular.game_name %>" style="text-decoration:none;"><a class="text-dark text-left" href="/games/detailGame/<%= popular.id %>"><%= popular.game_name %></a></abbr>
                   </b>
                 </h6>
               </div>
-
+              <input type="hidden" value="<%= popular.id %>" name="id_game">
+              <input type="hidden" name="photo_url" value="<%= popular.photo_url %>">
+              <input type="hidden" value="<%=req.session.User.id%>" name="user_id">
+              <input type="hidden" value="<%= popular.game_name %>" name="nama_game">
+              <input type="hidden" value="<%= popular.harga %>" name="harga">
               <div class="col-md-4 m-0" style="padding-right:0px; padding-top:0px; padding-bottom:0px;">
-                <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>" width="100%">
+                <a href="/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>" width="100%">
                 </a> </div>
               <div class="col-md-8">
                 <div class="row">
@@ -321,7 +272,7 @@
         <div class="col-md-12">
           <h4 class="text-center">
             <b>
-              <a href="http://localhost:1337/games/popular/1" class="text-dark">POPULAR GAME</a>
+              <a href="/games/popular/1" class="text-dark">POPULAR GAME</a>
             </b>
           </h4>
         </div>
@@ -329,11 +280,11 @@
       <div class="row">
         <%  _.each(games,function(popular){ %>
         <div class="col-md-3">
-          <a href="http://localhost:1337/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
+          <a href="/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
           <div class="row">
             <div class="col-md-12" style="height:35px;">
               <h6 class="py-1 text-left m-0 judul">
-                <b><%= popular.game_name %></b>
+                <b><a class="text-dark" href="/games/detailGame/<%= popular.id %>"><%= popular.game_name %></a></b>
               </h6>
             </div>
           </div>
@@ -362,6 +313,7 @@
             </div>
             <div class="col-md-6 text-right">
               <a class="btn btn-success btn-sm text-white" onclick="addcart()">Add</a>
+              
             </div>
           </div>
         </div>
@@ -373,7 +325,7 @@
       <div class="row">
         <div class="col-md-12">
           <h4 class="text-center">
-            <a href="http://localhost:1337/games/newgame/1" class="text-dark">
+            <a href="/games/newgame/1" class="text-dark">
               <b>NEW GAME</b>
             </a>
           </h4>
@@ -382,11 +334,11 @@
       <div class="row">
         <%  _.each(newgame,function(newgames){ %>
         <div class="col-md-3">
-          <a href="http://localhost:1337/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
+          <a href="/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
           <div class="row">
             <div class="col-md-12" style="height:45px;">
               <h6 class="py-1 text-left m-0 judul">
-                <b><%= newgames.game_name %></b>
+                <b><a class="text-dark" href="/games/detailGame/<%= newgames.id %>"><%= newgames.game_name %></a></b>
               </h6>
             </div>
           </div>
@@ -417,60 +369,7 @@
         <%})%>
       </div>
     </div>
-    <div class="container bg-light py-2 my-2" style="border-radius: 10px;">
-      <div class="row">
-        <div class="col-md-12">
-          <h4 class="text-center">
-            <a href="On Sale Game.html" class="text-dark">
-              <b> ON SALE GAME</b>
-            </a>
-          </h4>
-        </div>
-      </div>
-      <div class="row">
-        <%  _.each(newgame,function(newgames){ %>
-        <div class="col-md-3">
-          <a href="http://localhost:1337/games/detailGame/"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
-          <div class="row">
-            <div class="col-md-12" style="height:45px;">
-              <h6 class="py-1 text-left m-0 judul">
-                <b href="http://localhost:1337/games/detailGame/"><%= newgames.game_name %></b>
-              </h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <h6 class="py-1 m-0 text-left genre" style="font-size:14px;">
-                <%  _.each(newgames.genreStrings,function(genre_list){ %>
-                          <a href="#">
-                            <%= genre_list.nama_genre %>,
-                          </a>
-                <%})%>
-              </h6>
-            </div>
-            <div class="col-md-6 text-right">
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <i class="fa fa-star" style="font-size:14px;"></i>
-              <span style="font-size:14px;"><%= newgames.rating %></span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <h6 class="py-1 m-0 text-left">
-                Rp.<%= newgames.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %>
-              </h6>
-            </div>
-            <div class="col-md-6 text-right">
-                <a class="btn btn-success btn-sm text-white" onclick="addcart()">Add</a>
-            </div>
-          </div>
-        </div>
-        <%})%>
-      </div>
-    </div>
+    
   </div>
   <%}%>
   <div class="py-5 text-white bg-dark">
