@@ -631,7 +631,7 @@ module.exports = {
                                                                                                                                                                 return b.rp - a.rp;
                                                                                                                                                             })
                                                                                                                                                             var homerekomendasi = [];
-                                                                                                                                                            for(var i =0;i<8;i++){
+                                                                                                                                                            for(var i =0;i<9;i++){
                                                                                                                                                                 homerekomendasi.push(recommendationdata[i])
                                                                                                                                                             }
                                                                                                             
@@ -643,7 +643,7 @@ module.exports = {
                                                                                                                                                             //console.log(datakorelasi)
                                                                                                                                                             //console.log(genre)
                                                                                                                                                             // return res.json(recommendationdata)
-                                                                                                                                                            console.log(homerekomendasi[0])
+                                                                                                                                                            // console.log(homerekomendasi[0])
                                                                                                                                                             res.view('homepage', {
                                                                                                                                                                 status: 'OK',
                                                                                                                                                                 title: 'Game Studio',

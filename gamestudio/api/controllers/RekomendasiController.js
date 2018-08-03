@@ -189,7 +189,7 @@ module.exports = {
                                                         console.log(korelasigenre)
                                                         //console.log(genre)
                                                         
-                                                        return res.json(recommendationdata)
+                                                        // return res.json(recommendationdata)
                                                         res.view('user/recommend', {
                                                             status : 'OK',
                                                             title : 'Recommendation',
@@ -245,13 +245,13 @@ module.exports = {
                                                         // console.log(recommendationdata)
                                                         //console.log(datakorelasi)
                                                         //console.log(genre)
-                                                        res.json(recommendationdata)
-                                                            // res.view('user/recommend', {
-                                                            //     status : 'OK',
-                                                            //     title : 'rekomendasi',
-                                                            //     recommendationdata : recommendationdata,
+                                                        // res.json(recommendationdata)
+                                                            res.view('user/recommend', {
+                                                                status : 'OK',
+                                                                title : 'rekomendasi',
+                                                                recommendationdata : recommendationdata,
                     
-                                                            // })
+                                                            })
                                                      
                                                         }
                                                         

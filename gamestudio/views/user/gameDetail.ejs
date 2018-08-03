@@ -262,17 +262,37 @@
                   <li class="list-group-item p-0 list-group-item-info">
                     <div class="row my-1">
                       <div class="col-md-4">
-                        <h6 class="m-0 text-left">Processor</h6>
+                        <h6 class="m-0 text-left" style="float: left">Processor</h6>
+                        <%
+                                if(parseInt(userprocessor.processor_score) >= parseInt(getProc.processor_score)){%>
+                                  <img class="img-fluid d-block" src="/image/Check.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                            <%}
+                            else{%>
+                              
+                              <img class="img-fluid d-block" src="/image/x.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                              <%}%>
                       </div>
+                       
                       <div class="col-md-8">
-                        <h6 class="m-0 text-left"><%= getProc.processor_name %></h6>
+                        <h6 class="m-0 text-left"><%= getProc.processor_name %>
+                          
+                        </h6>
+                        
                       </div>
                     </div>
                   </li>
                   <li class="list-group-item p-0 list-group-item-info">
                     <div class="row my-1">
                       <div class="col-md-4">
-                        <h6 class="m-0 text-left">Memory</h6>
+                        <h6 class="m-0 text-left" style="float: left;" >Memory</h6>
+                        <%
+                                if(parseInt(userram.ram_score) >= parseInt(getRam.ram_score )){%>
+                                  <img class="img-fluid d-block" src="/image/Check.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                            <%}
+                            else{%>
+                              
+                              <img class="img-fluid d-block" src="/image/x.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                              <%}%>
                       </div>
                       <div class="col-md-8">
                         <h6 class="m-0 text-left"><%= getRam.ram_size %> GB</h6>
@@ -282,7 +302,15 @@
                   <li class="list-group-item p-0 list-group-item-info">
                     <div class="row my-1">
                       <div class="col-md-4 text-left">
-                        <h6 class="m-0">Graphics</h6>
+                        <h6 class="m-0" style="float: left;">Graphics</h6>
+                        <%
+                                if( parseInt(uservga.vga_score) >= parseInt(getVga.vga_score)){%>
+                                  <img class="img-fluid d-block" src="/image/Check.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                            <%}
+                            else{%>
+                              
+                              <img class="img-fluid d-block" src="/image/x.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                              <%}%>
                       </div>
                       <div class="col-md-8">
                         <h6 class="m-0 text-left"><%= getVga.vga_name %></h6>
