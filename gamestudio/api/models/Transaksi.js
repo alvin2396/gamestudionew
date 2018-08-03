@@ -23,6 +23,10 @@ module.exports = {
   },
   confirmation_code : {
     type : 'string',
+  },
+  typetransaction : {
+    type : 'string',
+    // required : true,
   }
 
 

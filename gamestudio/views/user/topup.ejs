@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-md-6 text-right">
                               <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="minus()" value="-">
-                              <input type="text" id="count" name="topup1" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
+                              <input type="text" id="count" name="topup1" value="0" style="width: 25px; text-align: center; background: transparent; border: none;" disabled >
                               <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="plus()" value="+">
                             </div>
                             </div>
@@ -49,7 +49,7 @@
                                   </div>
                                   <div class="col-md-6 text-right">
                                         <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="minus2()" value="-">
-                                        <input type="text" id="count2" name="topup2" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
+                                        <input type="text" id="count2" name="topup2" value="0" style="width: 25px; text-align: center; background: transparent; border: none;" disabled >
                                         <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="plus2()" value="+">
                                       </div>
                                   </div>
@@ -63,7 +63,7 @@
                                   </div>
                                   <div class="col-md-6 text-right">
                                         <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="minus3()" value="-">
-                                        <input type="text" id="count3" name="topup3" value="0" style="width: 25px; text-align: center; background: transparent; border: none;">
+                                        <input type="text" id="count3" name="topup3" value="0" style="width: 25px; text-align: center; background: transparent; border: none;" disabled >
                                         <input type="button" id=""  style="background: black;color :white;margin: 0px;padding: 0px;width: 27px;height: 27px;font-size: 18px; border:none;border-radius: 5px;" onclick="plus3()" value="+">
                                       </div>
                                   </div>
@@ -73,7 +73,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12 text-right">
-                        <h5 class="text-right">Total :</h5><input type="text" name="totaltopup" id="total" value="0" class="text-right" style="background: transparent; border: none; font-size: 18px;">
+                        <h5 class="text-right">Total :</h5><input type="text" name="totaltopup" id="total" value="0" class="text-right" style="background: transparent; border: none; font-size: 18px;" disabled >
                     </div>
                   </div>
       
@@ -124,10 +124,11 @@
                       <div class="row">
                         <div class="col-md-6 text-left">
                             <h5 class="text-left">Total :</h5>
-                            <input type="text" id="total2" name="total" value="0" class="text-left" style="background: transparent; border: none; font-size: 18px;">
+                            <input type="text" id="total2" name="total" value="0" class="text-left" style="background: transparent; border: none; font-size: 18px;" readonly >
                             <input type="hidden" name="user_id" value="<%= req.session.User.id %>">
                             <input type="hidden" name="status" value="pending">
                             <input type="hidden" name="confirmation_code" id="confirmation">
+                            <input type="hidden" name="typetransaction" value="topup">
                         </div>
                       </div>
                     </div>
@@ -168,7 +169,7 @@
             count++;
             countEl.value = count;
             countTotal.value = parseInt(countTotal.value) + parseInt(100000);
-            countTotal2.value = countTotal.value;
+            countTotal2.value = countTotal.value.toString();
         }
         function minus(){
         if (count > 0) {
@@ -179,14 +180,14 @@
             }
             countEl.value = count;
             countTotal.value = parseInt(countTotal.value) - parseInt(100000);
-            countTotal2.value = countTotal.value;
+            countTotal2.value = countTotal.value.toString();
         }  
         }
         function plus2(){
             count2++;
             countEl2.value = count2;
             countTotal.value = parseInt(countTotal.value) + parseInt(200000);
-            countTotal2.value = countTotal.value;
+            countTotal2.value = countTotal.value.toString();
         }
         function minus2(){
         if (count2 > 0) {
@@ -197,14 +198,14 @@
             }
             countEl2.value = count2;
             countTotal.value = parseInt(countTotal.value) - parseInt(200000);
-            countTotal2.value = countTotal.value;
+            countTotal2.value = countTotal.value.toString();
         }  
         }
         function plus3(){
             count3++;
             countEl3.value = count3;
             countTotal.value = parseInt(countTotal.value) + parseInt(500000);
-            countTotal2.value = countTotal.value;
+            countTotal2.value = countTotal.value.toString();
         }
         function minus3(){
         if (count3 > 0) {
@@ -215,7 +216,7 @@
             }
             countEl3.value = count3;
             countTotal.value = parseInt(countTotal.value) - parseInt(500000);
-            countTotal2.value = countTotal.value;
+            countTotal2.value = countTotal.value.toString();
         }  
         }
         function checkvalue(){

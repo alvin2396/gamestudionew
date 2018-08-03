@@ -295,7 +295,7 @@ module.exports = {
   },
 
   topupcheckout : function(req,res,next){
-    Transaksi.findOne({user_id : req.session.User.id}).where({status : 'pending'}).exec(function(err, transaksi){
+    Transaksi.findOne({user_id : req.session.User.id}).where({status : 'pending'}, {typetransaction : 'topup'}).sort({createdAt: 'DESC'}).exec(function(err, transaksi){
       if(err){
         return res.serverError(err);
       }
@@ -315,7 +315,7 @@ module.exports = {
   },
   
   validatecode : function(req,res,next){
-    Transaksi.findOne({user_id : req.session.User.id}).where({status : 'pending'}).exec(function(err, transaksi){
+    Transaksi.findOne({user_id : req.session.User.id}).where({status : 'pending'}, {typetransaction : 'topup'}).sort({createdAt: 'DESC'}).exec(function(err, transaksi){
       if(transaksi.confirmation_code == req.param('confirmation_code')){
         var transaksiObj = {
           status: 'complete',
@@ -548,6 +548,27 @@ module.exports = {
       res.json(user);
       });
   },
+
+  updatespekMobile: function(req, res, next){
+    User.update(req.param('id'),req.params.all(), function userUpdated(err,user){
+        if(err){
+            return res.redirect('/user/' + req.param('id'));
+        }
+  if(user)
+    res.json(user);
+    });
+},
+
+topupcreateMobile : function(req,res){
+  Transaksi.create(req.body).exec(function(err, new_transaksi){
+    if(err){
+      return res.serverError(err);
+    }
+    else{
+      res.json(new_transaksi);
+    }
+  })
+},
 
   
 }
