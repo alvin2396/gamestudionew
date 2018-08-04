@@ -41,7 +41,7 @@ module.exports = {
 		if (!req.param('email') || !req.param('password')) {
 			// return next({err: ["Password doesn't match password confirmation."]});
 			var usernamePasswordRequiredError = [
-				"Masukan Username dan Password anda"
+				"Input your email or password"
 			]
 
 			// Remember that err is the object being passed down (a.k.a. flash.err), whose value is another object with
@@ -63,7 +63,7 @@ module.exports = {
 			// If no user is found...
 			if (!user) {
 				var noAccountError = [
-					"Email Belum Terdaftar"
+					"Email not registered"
 				]
 				req.session.flash = {
 					err: noAccountError
@@ -79,7 +79,7 @@ module.exports = {
 				// If the password from the form doesn't match the password from the database...
 				if (!valid) {
 					var usernamePasswordMismatchError = [
-						"Email atau Password Salah"
+						"Email or Password invalid"
 					]
 					req.session.flash = {
 						err: usernamePasswordMismatchError

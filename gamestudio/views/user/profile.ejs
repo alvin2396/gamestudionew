@@ -18,10 +18,18 @@
           <div class="container bg-light my-2 py-2">
             <div class="row">
               <div class="text-center col-md-4">
+                  <% if(flash && flash.err) { %>
+                    <div class="alert alert-warning alert-dismissible">
+                      <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <% Object.keys(flash.err).forEach(function(error) { %>
+                      <h6 class="text-dark"><%- JSON.stringify(flash.err[error]) %></h6>
+                      <% }) %>
+                    </div>
+                  <% } %>
                 <form method="POST" action="/user/uploadPhotoProfil" enctype="multipart/form-data">
                   <%
                     if(userProfil.photo_url){%>
-                        <img class="img-thumbnail" src="/images/user/<%=userProfil.photo_url%>">
+                        <img class="img-fluid mx-auto img-thumbnail" src="<%=userProfil.photo_url%>" style="width: 200px;height: 200px;">
                     <%}
                     else{%>
                       <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150">
@@ -487,6 +495,15 @@
 		return false;
 		}
     });
+});
+  </script>
+
+  <script>
+    $(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 2000);
 });
   </script>
 
