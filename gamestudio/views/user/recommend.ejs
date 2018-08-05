@@ -24,7 +24,6 @@
       </div>
       <div class="row">
         <%  _.each(recommendationdata,function(recommend){ %>
-          <form method="POST" action="/cart/checkcartsearch">
         <div class="col-md-4 my-2">
           <a href="http://localhost:1337/games/detailGame/<%= recommend.id %>"><img class="img-fluid d-block" src="<%= recommend.photo_url %>"></a>
           <div class="row">
@@ -37,6 +36,7 @@
             </div>
           </div>
           <div class="row">
+              
             <div class="col-md-6">
               <h6 class="py-1 m-0 text-left text-truncate" style="font-size:14px;"><%= recommend.release_date %></h6>
             </div>
@@ -54,6 +54,7 @@
               <h6 class="py-1 m-0 text-left">Rp.<%= recommend.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
             </div>
             <div class="col-md-6 text-right">
+                <form method="POST" action="/cart/checkcartsearch">
                 <input id="currenturl" type="hidden" name="current_url">
                 <input type="hidden" value="<%= recommend.id %>" name="id_game">
                 <input type="hidden" name="photo_url" value="<%= recommend.photo_url %>">

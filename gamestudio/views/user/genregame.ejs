@@ -19,13 +19,13 @@
         <div class="col-md-12">
           <h2 class="text-center">
             <b>
-              <a href="http://localhost:1337/games/newgame/1" class="text-dark"> NEW GAME</a>
+              <a href="http://localhost:1337/games/newgame/1" class="text-dark"><%= sortgenre.datagame[0].genre %></a>
             </b>
           </h2>
         </div>
       </div>
       <div class="row">
-        <%  _.each(new_game,function(newgame){ %>
+        <%  _.each(sortgenre.datagame,function(newgame){ %>
         <div class="col-md-4 my-2">
           <a href="http://localhost:1337/games/detailGame/<%= newgame.id %>"><img class="img-fluid d-block" src="<%= newgame.photo_url %>"></a>
           <div class="row">
@@ -69,39 +69,7 @@
       </form>
         <%})%>        
       </div>
-      <center>
-        <div class="col-md-4 " style="margin-left: 30px;">
-            <% if (pages > 0) { %>
-              <ul class="pagination text-center">
-                  <% if (current == 1) { %>
-                      <li class="disabled page-item"><a class="page-link">First</a></li>
-                  <% } else { %>
-                      <li class="page-item"><a class="page-link" href="/games/newgame/1">First</a></li>
-                  <% } %>
-                  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-                  <% if (i !== 1) { %>
-                      <li class="disabled page-item"><a>...</a></li>
-                  <% } %>
-                  <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-                      <% if (i == current) { %>
-                          <li class="active page-item"><a class="page-link"><%= i %></a></li>
-                      <% } else { %>
-                          <li class="page-item"><a class="page-link" href="/games/newgame/<%= i %>"><%= i %></a></li>
-                      <% } %>
-                      <% if (i == Number(current) + 4 && i < pages) { %>
-                          <li class="disabled page-link"><a>...</a></li>
-                      <% } %>
-                  <% } %>
-                  <% if (current == pages) { %>
-                      <li class="disabled page-item"><a class="page-link">Last</a></li>
-                  <% } else { %>
-                      <li class="page-item"><a class="page-link" href="/games/newgame/<%= pages %>">Last</a></li>
-                  <% } %>
-              </ul>
-          <% } %>
-          
-       </div>
-      </center>
+      
     </div>
   </div>
   <%}
@@ -114,13 +82,13 @@
               <div class="col-md-12">
                 <h2 class="text-center">
                   <b>
-                    <a href="http://localhost:1337/games/newgame/1" class="text-dark"> NEW GAME</a>
+                    <a href="http://localhost:1337/games/newgame/1" class="text-dark"><%= sortgenre.datagame[0].genre %></a>
                   </b>
                 </h2>
               </div>
             </div>
             <div class="row">
-              <%  _.each(new_game,function(newgame){ %>
+              <%  _.each(sortgenre.datagame,function(newgame){ %>
               <div class="col-md-4 my-2">
                 <a href="http://localhost:1337/games/detailGame/<%= newgame.id %>"><img class="img-fluid d-block" src="<%= newgame.photo_url %>"></a>
                 <div class="row">
@@ -134,7 +102,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <h6 class="py-1 m-0 text-left text-truncate" style="font-size:14px;">Action, Sports asa asas asas</h6>
+                    <h6 class="py-1 m-0 text-left text-truncate" style="font-size:14px;"><%= newgame.release_date %></h6>
                   </div>
                   <div class="col-md-6 text-right">
                     <i class="fa fa-star" style="font-size:14px;"></i>
@@ -150,45 +118,13 @@
                     <h6 class="py-1 m-0 text-left">Rp.<%= newgame.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
                   </div>
                   <div class="col-md-6 text-right">
-                    <a class="btn btn-success btn-sm" href="#">Add</a>
+                    <a class="btn btn-success btn-sm text-white" onclick="reviewnotlogin()" >Add</a>
                   </div>
                 </div>
               </div>
               <%})%>        
             </div>
-            <center>
-              <div class="col-md-2 ">
-                  <% if (pages > 0) { %>
-                    <ul class="pagination text-center">
-                        <% if (current == 1) { %>
-                            <li class="disabled page-item"><a class="page-link">First</a></li>
-                        <% } else { %>
-                            <li class="page-item"><a class="page-link" href="/games/newgame/1">First</a></li>
-                        <% } %>
-                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-                        <% if (i !== 1) { %>
-                            <li class="disabled page-item"><a>...</a></li>
-                        <% } %>
-                        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-                            <% if (i == current) { %>
-                                <li class="active page-item"><a class="page-link"><%= i %></a></li>
-                            <% } else { %>
-                                <li class="page-item"><a class="page-link" href="/games/newgame/<%= i %>"><%= i %></a></li>
-                            <% } %>
-                            <% if (i == Number(current) + 4 && i < pages) { %>
-                                <li class="disabled page-link"><a>...</a></li>
-                            <% } %>
-                        <% } %>
-                        <% if (current == pages) { %>
-                            <li class="disabled page-item"><a class="page-link">Last</a></li>
-                        <% } else { %>
-                            <li class="page-item"><a class="page-link" href="/games/newgame/<%= pages %>">Last</a></li>
-                        <% } %>
-                    </ul>
-                <% } %>
-                
-             </div>
-            </center>
+    
           </div>
         </div>
       <%}%>
@@ -209,6 +145,13 @@
       document.getElementById("currenturl").value = get_url;
       
     </script>
+
+<script>
+    function reviewnotlogin(){
+      alert("Login First")
+    }
+     
+   </script>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

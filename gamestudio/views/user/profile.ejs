@@ -29,11 +29,7 @@
                 <form method="POST" action="/user/uploadPhotoProfil" enctype="multipart/form-data">
                   <%
                     if(userProfil.photo_url){%>
-<<<<<<< HEAD
-                        <img class="img-thumbnail" src="<%=userProfil.photo_url%>">
-=======
-                        <img class="img-fluid mx-auto img-thumbnail" src="<%=userProfil.photo_url%>" style="width: 200px;height: 200px;">
->>>>>>> 150afc20065688e981f5fbcbd1a4072237e3eb96
+                        <img class="img-thumbnail" src="<%=userProfil.photo_url%>" width="150">
                     <%}
                     else{%>
                       <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150">

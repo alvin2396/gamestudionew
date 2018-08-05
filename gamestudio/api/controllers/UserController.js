@@ -207,20 +207,13 @@ module.exports = {
       var id =req.session.User.id;
       var photo = User.photo;
       var fd = uploads[0].fd;
-<<<<<<< HEAD
-      var nameImage = fd.substring(50,102)
+      var nameImage = fd.substring(50,103)
       console.log(nameImage)
 
       var userObj = {
        photo_url : nameImage,
       }
       User.update(req.param('id'),userObj,function(err){
-=======
-      var replacement = "/";
-      var nameImage = fd.toString().substring(58).replace(/\\/g,replacement)
-      console.log(nameImage)
-
->>>>>>> 150afc20065688e981f5fbcbd1a4072237e3eb96
       
       User.update({id:id}
                 ,
@@ -234,7 +227,7 @@ module.exports = {
     })
     
     
-},
+})},
   
   
   

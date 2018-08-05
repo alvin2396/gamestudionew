@@ -68,12 +68,8 @@
                           <h5 class="text-left m-0"><%=reviewdata.nama%></h5>
                         </div>
                         <div class="col-md-6">
-                            <h6><%=reviewdata.rating%></h6>
-                          <i class="fa fa-star text-dark"></i>
-                          <i class="fa fa-star text-dark"></i>
-                          <i class="fa fa-star text-dark"></i>
-                          <i class="fa fa-star text-dark"></i>
-                          <i class="fa fa-star text-dark"></i>
+                            <h6 style="float:right;"><%=reviewdata.rating%></h6>
+                          <i class="fa fa-star text-dark" style="float:right;margin-right: 10px;"></i>
                         </div>
                       </div>
                       <p class="text-justify my-1 text-dark"><%=reviewdata.review%></p>
@@ -192,11 +188,12 @@
                     <h6 class="m-0 text-dark text-left">Gameplay</h6>
                   </div>
                   <div class="col-md-8 p-0 m-0">
-                    <div class="bar-container" style="width: 94%;
+                      <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.gameplay %></h6>
+                    <div class="bar-container" style="width: 82%;
                     background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div id="gameplayrating" class="gameplay" style="width: 60%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="gameplayrating" class="gameplay" style="width: 60%; height: 18px; background-color: #4CAF50; float: left;"> </div>
                     </div>
                   </div>
                 </div>
@@ -205,11 +202,12 @@
                     <h6 class="m-0 text-dark text-left">Graphics</h6>
                   </div>
                   <div class="p-0 m-0 col-md-8">
-                    <div class="bar-container" style="width: 94%;
+                      <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.graphic %></h6>
+                    <div class="bar-container" style="width: 82%;
                     background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div id="graphicrating" class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="graphicrating" class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50; float: left;"> </div>
                     </div>
                   </div>
                 </div>
@@ -218,11 +216,12 @@
                     <h6 class="m-0 text-dark text-left">Controls</h6>
                   </div>
                   <div class="p-0 m-0 col-md-8">
-                    <div class="bar-container" style="width: 94%;
-                      background-color: #d0d0d0;
+                      <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.controls %></h6>
+                    <div class="bar-container" style="width: 82%;
+                      background-color: #b1b1b1;
                       text-align: center;
                       color: white;">
-                      <div id="controlsrating" class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="controlsrating" class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50; float: left;"> </div>
                     </div>
                   </div>
                 </div>
@@ -231,11 +230,12 @@
                     <h6 class="m-0 text-dark text-left">Story</h6>
                   </div>
                   <div class="p-0 m-0 col-md-8">
-                    <div class="bar-container" style="width: 94%;
+                      <h6 class="m-0 text-dark text-left" style="float: left; padding-right: 10px"><%= feature.story %></h6>
+                    <div class="bar-container" style="width: 82%;
                     background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div id="storyrating" class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="storyrating" class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50; float: left;"> </div>
                     </div>
                   </div>
                 </div>
@@ -244,11 +244,12 @@
                     <h6 class="m-0 text-dark text-left">Music</h6>
                   </div>
                   <div class="p-0 m-0 col-md-8">
-                    <div class="bar-container" style="width: 94%;
+                      <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.music %></h6>
+                    <div class="bar-container" style="width: 82%;
                     background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div id="musicrating" class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="musicrating" class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50; float: left;"> </div>
                     </div>
                   </div>
                 </div>
@@ -588,11 +589,14 @@
                     <h6 class="m-0 text-dark text-left"> Gameplay</h6>
                   </div>
                   <div class="col-md-8 p-0 m-0">
-                    <div class="bar-container" style="width: 94%;
+                    <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.gameplay %></h6>
+                    <div class="bar-container" style="width: 82%;
                     background-color: #d0d0d0;
                     text-align: center;
+                    float: left;
+                    margin-left: 10px;
                     color: white;">
-                      <div id="gameplayrating" class="gameplay" style=" height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="gameplayrating" class="gameplay" style=" height: 18px; background-color: #4CAF50; float: right;"> </div>
                     </div>
                   </div>
                 </div>
@@ -601,11 +605,12 @@
                     <h6 class="m-0 text-dark text-left">Graphics</h6>
                   </div>
                   <div class="p-0 m-0 col-md-8">
-                    <div class="bar-container" style="width: 94%;
+                      <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.graphic %></h6>
+                    <div class="bar-container" style="width: 82%;
                     background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div id="graphicrating" class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="graphicrating" class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50; float: right;"> </div>
                     </div>
                   </div>
                 </div>
@@ -614,11 +619,12 @@
                     <h6 class="m-0 text-dark text-left">Controls</h6>
                   </div>
                   <div class="p-0 m-0 col-md-8">
-                    <div class="bar-container" style="width: 94%;
+                      <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.controls %></h6>
+                    <div class="bar-container" style="width: 82%;
                       background-color: #d0d0d0;
                       text-align: center;
                       color: white;">
-                      <div id="controlsrating" class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="controlsrating" class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;float: right;"> </div>
                     </div>
                   </div>
                 </div>
@@ -627,11 +633,12 @@
                     <h6 class="m-0 text-dark text-left">Story</h6>
                   </div>
                   <div class="p-0 m-0 col-md-8">
-                    <div class="bar-container" style="width: 94%;
+                      <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.story %></h6>
+                    <div class="bar-container" style="width: 82%;
                     background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div id="storyrating" class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="storyrating" class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;float: right;"> </div>
                     </div>
                   </div>
                 </div>
@@ -640,11 +647,12 @@
                     <h6 class="m-0 text-dark text-left">Music</h6>
                   </div>
                   <div class="p-0 m-0 col-md-8">
-                    <div class="bar-container" style="width: 94%;
+                      <h6 class="m-0 text-dark text-left" style="float: left;"><%= feature.story %></h6>
+                    <div class="bar-container" style="width: 82%;
                     background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div id="musicrating" class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="musicrating" class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;float: right;"> </div>
                     </div>
                   </div>
                 </div>

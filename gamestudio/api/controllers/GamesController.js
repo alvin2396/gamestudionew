@@ -87,7 +87,7 @@ module.exports = {
                                                                                 console.log(updatecart)
                                                                                 
                                                                                 Feature.findOne({game_id : games.id}).exec(function(err, feature){
-                                                                                    Rating.find({game_id : games.id}).exec(function(err,review){
+                                                                                    Rating.find({game_id : games.id}).sort('createdAt ASC').exec(function(err,review){
                                                                                         review.namauser = []
                                                                                         async.each(review,function(userreview,callback){
                                                                                             User.findOne({id : userreview.user_id}).exec(function(err, datareview){
@@ -798,7 +798,8 @@ module.exports = {
     },
 
     search: function (req, res, next) {
-        Games.find({ like: { game_name: '%' + req.param('search') + '%' } })
+        if(req.session.User){
+            Games.find({ like: { game_name: '%' + req.param('search') + '%' } })
             .exec(function (err, search) {
                 if (err) {
                     return res.serverError(err);
@@ -816,6 +817,103 @@ module.exports = {
 
 
             })
+        }
+        else{
+            Games.find({ like: { game_name: '%' + req.param('search') + '%' } })
+            .exec(function (err, search) {
+                if (err) {
+                    return res.serverError(err);
+                }
+                else {
+                    res.view("user/search/", {
+                        status: 'OK',
+                        title: 'Search Result',
+                        search: search,
+                    })
+                }
+
+
+            })
+        }
+    },
+
+    genre : function(req,res){
+        if(req.session.User){
+            Genrelist.find({genre_id : req.param('genre_id')}).populateAll().exec(function(err,sortgenre){
+                if(err){
+                    return res.serverError(err);
+                }
+                else{
+                    sortgenre.datagame = []
+                    async.each(sortgenre,function(datagenre,callback){
+                        Games.findOne({id : datagenre.game_id.id}).sort('rating DESC').exec(function(err, datagame){
+                            sortgenre.datagame.push({
+                                id : datagame.id,
+                                game_name : datagame.game_name,
+                                photo_url : datagame.photo_url,
+                                release_date : datagame.release_date,
+                                rating : datagame.rating,
+                                harga : datagame.harga,
+                                genre : req.param('namagenre')
+                               
+                            })
+                            callback()
+                        })
+                    },function(err){
+                        if(err){
+                            return res.serverError(err);
+                        }
+                        else{
+                            
+                            Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+                                res.view("user/genregame", {
+                                    status : 'OK',
+                                    title : req.param('namagenre'),
+                                    sortgenre : sortgenre,
+                                    updatecart : updatecart
+                                })
+                            })
+                        }
+                    })
+                }
+            })
+        }
+        else{
+            Genrelist.find({genre_id : req.param('genre_id')}).populateAll().exec(function(err,sortgenre){
+                if(err){
+                    return res.serverError(err);
+                }
+                else{
+                    sortgenre.datagame = []
+                    async.each(sortgenre,function(datagenre,callback){
+                        Games.findOne({id : datagenre.game_id.id}).sort('rating DESC').exec(function(err, datagame){
+                            sortgenre.datagame.push({
+                                id : datagame.id,
+                                game_name : datagame.game_name,
+                                photo_url : datagame.photo_url,
+                                release_date : datagame.release_date,
+                                rating : datagame.rating,
+                                harga : datagame.harga,
+                                genre : req.param('namagenre')
+                               
+                            })
+                            callback()
+                        })
+                    },function(err){
+                        if(err){
+                            return res.serverError(err);
+                        }
+                        else{
+                            res.view("user/genregame", {
+                                status : 'OK',
+                                title : req.param('namagenre'),
+                                sortgenre : sortgenre,
+                            })
+                        }
+                    })
+                }
+            })
+        }
     },
 
 
