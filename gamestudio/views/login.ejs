@@ -23,11 +23,12 @@
               <h2 class="mb-4 m-0 text-center" contenteditable="true">Login to Your Account</h2>
               <form method="post" action="/session/create">
                 <% if(flash && flash.err) { %>
-                  <ul class="alert alert-success">
-                  <% Object.keys(flash.err).forEach(function(error) { %>
-                  <li><%- JSON.stringify(flash.err[error]) %></li>
-                  <% }) %>
-                  </ul>
+                  <div class="alert alert-warning alert-dismissible">
+                    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <% Object.keys(flash.err).forEach(function(error) { %>
+                    <h6 class="text-dark"><%- JSON.stringify(flash.err[error]) %></h6>
+                    <% }) %>
+                  </div>
                 <% } %>
                 <div class="form-group">
                   <input name="email" type="email" class="form-control" placeholder="Enter email"> </div>

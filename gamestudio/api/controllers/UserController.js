@@ -196,7 +196,7 @@ module.exports = {
   uploadPhotoProfil: function(req, res) {
 
     req.file('photo_url') // this is the name of the file in your multipart form
-    .upload({ dirname: '../../assets/image/user' }, function(err, uploads) {
+    .upload({ dirname: '../../assets/images/user' }, function(err, uploads) {
       // try to always handle errors
       if (err) { return res.serverError(err) }
       // uploads is an array of files uploaded 
@@ -207,6 +207,7 @@ module.exports = {
       var id =req.session.User.id;
       var photo = User.photo;
       var fd = uploads[0].fd;
+<<<<<<< HEAD
       var nameImage = fd.substring(50,102)
       console.log(nameImage)
 
@@ -214,21 +215,21 @@ module.exports = {
        photo_url : nameImage,
       }
       User.update(req.param('id'),userObj,function(err){
+=======
+      var replacement = "/";
+      var nameImage = fd.toString().substring(58).replace(/\\/g,replacement)
+      console.log(nameImage)
+
+>>>>>>> 150afc20065688e981f5fbcbd1a4072237e3eb96
       
-        if(err){
-          console.log(err);
-        }
-        else{
-          var ubahSuccess = [
-            'Profile updated!',
-          ]
-          req.session.flash = {
-            err: ubahSuccess
-          // If error redirect back to sign-up page
-          }
-          res.redirect('/user/profile/' + req.param('id'));
-        }
-      })
+      User.update({id:id}
+                ,
+                {photo_url: nameImage
+              }).exec(function(err, file) {
+                if (err) { return res.serverError(err) }
+                // if it was successful return the registry in the response
+                res.redirect('user/profile/' +id);
+    })
       
     })
     
@@ -241,7 +242,7 @@ module.exports = {
     User.findOneByEmail(req.param('email'),function(err,user){
       if(user){
         var emailAlready = [
-          'Email sudah terdaftar. gunakan email lain untuk mendaftar'
+          'Email already used'
         ]
         req.session.flash = {
           err: emailAlready
@@ -257,7 +258,7 @@ module.exports = {
             }
           else{
             var daftarSuccess = [
-              'Email sudah berhasil didaftar. Silahkan Login'
+              'Email registered. please Login'
             ]
             req.session.flash = {
               err: daftarSuccess

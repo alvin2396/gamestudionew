@@ -19,11 +19,12 @@
             <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150">
             <div class="card-body">
               <% if(flash && flash.err) { %>
-                <ul class="alert alert-danger">
+                <div class="alert alert-warning alert-dismissible">
+                  <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
                   <% Object.keys(flash.err).forEach(function(error) { %>
-                  <li><%- JSON.stringify(flash.err[error]) %></li>
+                  <h6 class="text-dark"><%- JSON.stringify(flash.err[error]) %></h6>
                   <% }) %>
-                </ul>
+                </div>
               <% } %>
               <h2 class="mb-4 m-0 text-center">Register</h2>
               <form method="post" action="user/create">
