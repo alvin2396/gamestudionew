@@ -27,6 +27,7 @@
               </div>
             </div>
             <% _.each(search,function(search){%>
+            <form method="POST" action="/cart/checkcartsearch">
             <div class="row my-2" style="margin-top:0px !important;">
               <div class="m-0 col-md-3" style="padding-right:0px; padding-top:0px; padding-bottom:0px;">
                 <img class="img-fluid d-block" src="<%=search.photo_url%>" width="100%"> </div>
@@ -56,11 +57,18 @@
                     <span style="font-size:14px;"><%=search.rating%></span>
                   </div>
                   <div class="text-right col-md-5">
-                    <a class="btn btn-success btn-sm" href="#">Add</a>
+                      <input id="currenturl" type="hidden" name="current_url">
+                      <input type="hidden" value="<%= search.id %>" name="id_game">
+                      <input type="hidden" name="photo_url" value="<%= search.photo_url %>">
+                      <input type="hidden" value="<%=req.session.User.id%>" name="user_id">
+                      <input type="hidden" value="<%= search.game_name %>" name="nama_game">
+                      <input type="hidden" value="<%= search.harga %>" name="harga">
+                      <button class="btn btn-success btn-sm" type="submit">Add</button>
                   </div>
                 </div>
               </div>
             </div>
+          </form>
             <%})%>
           </div>
          
@@ -137,6 +145,15 @@
       </div>
     </div>
   </div>
+
+  <script>
+      var get_url = window.location.pathname;
+      
+      
+      document.getElementById("currenturl").value = get_url;
+      
+    </script>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -26,7 +26,6 @@ module.exports = {
   },
   typetransaction : {
     type : 'string',
-    // required : true,
   }
 
 

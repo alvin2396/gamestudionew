@@ -21,7 +21,7 @@
                 <form method="POST" action="/user/uploadPhotoProfil" enctype="multipart/form-data">
                   <%
                     if(userProfil.photo_url){%>
-                        <img class="img-thumbnail" src="/images/user/<%=userProfil.photo_url%>">
+                        <img class="img-thumbnail" src="<%=userProfil.photo_url%>">
                     <%}
                     else{%>
                       <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150">

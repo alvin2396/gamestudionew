@@ -28,14 +28,59 @@ module.exports = {
 		})
 	},
 
+	checkcartsearch : function(req,res,next){
+		Cart.findOne({user_id : req.param('user_id')}).where({id_game : req.param('id_game')}).exec(function(err, usercart){
+			
+			if(usercart){
+				var current_url = req.param('current_url');
+		
+				console.log('itemfound')
+				res.redirect(current_url);
+				console.log(current_url)
+		
+			}
+			else{
+				var current_url = req.param('current_url');
+				console.log('item not found')
+				Cart.create(req.body).exec(function(err, newcart){
+					if(err){
+						return res.serverError(err);
+					}
+					else{
+						
+						console.log('cart added')
+						res.redirect(current_url);
+					}
+				})
+			}
+		})
+	},
+
 	remove : function(req,res,next){
 		Cart.destroy({id : req.param('id')}).exec(function(err, deleteitem){
 			if(err){
 				return res.serverError(err);
 			}
 			else{
+				var geturl = req.param('current_url');
+				console.log(geturl)
 				console.log('cart deleted')
 				res.redirect('/');
+			}
+		})
+
+		
+	},
+
+	removesearch : function(req,res,next){
+		Cart.destroy({id : req.param('id')}).exec(function(err, deleteitem){
+			if(err){
+				return res.serverError(err);
+			}
+			else{
+				var current_url = req.param('current_url')
+				console.log('cart deleted')
+				res.redirect(current_url);
 			}
 		})
 

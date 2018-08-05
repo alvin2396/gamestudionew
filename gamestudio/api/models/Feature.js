@@ -1,5 +1,5 @@
 /**
- * Rating.js
+ * Feature.js
  *
  * @description :: A model definition.  Represents a database table/collection/etc.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -8,47 +8,34 @@
 module.exports = {
 
   attributes: {
-
-    user_id : {
-        model : 'user',
-        required:true,
-    },
-
+    
     game_id : {
-        model : 'games',
-        required:true,
+      model : 'games',
+      required:true,
     },
 
-    rating_value : {
-        type : 'string'
-    },
-
-     gameplay_value : {
-      type: 'string'
-    },
-
-    graphic_value : {
+    gameplay : {
       type : 'string'
     },
 
-    controls_value : {
+    graphic : {
       type : 'string'
     },
 
-    story_value : {
+    controls : {
       type : 'string'
     },
 
-    music_value : {
+    story : {
       type : 'string'
     },
 
-    review : {
+    music : {
       type : 'string'
     }
 
   },
-  connection:'database',
+  connection:'database'
 
 };
 

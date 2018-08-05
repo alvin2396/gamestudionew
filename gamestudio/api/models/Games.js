@@ -74,10 +74,24 @@ module.exports = {
     rating : {
         type : 'string'
     },
+    
+    featurerating : {
+        collection : 'feature',
+        via : 'game_id',
+    },
 
     publisher : {
         type : 'string'
     },
+
+    ratings : {
+        collection : 'rating',
+        via : 'game_id',
+    },
+
+    rated : {
+        type : 'string'
+    }
     
 
 

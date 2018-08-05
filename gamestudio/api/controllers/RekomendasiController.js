@@ -190,11 +190,14 @@ module.exports = {
                                                         //console.log(genre)
                                                         
                                                         // return res.json(recommendationdata)
-                                                        res.view('user/recommend', {
-                                                            status : 'OK',
-                                                            title : 'Recommendation',
-                                                            recommendationdata : recommendationdata,
-                
+                                                        Cart.find({user_id : req.session.User.id}).exec(function(err,updatecart){
+                                                            res.view('user/recommend', {
+                                                                status : 'OK',
+                                                                title : 'Recommendation',
+                                                                recommendationdata : recommendationdata,
+                                                                updatecart : updatecart,
+                    
+                                                            })
                                                         })
 
                                                         })
@@ -246,11 +249,14 @@ module.exports = {
                                                         //console.log(datakorelasi)
                                                         //console.log(genre)
                                                         // res.json(recommendationdata)
-                                                            res.view('user/recommend', {
-                                                                status : 'OK',
-                                                                title : 'rekomendasi',
-                                                                recommendationdata : recommendationdata,
-                    
+                                                            Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+                                                                res.view('user/recommend', {
+                                                                    status : 'OK',
+                                                                    title : 'rekomendasi',
+                                                                    recommendationdata : recommendationdata,
+                                                                    updatecart : updatecart,
+                        
+                                                                })
                                                             })
                                                      
                                                         }

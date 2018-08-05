@@ -71,6 +71,11 @@ module.exports = {
         type : 'array'
       },
 
+      ratings : {
+        collection : 'rating',
+        via : 'user_id',
+      },
+
       
       toJSON: function(){
       var obj = this.toObject();

@@ -207,11 +207,11 @@ module.exports = {
       var id =req.session.User.id;
       var photo = User.photo;
       var fd = uploads[0].fd;
-      var nameImage = fd.substring(50,51)
+      var nameImage = fd.substring(50,102)
       console.log(nameImage)
 
       var userObj = {
-       photo_url : fd,
+       photo_url : nameImage,
       }
       User.update(req.param('id'),userObj,function(err){
       
@@ -274,6 +274,8 @@ module.exports = {
 
   topup:function(req,res,next){
     Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+      var id =req.session.User.id;
+      console.log(id)
       res.view('user/topup',{
         status : 'OK',
         title : 'Top Up',

@@ -47,41 +47,41 @@
                     <h4 class="text-left text-dark">Review</h4>
                   </div>
                   <div class="col-md-3 text-right">
-                    <a class="btn btn-success btn-sm" href="#">Add Review</a>
+                    <a class="btn btn-success btn-sm" href="#myModal" data-toggle="modal">Add Review</a>
                   </div>
                 </div>
-                <div class="row my-2" style="margin-top:0px !important;">
-                  <div class="col-md-9 text-dark">
-                    <h5 class="text-left m-0">User 1</h5>
+                <%  _.each(review.namauser,function(reviewdata){ %>
+                  <div class="row my-2">
+                    <div class="text-dark col-md-2">
+                        <%
+                        if(reviewdata.photo_url){%>
+                            <img class="img-thumbnail" src="<%=reviewdata.photo_url%>">
+                        <%}
+                        else{%>
+                          <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150">
+                        <%}
+                      %>
+                    </div>
+                    <div class="text-right col-md-10">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h5 class="text-left m-0"><%=reviewdata.nama%></h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><%=reviewdata.rating%></h6>
+                          <i class="fa fa-star text-dark"></i>
+                          <i class="fa fa-star text-dark"></i>
+                          <i class="fa fa-star text-dark"></i>
+                          <i class="fa fa-star text-dark"></i>
+                          <i class="fa fa-star text-dark"></i>
+                        </div>
+                      </div>
+                      <p class="text-justify my-1 text-dark"><%=reviewdata.review%></p>
+                    </div>
                   </div>
-                  <div class="col-md-3 text-right">
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                  </div>
-                  <div class="col-md-12">
-                    <p class="text-justify my-1 text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  </div>
-                </div>
-                <div class="row my-2" style="margin-top:0px !important;">
-                  <div class="col-md-9 text-dark">
-                    <h5 class="text-left m-0">User 2</h5>
-                  </div>
-                  <div class="col-md-3 text-right">
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                  </div>
-                  <div class="col-md-12">
-                    <p class="text-justify my-1 text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  </div>
-                </div>
+                
+                <%})%>
+               
               </div>
             </div>
           </div>
@@ -119,6 +119,7 @@
                       </div>
                       <div class="col-md-8">
                         <h6 class="m-0 text-left">
+                          
                           <%  _.each(games.genreStrings,function(genre_list){ %>
                           <a href="#" class="text-black" style="color: black;">
                             <%= genre_list.nama_genre %>
@@ -173,7 +174,15 @@
                 </ul>
                 <div class="row my-2">
                   <div class="col-md-12 text-left">
-                    <a class="btn btn-success btn-sm" href="#">Add to cart</a>
+                      <form method="POST" action="/cart/checkcartsearch">
+                      <input id="currenturl" type="hidden" name="current_url">
+                      <input type="hidden" value="<%= games.id %>" name="id_game">
+                      <input type="hidden" name="photo_url" value="<%= games.photo_url %>">
+                      <input type="hidden" value="<%=req.session.User.id%>" name="user_id">
+                      <input type="hidden" value="<%= games.game_name %>" name="nama_game">
+                      <input type="hidden" value="<%= games.harga %>" name="harga">
+                      <button class="btn btn-success btn-sm" type="submit">Add to Cart</button>
+                      </form>
                   </div>
                 </div>
                 <h4 class="my-3 text-dark text-center">Feature Ratings
@@ -184,10 +193,10 @@
                   </div>
                   <div class="col-md-8 p-0 m-0">
                     <div class="bar-container" style="width: 94%;
-                    background-color: #f1f1f1;
+                    background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div class="gameplay" style="width: 60%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="gameplayrating" class="gameplay" style="width: 60%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -197,10 +206,10 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-                    background-color: #f1f1f1;
+                    background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="graphicrating" class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -210,10 +219,10 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-                      background-color: #f1f1f1;
+                      background-color: #d0d0d0;
                       text-align: center;
                       color: white;">
-                      <div class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="controlsrating" class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -223,10 +232,10 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-                    background-color: #f1f1f1;
+                    background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="storyrating" class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -236,10 +245,10 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-                    background-color: #f1f1f1;
+                    background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="musicrating" class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -345,7 +354,15 @@
                   <li class="list-group-item p-0 list-group-item-info">
                     <div class="row my-1">
                       <div class="col-md-4">
-                        <h6 class="m-0 text-left">Processor</h6>
+                          <h6 class="m-0 text-left" style="float: left">Processor</h6>
+                          <%
+                                  if(parseInt(userprocessor.processor_score) >= parseInt(recProc.processor_score)){%>
+                                    <img class="img-fluid d-block" src="/image/Check.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                              <%}
+                              else{%>
+                                
+                                <img class="img-fluid d-block" src="/image/x.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                                <%}%>
                       </div>
                       <div class="col-md-8">
                         <h6 class="m-0 text-left"><%= recProc.processor_name %></h6>
@@ -355,7 +372,15 @@
                   <li class="list-group-item p-0 list-group-item-info">
                     <div class="row my-1">
                       <div class="col-md-4">
-                        <h6 class="m-0 text-left">Memory</h6>
+                          <h6 class="m-0 text-left" style="float: left">Memory</h6>
+                          <%
+                                  if(parseInt(userram.ram_score) >= parseInt(recRam.ram_score)){%>
+                                    <img class="img-fluid d-block" src="/image/Check.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                              <%}
+                              else{%>
+                                
+                                <img class="img-fluid d-block" src="/image/x.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                                <%}%>
                       </div>
                       <div class="col-md-8">
                         <h6 class="m-0 text-left"><%= recRam.ram_size %></h6>
@@ -365,7 +390,15 @@
                   <li class="list-group-item p-0 list-group-item-info">
                     <div class="row my-1">
                       <div class="col-md-4 text-left">
-                        <h6 class="m-0">Graphics</h6>
+                          <h6 class="m-0 text-left" style="float: left">Graphics</h6>
+                          <%
+                                  if(parseInt(uservga.vga_score) >= parseInt(recVga.vga_score)){%>
+                                    <img class="img-fluid d-block" src="/image/Check.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                              <%}
+                              else{%>
+                                
+                                <img class="img-fluid d-block" src="/image/x.png" style="float: left;margin-left: 5px;position:relative;width:18px;top:0px;">                            
+                                <%}%>
                       </div>
                       <div class="col-md-8">
                         <h6 class="m-0 text-left"><%= recVga.vga_name %></h6>
@@ -427,41 +460,41 @@
                     <h4 class="text-left text-dark">Review</h4>
                   </div>
                   <div class="col-md-3 text-right">
-                    <a class="btn btn-success btn-sm" href="#">Add Review</a>
+                    <a id="reviewnotlogin" class="btn btn-success btn-sm text-white" onclick="reviewnotlogin()" >Add Review</a>
                   </div>
                 </div>
-                <div class="row my-2" style="margin-top:0px !important;">
-                  <div class="col-md-9 text-dark">
-                    <h5 class="text-left m-0">User 1</h5>
+                <%  _.each(review.namauser,function(reviewdata){ %>
+                  <div class="row my-2">
+                    <div class="text-dark col-md-2">
+                        <%
+                        if(reviewdata.photo_url){%>
+                            <img class="img-thumbnail" src="<%=reviewdata.photo_url%>">
+                        <%}
+                        else{%>
+                          <img class="img-fluid mx-auto" src="/image/login.png" alt="Card image" height="16" width="150">
+                        <%}
+                      %>
+                    </div>
+                    <div class="text-right col-md-10">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h5 class="text-left m-0"><%=reviewdata.nama%></h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><%=reviewdata.rating%></h6>
+                          <i class="fa fa-star text-dark"></i>
+                          <i class="fa fa-star text-dark"></i>
+                          <i class="fa fa-star text-dark"></i>
+                          <i class="fa fa-star text-dark"></i>
+                          <i class="fa fa-star text-dark"></i>
+                        </div>
+                      </div>
+                      <p class="text-justify my-1 text-dark"><%=reviewdata.review%></p>
+                    </div>
                   </div>
-                  <div class="col-md-3 text-right">
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                  </div>
-                  <div class="col-md-12">
-                    <p class="text-justify my-1 text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  </div>
-                </div>
-                <div class="row my-2" style="margin-top:0px !important;">
-                  <div class="col-md-9 text-dark">
-                    <h5 class="text-left m-0">User 2</h5>
-                  </div>
-                  <div class="col-md-3 text-right">
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                    <i class="fa fa-star text-dark"></i>
-                  </div>
-                  <div class="col-md-12">
-                    <p class="text-justify my-1 text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  </div>
-                </div>
+                
+                <%})%>
+               
               </div>
             </div>
           </div>
@@ -545,21 +578,21 @@
                 </ul>
                 <div class="row my-2">
                   <div class="col-md-12 text-left">
-                    <a class="btn btn-success btn-sm" href="#">Add to cart</a>
+                    <a class="btn btn-success btn-sm text-white" onclick="reviewnotlogin()" >Add to cart</a>
                   </div>
                 </div>
                 <h4 class="my-3 text-dark text-center">Feature Ratings
                   <br> </h4>
                 <div class="row my-2">
                   <div class="col-md-4">
-                    <h6 class="m-0 text-dark text-left">Gameplay</h6>
+                    <h6 class="m-0 text-dark text-left"> Gameplay</h6>
                   </div>
                   <div class="col-md-8 p-0 m-0">
                     <div class="bar-container" style="width: 94%;
-                    background-color: #f1f1f1;
+                    background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div class="gameplay" style="width: 60%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="gameplayrating" class="gameplay" style=" height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -569,10 +602,10 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-                    background-color: #f1f1f1;
+                    background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="graphicrating" class="gameplay" style="width: 30%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -582,10 +615,10 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-                      background-color: #f1f1f1;
+                      background-color: #d0d0d0;
                       text-align: center;
                       color: white;">
-                      <div class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="controlsrating" class="gameplay" style="width: 75%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -595,10 +628,10 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-                    background-color: #f1f1f1;
+                    background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="storyrating" class="gameplay" style="width: 50%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -608,10 +641,10 @@
                   </div>
                   <div class="p-0 m-0 col-md-8">
                     <div class="bar-container" style="width: 94%;
-                    background-color: #f1f1f1;
+                    background-color: #d0d0d0;
                     text-align: center;
                     color: white;">
-                      <div class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;"> </div>
+                      <div id="musicrating" class="gameplay" style="width: 40%; height: 18px; background-color: #4CAF50;"> </div>
                     </div>
                   </div>
                 </div>
@@ -744,12 +777,225 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title text-center w-100">Rating &amp; Review</h4>
+            <button type="button" class="close m-0 p-0" data-dismiss="modal">×</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h5 class="text-left">My Rating&nbsp;
+                  <i class="fa fa-star text-dark"></i>
+                  <i class="fa fa-star text-dark"></i>
+                  <i class="fa fa-star text-dark"></i>
+                  <i class="fa fa-star text-dark"></i>
+                  <i class="fa fa-star text-dark"></i>
+                </h5>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h5 class="text-left">1. Pertanyaan Pertama</h5>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Yes</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Not Sure</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h5 class="text-left">2. Pertanyaan Kedua</h5>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Yes</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Not Sure</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h5 class="text-left">3. Pertanyaan Ketiga</h5>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Yes</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Not Sure</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h5 class="text-left">4. Pertanyaan Keempat</h5>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Yes</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Not Sure</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h5 class="text-left">5. Pertanyaan Kelima</h5>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Yes</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>Not Sure</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-left">
+                  <input type="radio" id="same-address" value="on">
+                  <label for="same-address">
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h5 class="text-left">Write Your Review :</h5>
+              </div>
+              <div class="col-md-12">
+                <textarea class="form-control" rows="5" id="review"></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer text-center">
+            <button type="button" class="btn btn-success btn-block btn-sm text-center">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
   <script>
     function onClick(element) {
       document.getElementById("img01").src = element.src;
       document.getElementById("modal01").style.display = "block";
     }
   </script>
+ <script>
+   var gameplay = ("<%= feature.gameplay %>"*10+"%");
+   var graphic = ("<%= feature.graphic %>"*10+"%");
+   var controls = ("<%= feature.controls %>"*10+"%");
+   var story = ("<%= feature.story %>"*10+"%");
+   var music = ("<%= feature.music %>"*10+"%");
+   document.getElementById("gameplayrating").style.width = gameplay;
+   document.getElementById("graphicrating").style.width = graphic;
+   document.getElementById("controlsrating").style.width = controls;
+   document.getElementById("storyrating").style.width = story;
+   document.getElementById("musicrating").style.width = music;
+  
+ </script>
+
+ <script>
+  function reviewnotlogin(){
+    alert("Login First")
+  }
+   
+ </script>
+  
+  <script>
+      var get_url = window.location.pathname;
+      
+      
+      document.getElementById("currenturl").value = get_url;
+      
+    </script>
+
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

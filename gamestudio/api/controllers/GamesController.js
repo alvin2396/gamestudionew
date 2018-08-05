@@ -85,21 +85,56 @@ module.exports = {
                                                                         Ram.findOne({ id: user.ram_id }).exec(function (err, userram) {
                                                                             Cart.find({ user_id: req.session.User.id }).exec(function (err, updatecart) {
                                                                                 console.log(updatecart)
-                                                                                res.view("user/gameDetail/", {
-                                                                                    status: 'OK',
-                                                                                    title: 'Detail Game',
-                                                                                    games: games,
-                                                                                    getRam: getRam,
-                                                                                    getProc: getProc,
-                                                                                    getVga: getVga,
-                                                                                    recProc: recProc,
-                                                                                    recRam: recRam,
-                                                                                    recVga: recVga,
-                                                                                    uservga: uservga,
-                                                                                    userram: userram,
-                                                                                    userprocessor: userprocessor,
-                                                                                    user: user,
-                                                                                    updatecart: updatecart,
+                                                                                
+                                                                                Feature.findOne({game_id : games.id}).exec(function(err, feature){
+                                                                                    Rating.find({game_id : games.id}).exec(function(err,review){
+                                                                                        review.namauser = []
+                                                                                        async.each(review,function(userreview,callback){
+                                                                                            User.findOne({id : userreview.user_id}).exec(function(err, datareview){
+                                                                                                if(err){
+                                                                                                    return res.serverError(err)
+                                                                                                }
+                                                                                                else{
+                                                                                                    review.namauser.push({
+                                                                                                        id : datareview.id,
+                                                                                                        nama : datareview.nama,
+                                                                                                        photo_url : datareview.photo_url,
+                                                                                                        review : userreview.review,
+                                                                                                        rating : userreview.rating_value
+                                                                                                    })
+                                                                                                    callback()
+                                                                                                }
+                                                                                                console.log('datareview')
+                                                                                                console.log(review.namauser)
+                                                                                            })
+                                                                                            
+                                                                                        },function(err){
+                                                                                            if(err){
+                                                                                                return res.serverError(err);
+                                                                                            }
+                                                                                            else{
+                                                                                                res.view("user/gameDetail/", {
+                                                                                                    status: 'OK',
+                                                                                                    title: 'Detail Game',
+                                                                                                    games: games,
+                                                                                                    getRam: getRam,
+                                                                                                    getProc: getProc,
+                                                                                                    getVga: getVga,
+                                                                                                    recProc: recProc,
+                                                                                                    recRam: recRam,
+                                                                                                    recVga: recVga,
+                                                                                                    uservga: uservga,
+                                                                                                    userram: userram,
+                                                                                                    userprocessor: userprocessor,
+                                                                                                    user: user,
+                                                                                                    updatecart: updatecart,
+                                                                                                    feature : feature,
+                                                                                                    review : review,
+                                                                                                  
+                                                                                                })
+                                                                                            }
+                                                                                        })
+                                                                                    })
                                                                                 })
                                                                             })
                                                                             if (parseInt(userprocessor.processor_score) >= parseInt(getProc.processor_score) && parseInt(userram.ram_score) >= parseInt(getRam.ram_score) && parseInt(uservga.vga_score) >= parseInt(getVga.vga_score)) {
@@ -138,16 +173,56 @@ module.exports = {
                                                             })
                                                         }
                                                         else {
-                                                            res.view("user/gameDetail/", {
-                                                                status: 'OK',
-                                                                title: 'Detail Game',
-                                                                games: games,
-                                                                getRam: getRam,
-                                                                getProc: getProc,
-                                                                getVga: getVga,
-                                                                recProc: recProc,
-                                                                recRam: recRam,
-                                                                recVga: recVga,
+                                                            Feature.findOne({game_id : games.id}).exec(function(err, feature){
+                                                                if(err){
+                                                                    return res.serverError(err)
+                                                                }
+                                                                else{
+                                                                    Rating.find({game_id : games.id}).exec(function(err,review){
+                                                                        review.namauser = []
+                                                                        async.each(review,function(userreview,callback){
+                                                                            User.findOne({id : userreview.user_id}).exec(function(err, datareview){
+                                                                                if(err){
+                                                                                    return res.serverError(err)
+                                                                                }
+                                                                                else{
+                                                                                    review.namauser.push({
+                                                                                        id : datareview.id,
+                                                                                        nama : datareview.nama,
+                                                                                        photo_url : datareview.photo_url,
+                                                                                        review : userreview.review,
+                                                                                        rating : userreview.rating_value
+                                                                                    })
+                                                                                    callback()
+                                                                                }
+                                                                                console.log('datareview')
+                                                                                console.log(review.namauser)
+                                                                            })
+                                                                            
+                                                                        },function(err){
+                                                                            if(err){
+                                                                                return res.serverError(err);
+                                                                            }
+                                                                            else{
+                                                                                console.log(review)
+                                                                                res.view("user/gameDetail/", {
+                                                                                    status: 'OK',
+                                                                                    title: 'Detail Game',
+                                                                                    games: games,
+                                                                                    getRam: getRam,
+                                                                                    getProc: getProc,
+                                                                                    getVga: getVga,
+                                                                                    recProc: recProc,
+                                                                                    recRam: recRam,
+                                                                                    recVga: recVga,
+                                                                                    feature : feature,
+                                                                                    review : review,
+                                                                                  
+                                                                                })
+                                                                            }
+                                                                        })
+                                                                    })
+                                                                }
                                                             })
                                                         }
                                                     })
@@ -729,10 +804,13 @@ module.exports = {
                     return res.serverError(err);
                 }
                 else {
-                    res.view("user/search/", {
-                        status: 'OK',
-                        title: 'Search Result',
-                        search: search,
+                    Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
+                        res.view("user/search/", {
+                            status: 'OK',
+                            title: 'Search Result',
+                            search: search,
+                            updatecart : updatecart,
+                        })
                     })
                 }
 
