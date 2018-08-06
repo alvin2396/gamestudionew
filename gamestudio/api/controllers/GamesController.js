@@ -423,13 +423,16 @@ module.exports = {
                     else {
                         if (req.session.User) {
                             Cart.find({ user_id: req.session.User.id }).exec(function (err, updatecart) {
-                                res.view('user/newGame', {
-                                    status: 'OK',
-                                    title: 'New Games',
-                                    new_game: new_game,
-                                    current: page,
-                                    pages: Math.ceil(count / perPage),
-                                    updatecart: updatecart,
+                                Owngame.find({user_id : req.session.User.id}).exec(function(err, owngame){
+                                    res.view('user/newGame', {
+                                        status: 'OK',
+                                        title: 'New Games',
+                                        new_game: new_game,
+                                        current: page,
+                                        pages: Math.ceil(count / perPage),
+                                        updatecart: updatecart,
+                                        owngame : owngame,
+                                    })
                                 })
                             })
                         }
@@ -944,6 +947,89 @@ module.exports = {
                     title: 'tes search',
                     listgame: listgame
                 })
+            }
+        })
+    },
+
+    detailGameMobile: function (req, res, next) {
+
+        Games.findOne(req.param('id')).populateAll().exec(function (err, games) {
+            if (err) {
+                return res.serverError(err);
+            }
+            else {
+
+                games.genreStrings = []
+                async.each(games.genre_lists, function (genre, callback) {
+                    Genre.findOne({ id: genre.genre_id }).exec(function (err, genres) {
+                        if (err) {
+                            callback(err)
+                        } else {
+
+                            games.genreStrings.push({
+                                id: genres.id,
+                                nama_genre: genres.genre_name
+                            })
+                            callback()
+                        }
+                    })
+                }, function (err) { // function ini akan jalan bila semua genre_lists telah diproses
+
+                    if (err)
+                        return res.serverError(err);
+                    else {
+                        games.min_spek_intel = []
+                        games.rec_spek = []
+                        async.each(games.min_requirement, function (spek, callback) {
+
+                            Spesifikasi.findOne({ id: spek.id }).exec(function (err, min_spek) {
+
+                                if (err) {
+                                    callback(err)
+                                }
+                                else {
+                                    if (min_spek.status == 'minimum') {
+                                        games.min_spek_intel.push({
+                                            processor_id: min_spek.processor_id,
+                                            vga_id: min_spek.vga_id,
+                                            ram_id: min_spek.ram_id,
+                                            status: min_spek.status
+                                        })
+                                    }
+                                    if (min_spek.status == 'recommend') {
+
+                                        games.rec_spek.push({
+                                            processor_id: min_spek.processor_id,
+                                            vga_id: min_spek.vga_id,
+                                            ram_id: min_spek.ram_id,
+                                            status: min_spek.status
+                                        })
+                                    }
+
+                                    callback()
+                                }
+                            })
+                        }, function (err) {
+
+
+                            if (err) {
+                                return res.serverError(err);
+                            }
+                            else {
+                                res.json(games)
+
+
+                            }
+                        })
+
+
+
+
+
+
+                    }
+                })
+
             }
         })
     },

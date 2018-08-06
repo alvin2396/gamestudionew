@@ -385,22 +385,29 @@ module.exports = {
     User.findOne({id : req.session.User.id}).exec(function(err,user){
       Cart.find({user_id : user.id}).exec(function(err, usercart){
         async.each(usercart,function(datacart,callback){
-          Owngame.create({user_id : user.id}, {game_id :datacart.id_game }).exec(function(err, owngame){
+          Owngame.create({user_id : user.id, game_id : datacart.id_game}).exec(function(err, owngame){
             if(err){
               return res.serverError(err);
             }
             else{
-              Cart.destroy({user_id : req.session.User.id}).exec(function(err, deletecart){
-                if(err){
-                  return res.serverError(err);
-                }
-                else{
-                  res.redirect('/user/profile/'+user.id)
-                }
-              })
+              callback()
               
             }
           })
+        },function(err){
+          if(err){
+            return res.serverError(err);
+          }
+          else{
+            Cart.destroy({user_id : req.session.User.id}).exec(function(err, deletecart){
+              if(err){
+                return res.serverError(err);
+              }
+              else{
+                res.redirect('/user/profile/'+user.id)
+              }
+            })
+          }
         })
       })
 

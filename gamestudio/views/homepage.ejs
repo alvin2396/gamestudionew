@@ -100,15 +100,28 @@
                     <input type="hidden" value="<%= popular.harga %>" name="harga"><h6 class="py-1 m-0 text-left">Rp.<%= popular.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
                   </div>
                   <div class="text-right col-md-4">
-                    <%  _.each(owngame,function(owngame){ %>
-                      <%
-                    if(owngame.game_id == popular.id){%>
-                      <button class="btn btn-success btn-sm" disabled>Owned</button>
+                      <% if(owngame.length == 0){%>
+                        <button class="btn btn-success btn-sm" type="submit">Add</button>
                       <%}
                       else{%>
-                        <button class="btn btn-success btn-sm" type="submit">Add</button>
-                        <%}%>
-                    <%})%>
+                        <% var found = false %>
+                        <% for (var l = owngame.length, i = 0; i < l; i++) { %>
+                          
+                          <% owngames = owngame[i].game_id%>
+                            <% if(owngames == popular.id){%>
+                              <% found = true %>
+                            <%} %>
+                        <% } %>
+                        <% if(found){%>
+                          <button class="btn btn-success btn-sm" type="submit" disabled >owned</button>
+                        <%}
+                        else{%>
+                          <button class="btn btn-success btn-sm" type="submit" >add</button>
+                          <%}
+                          %>  
+                      <%}
+                      %>
+                      
                   </div>
                 </div>
                 </form>
@@ -161,7 +174,27 @@
                         <input type="hidden" value="<%= newgames.harga %>" name="harga"><h6 class="py-1 m-0 text-left">Rp.<%= newgames.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
                       </div>
                       <div class="text-right col-md-4">
-                        <button class="btn btn-success btn-sm" type="submit">Add</button>
+                          <% if(owngame.length == 0){%>
+                            <button class="btn btn-success btn-sm" type="submit">Add</button>
+                          <%}
+                          else{%>
+                            <% var found = false %>
+                            <% for (var l = owngame.length, i = 0; i < l; i++) { %>
+                              
+                              <% owngames = owngame[i].game_id%>
+                                <% if(owngames == newgames.id){%>
+                                  <% found = true %>
+                                <%} %>
+                            <% } %>
+                            <% if(found){%>
+                              <button class="btn btn-success btn-sm" type="submit" disabled >owned</button>
+                            <%}
+                            else{%>
+                              <button class="btn btn-success btn-sm" type="submit" >add</button>
+                              <%}
+                              %>  
+                          <%}
+                          %>
                       </div>
                     </div>
                     </form>
@@ -185,7 +218,6 @@
             </div>
             <%  _.each(homerekomendasi,function(popular){ %>
             <div class="row my-2" style="margin-top:0px !important;">
-              <form method="POST" action="/cart/checkcart">
               <div class="m-0 col-md-12 px-2" style="padding-right:0px; padding-top:0px; padding-bottom:0px;">
                 <h6 class="text-truncate m-0 py-1 w-100 text-left">
                   <b class="text-left">
@@ -203,10 +235,10 @@
                 </a> </div>
               <div class="col-md-8" style="float: left;">
                 <div class="row">
-                  <div class="col-md-5">
+                  <div class="col-md-7">
                     <h6 class="py-1 m-0 text-left text-truncate" style="font-size:14px;"><%= popular.release_date %></h6>
                   </div>
-                  <div class="col-md-7">
+                  <div class="col-md-5">
                     <h6 class="py-1 m-0 text-right" style="font-size:14px;">Rp.<%= popular.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
                   </div>
                 </div>
@@ -220,7 +252,28 @@
                     <span style="font-size:14px;"><%= popular.rating %> </span>
                   </div>
                   <div class="text-right col-md-5">
-                      <button class="btn btn-success btn-sm" type="submit">Add</button>
+                      <form method="POST" action="/cart/checkcart">
+                      <% if(owngame.length == 0){%>
+                        <button class="btn btn-success btn-sm" type="submit">Add</button>
+                      <%}
+                      else{%>
+                        <% var found = false %>
+                        <% for (var l = owngame.length, i = 0; i < l; i++) { %>
+                          
+                          <% owngames = owngame[i].game_id%>
+                            <% if(owngames == popular.id){%>
+                              <% found = true %>
+                            <%} %>
+                        <% } %>
+                        <% if(found){%>
+                          <button class="btn btn-success btn-sm" type="submit" disabled >owned</button>
+                        <%}
+                        else{%>
+                          <button class="btn btn-success btn-sm" type="submit" >add</button>
+                          <%}
+                          %>  
+                      <%}
+                      %>
                   </div>
                 </div>
               </div>
