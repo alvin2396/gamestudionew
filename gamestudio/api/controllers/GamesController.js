@@ -719,17 +719,20 @@ module.exports = {
                                                                                                                                                             //console.log(genre)
                                                                                                                                                             // return res.json(recommendationdata)
                                                                                                                                                             // console.log(homerekomendasi[0])
-                                                                                                                                                            res.view('homepage', {
-                                                                                                                                                                status: 'OK',
-                                                                                                                                                                title: 'Game Studio',
-                                                                                                                                                                games: games,
-                                                                                                                                                                newgame: newgame,
-                                                                                                                                                                listgame: listgame,
-                                                                                                                                                                limitgames: limitgames,
-                                                                                                                                                                limitnew: limitnew,
-                                                                                                                                                                user: user,
-                                                                                                                                                                updatecart: updatecart,
-                                                                                                                                                                homerekomendasi : homerekomendasi,
+                                                                                                                                                            Owngame.find({user_id : req.session.User.id}).exec(function(err,owngame){
+                                                                                                                                                                res.view('homepage', {
+                                                                                                                                                                    status: 'OK',
+                                                                                                                                                                    title: 'Game Studio',
+                                                                                                                                                                    games: games,
+                                                                                                                                                                    newgame: newgame,
+                                                                                                                                                                    listgame: listgame,
+                                                                                                                                                                    limitgames: limitgames,
+                                                                                                                                                                    limitnew: limitnew,
+                                                                                                                                                                    user: user,
+                                                                                                                                                                    updatecart: updatecart,
+                                                                                                                                                                    homerekomendasi : homerekomendasi,
+                                                                                                                                                                    owngame : owngame,
+                                                                                                                                                                })
                                                                                                                                                             })
                                                                                                             
                                                                                                                                                             })

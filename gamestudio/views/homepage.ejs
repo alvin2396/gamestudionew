@@ -100,7 +100,15 @@
                     <input type="hidden" value="<%= popular.harga %>" name="harga"><h6 class="py-1 m-0 text-left">Rp.<%= popular.harga.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") %></h6>
                   </div>
                   <div class="text-right col-md-4">
-                    <button class="btn btn-success btn-sm" type="submit">Add</button>
+                    <%  _.each(owngame,function(owngame){ %>
+                      <%
+                    if(owngame.game_id == popular.id){%>
+                      <button class="btn btn-success btn-sm" disabled>Owned</button>
+                      <%}
+                      else{%>
+                        <button class="btn btn-success btn-sm" type="submit">Add</button>
+                        <%}%>
+                    <%})%>
                   </div>
                 </div>
                 </form>
@@ -279,7 +287,7 @@
       </div>
       <div class="row">
         <%  _.each(games,function(popular){ %>
-        <div class="col-md-3">
+        <div class="col-md-3" style="margin-bottom: 10px">
           <a href="/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>"></a>
           <div class="row">
             <div class="col-md-12" style="height:35px;">
@@ -333,7 +341,7 @@
       </div>
       <div class="row">
         <%  _.each(newgame,function(newgames){ %>
-        <div class="col-md-3">
+        <div class="col-md-3" style="margin-bottom: 10px" >
           <a href="/games/detailGame/<%= newgames.id %>"><img class="img-fluid d-block" src="<%= newgames.photo_url %>"></a>
           <div class="row">
             <div class="col-md-12" style="height:45px;">

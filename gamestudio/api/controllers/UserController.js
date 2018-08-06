@@ -207,7 +207,8 @@ module.exports = {
       var id =req.session.User.id;
       var photo = User.photo;
       var fd = uploads[0].fd;
-      var nameImage = fd.substring(50,103)
+      var replacement = "/";
+      var nameImage = fd.substring(50,103).replace(/\\/g,replacement)
       console.log(nameImage)
 
       var userObj = {
@@ -382,35 +383,25 @@ module.exports = {
 
   gamebuy : function(req,res){
     User.findOne({id : req.session.User.id}).exec(function(err,user){
-      var total = req.param('totalinput');
-      var sisa = parseFloat(user.wallet) - parseFloat(total);
-      console.log(user.wallet)
-      console.log(total)
-      console.log(sisa)
-      var userObj2 = {
-        wallet : sisa,
-      }
-      User.update(req.session.User.id, userObj2, function(err){
-        if(err){
-          return res.serverError(err);
-        }
-        else{
-          var Success = [
-            'Pembelian Berhasil'
-          ]
-          req.session.flash = {
-            err: Success
-          }
-          Cart.destroy({user_id : req.session.User.id}).exec(function(err, deleteitem){
+      Cart.find({user_id : user.id}).exec(function(err, usercart){
+        async.each(usercart,function(datacart,callback){
+          Owngame.create({user_id : user.id}, {game_id :datacart.id_game }).exec(function(err, owngame){
             if(err){
               return res.serverError(err);
             }
             else{
-              console.log('cart deleted')
-              res.redirect('/user/profile/'+req.session.User.id)
+              Cart.destroy({user_id : req.session.User.id}).exec(function(err, deletecart){
+                if(err){
+                  return res.serverError(err);
+                }
+                else{
+                  res.redirect('/user/profile/'+user.id)
+                }
+              })
+              
             }
           })
-        }
+        })
       })
 
 
