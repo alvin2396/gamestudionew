@@ -113,24 +113,28 @@ module.exports = {
                                                                                                 return res.serverError(err);
                                                                                             }
                                                                                             else{
-                                                                                                res.view("user/gameDetail/", {
-                                                                                                    status: 'OK',
-                                                                                                    title: 'Detail Game',
-                                                                                                    games: games,
-                                                                                                    getRam: getRam,
-                                                                                                    getProc: getProc,
-                                                                                                    getVga: getVga,
-                                                                                                    recProc: recProc,
-                                                                                                    recRam: recRam,
-                                                                                                    recVga: recVga,
-                                                                                                    uservga: uservga,
-                                                                                                    userram: userram,
-                                                                                                    userprocessor: userprocessor,
-                                                                                                    user: user,
-                                                                                                    updatecart: updatecart,
-                                                                                                    feature : feature,
-                                                                                                    review : review,
-                                                                                                  
+                                                                                                Owngame.find({user_id : req.session.User.id}).exec(function(err,owngame){
+                                                                                                    
+                                                                                                    res.view("user/gameDetail/", {
+                                                                                                        status: 'OK',
+                                                                                                        title: 'Detail Game',
+                                                                                                        games: games,
+                                                                                                        getRam: getRam,
+                                                                                                        getProc: getProc,
+                                                                                                        getVga: getVga,
+                                                                                                        recProc: recProc,
+                                                                                                        recRam: recRam,
+                                                                                                        recVga: recVga,
+                                                                                                        uservga: uservga,
+                                                                                                        userram: userram,
+                                                                                                        userprocessor: userprocessor,
+                                                                                                        user: user,
+                                                                                                        updatecart: updatecart,
+                                                                                                        feature : feature,
+                                                                                                        review : review,
+                                                                                                        owngame : owngame,
+                                                                                                      
+                                                                                                    })
                                                                                                 })
                                                                                             }
                                                                                         })
@@ -343,13 +347,16 @@ module.exports = {
                     else {
                         if (req.session.User) {
                             Cart.find({ user_id: req.session.User.id }).exec(function (err, updatecart) {
-                                res.view('user/popularGame', {
-                                    status: 'OK',
-                                    title: 'Popular Games',
-                                    games_popular: games_popular,
-                                    current: page,
-                                    pages: Math.ceil(count / perPage),
-                                    updatecart: updatecart,
+                                Owngame.find({user_id : req.session.User.id}).exec(function(err,owngame){
+                                    res.view('user/popularGame', {
+                                        status: 'OK',
+                                        title: 'Popular Games',
+                                        games_popular: games_popular,
+                                        current: page,
+                                        pages: Math.ceil(count / perPage),
+                                        updatecart: updatecart,
+                                        owngame : owngame,
+                                    })
                                 })
                             })
                         }
@@ -812,11 +819,14 @@ module.exports = {
                 }
                 else {
                     Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
-                        res.view("user/search/", {
-                            status: 'OK',
-                            title: 'Search Result',
-                            search: search,
-                            updatecart : updatecart,
+                        Owngame.find({user_id : req.session.User.id}).exec(function(err, owngame){
+                            res.view("user/search/", {
+                                status: 'OK',
+                                title: 'Search Result',
+                                search: search,
+                                updatecart : updatecart,
+                                owngame : owngame,
+                            })
                         })
                     })
                 }
@@ -872,11 +882,14 @@ module.exports = {
                         else{
                             
                             Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
-                                res.view("user/genregame", {
-                                    status : 'OK',
-                                    title : req.param('namagenre'),
-                                    sortgenre : sortgenre,
-                                    updatecart : updatecart
+                                Owngame.find({user_id : req.session.User.id}).exec(function(err, owngame){
+                                    res.view("user/genregame", {
+                                        status : 'OK',
+                                        title : req.param('namagenre'),
+                                        sortgenre : sortgenre,
+                                        updatecart : updatecart,
+                                        owngame : owngame,
+                                    })
                                 })
                             })
                         }

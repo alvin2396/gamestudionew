@@ -89,6 +89,10 @@
                 <a class="dropdown-item" href="#">Action</a>
               </div>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/games/popular/1">Popular Game</a>
+              </li>
             <li class="nav-item">
               <a class="nav-link" href="/games/newgame/1">New Game</a>
             </li>
@@ -150,7 +154,13 @@
                 <li class="divider"></li>
                 <li>
                   <div class="col-md-12 text-right">
+                      <% if(updatecart.length == 0){%>
+                        <button class="btn btn-success btn-sm" disabled  >Check Out</button>
+                      <%}
+                      else{%>
                     <a class="btn btn-success btn-sm" href="/cart/checkout">Check Out</a>
+                    <%}
+                %>
                   </div>
                 </li>
               </ul>

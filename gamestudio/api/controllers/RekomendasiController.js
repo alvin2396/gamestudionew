@@ -191,12 +191,14 @@ module.exports = {
                                                         
                                                         // return res.json(recommendationdata)
                                                         Cart.find({user_id : req.session.User.id}).exec(function(err,updatecart){
-                                                            res.view('user/recommend', {
-                                                                status : 'OK',
-                                                                title : 'Recommendation',
-                                                                recommendationdata : recommendationdata,
-                                                                updatecart : updatecart,
-                    
+                                                            Owngame.find({user_id : req.session.User.id}).exec(function(err,owngame){
+                                                                res.view('user/recommend', {
+                                                                    status : 'OK',
+                                                                    title : 'Recommendation',
+                                                                    recommendationdata : recommendationdata,
+                                                                    updatecart : updatecart,
+                                                                    owngame : owngame,
+                                                                })
                                                             })
                                                         })
 

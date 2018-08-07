@@ -353,7 +353,7 @@ module.exports = {
                     }
                     else{
                       var topupSuccess = [
-                        'Top Up Berhasil'
+                        'Top Up Success'
                       ]
                       req.session.flash = {
                         err: topupSuccess
@@ -399,14 +399,32 @@ module.exports = {
             return res.serverError(err);
           }
           else{
-            Cart.destroy({user_id : req.session.User.id}).exec(function(err, deletecart){
+            var total = req.param('totalinput');
+            var userObj2 = {
+              wallet : (parseFloat(user.wallet) - parseFloat(total)).toString(),
+            }
+            User.update(user.id,userObj2,function(err){
               if(err){
                 return res.serverError(err);
               }
               else{
-                res.redirect('/user/profile/'+user.id)
+                var topupSuccess = [
+                  'Transaction Successful'
+                ]
+                req.session.flash = {
+                  err: topupSuccess
+                }
+                Cart.destroy({user_id : req.session.User.id}).exec(function(err, deletecart){
+                  if(err){
+                    return res.serverError(err);
+                  }
+                  else{
+                    res.redirect('/user/profile/'+user.id)
+                  }
+                })
               }
             })
+            
           }
         })
       })

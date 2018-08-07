@@ -19,7 +19,7 @@
         <div class="col-md-12">
           <h2 class="text-center">
             <b>
-              <a href="http://localhost:1337/games/popular/1" class="text-dark"> POPULAR GAME</a>
+              <a href="/games/popular/1" class="text-dark"> POPULAR GAME</a>
             </b>
           </h2>
         </div>
@@ -62,7 +62,27 @@
                 <input type="hidden" value="<%=req.session.User.id%>" name="user_id">
                 <input type="hidden" value="<%= popular.game_name %>" name="nama_game">
                 <input type="hidden" value="<%= popular.harga %>" name="harga">
-                <button class="btn btn-success btn-sm" type="submit">Add</button>
+                <% if(owngame.length == 0){%>
+                  <button class="btn btn-success btn-sm" type="submit">Add</button>
+                <%}
+                else{%>
+                  <% var found = false %>
+                  <% for (var l = owngame.length, i = 0; i < l; i++) { %>
+                    
+                    <% owngames = owngame[i].game_id%>
+                      <% if(owngames == popular.id){%>
+                        <% found = true %>
+                      <%} %>
+                  <% } %>
+                  <% if(found){%>
+                    <button class="btn btn-primary btn-sm" type="submit" disabled >owned</button>
+                  <%}
+                  else{%>
+                    <button class="btn btn-success btn-sm" type="submit" >add</button>
+                    <%}
+                    %>  
+                <%}
+                %>
             </div>
           </div>
           </form>

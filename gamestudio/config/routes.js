@@ -153,6 +153,11 @@ module.exports.routes = {
 'POST /rating/addreview' : {
   controller : 'rating',
   action : "addreview",
+},
+
+'POST /games/detailGameMobile/:id' : {
+  controller : 'games',
+  action : "detailGameMobile",
 }
 
  
