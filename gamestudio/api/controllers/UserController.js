@@ -582,5 +582,76 @@ topupcreateMobile : function(req,res){
   })
 },
 
+validatecodemobile : function(req,res,next){
+  Transaksi.findOne({id : req.param('transaksi_id')}).exec(function(err, transaksi){
+    console.log(transaksi)
+    if(transaksi.confirmation_code == req.param('confirmation_code')){
+      var transaksiObj = {
+        status: 'complete',
+      }
+        Transaksi.update(transaksi.id,transaksiObj,function(err){
+          if(err){
+            console.log(err);
+          }
+          else{
+            User.findOne({email : req.param('email')}).exec(function(err, user){
+              var userObj = {
+                wallet : parseInt(transaksi.total).toString(),
+              }
+              if(typeof(user.wallet) == 'undefined' ){
+                User.update(user.id, userObj, function(err){
+                  if(err){
+                    return res.serverError(err);
+                  }
+                  else{
+                    var topupSuccess = [
+                      'Top Up Berhasil'
+                    ]
+                    req.session.flash = {
+                      err: topupSuccess
+                    }
+                    res.json(user)
+                  }
+                })
+              }
+              else{
+                var total = (parseInt(user.wallet) + parseInt(transaksi.total)).toString();
+                var userObj2 = {
+                  wallet : total,
+                }
+                User.update(user.id, userObj2, function(err){
+                  if(err){
+                    return res.serverError(err);
+                  }
+                  else{
+                    var topupSuccess = [
+                      'Top Up Success'
+                    ]
+                    req.session.flash = {
+                      err: topupSuccess
+                    }
+                    res.json(user)
+                  }
+                })
+              }
+            })
+          }
+        })
+    }
+    else{
+      console.log('wrong code')
+      var code_wrong = [
+        'Confirmation Code not Match'
+      ]
+      req.session.flash = {
+        err : code_wrong
+      }
+      
+      res.redirect('/user/topupcheckout')
+    }
+
+  })
+}
+
   
 }
