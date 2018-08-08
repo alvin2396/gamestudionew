@@ -76,6 +76,11 @@ module.exports.routes = {
   view:'admin/addRam'
 },
 
+'POST /search/:page':{
+  controller:"games",
+  action:"search"
+} ,
+
 'GET /processor/add' : {
   view:'admin/addProcessor'
 },
@@ -128,6 +133,11 @@ module.exports.routes = {
 'GET /cart/checkout' : {
   controller : 'cart',
   action : "checkout",
+},
+
+'GET /games/populargameMobile' : {
+  controller : 'games',
+  action : "populargameMobile",
 },
 
 'GET /games/populargameMobile' : {

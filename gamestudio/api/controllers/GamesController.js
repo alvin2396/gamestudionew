@@ -811,8 +811,18 @@ module.exports = {
     },
 
     search: function (req, res, next) {
+        var perPage = 20
+            if (!req.params.page) {
+                var page = 1
+            }
+            else {
+                var page = req.params.page
+            }
         if(req.session.User){
+            
             Games.find({ like: { game_name: '%' + req.param('search') + '%' } })
+            .skip((perPage * page) - perPage)
+            .limit(perPage).populateAll()
             .exec(function (err, search) {
                 if (err) {
                     return res.serverError(err);
@@ -820,13 +830,18 @@ module.exports = {
                 else {
                     Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
                         Owngame.find({user_id : req.session.User.id}).exec(function(err, owngame){
-                            res.view("user/search/", {
-                                status: 'OK',
-                                title: 'Search Result',
-                                search: search,
-                                updatecart : updatecart,
-                                owngame : owngame,
+                            Games.count({ like: { game_name: '%' + req.param('search') + '%' } }).exec(function (err, count){
+                                res.view("user/search/", {
+                                    status: 'OK',
+                                    title: 'Search Result',
+                                    search: search,
+                                    updatecart : updatecart,
+                                    owngame : owngame,
+                                    current: page,
+                                    pages: Math.ceil(count / perPage)
+                                })
                             })
+                            
                         })
                     })
                 }
@@ -835,17 +850,26 @@ module.exports = {
             })
         }
         else{
+         
             Games.find({ like: { game_name: '%' + req.param('search') + '%' } })
+            .skip((perPage * page) - perPage)
+            .limit(perPage).populateAll()
             .exec(function (err, search) {
                 if (err) {
                     return res.serverError(err);
                 }
                 else {
-                    res.view("user/search/", {
-                        status: 'OK',
-                        title: 'Search Result',
-                        search: search,
+                    Games.count({ like: { game_name: '%' + req.param('search') + '%' } }).exec(function (err, count){
+                        console.log(search.length)
+                        res.view("user/search/", {
+                            status: 'OK',
+                            title: 'Search Result',
+                            search: search,
+                            current: page,
+                            pages: Math.ceil(count / perPage)
+                        })
                     })
+                    
                 }
 
 
@@ -978,6 +1002,18 @@ module.exports = {
 
     add: function (req, res) {
         res.view('admin/addGame')
+    },
+
+    gamesspesifikasi : function(req,res){
+        Spesifikasi.findOne({game_id : req.param('id')}).where({status : req.param('status')}).exec(function(err, spekgame){
+            console.log(spekgame)
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                res.json(spekgame)
+            }
+        })
     },
 
 
