@@ -39,7 +39,7 @@ module.exports = {
                             graphic : (((parseFloat(feature.graphic) * parseFloat(ratecount))+ parseFloat(req.param('graphic_value'))) / (parseFloat(ratecount) + 1 )).toFixed(1),
                             controls : (((parseFloat(feature.controls) * parseFloat(ratecount))+ parseFloat(req.param('controls_value'))) / (parseFloat(ratecount) + 1 )).toFixed(1),
                             story : (((parseFloat(feature.story) * parseFloat(ratecount))+ parseFloat(req.param('story_value'))) / (parseFloat(ratecount) + 1 )).toFixed(1),
-                            music : (((parseFloat(feature.music) * parseFloat(ratecount))+ parseFloat(req.param('music_value'))) / (parseFloat(ratecount) + 1 ).toFixed(1)),
+                            music : (((parseFloat(feature.music) * parseFloat(ratecount))+ parseFloat(req.param('music_value'))) / (parseFloat(ratecount) + 1 )).toFixed(1),
                             
                            }
 

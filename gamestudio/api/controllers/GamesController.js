@@ -1016,6 +1016,36 @@ module.exports = {
         })
     },
 
+    detailmobilegenre : function(req,res){
+        Genrelist.find({game_id : req.param('game_id')}).exec(function(err,detailgenre){
+            detailgenre.datagenre = []
+            console.log(detailgenre)
+            async.each(detailgenre, function(genre,callback){
+                console.log(detailgenre.genre_id)
+                if(err){
+                    return res.serverError(err);
+                }
+                else{
+                    Genre.findOne({id : genre.genre_id}).exec(function(err, findgenre){
+                        var namagenre = findgenre.genre_name
+                        detailgenre.datagenre.push({
+                           nama_genre : findgenre.genre_name,
+                           id : findgenre.id
+                        })
+                        callback()
+                    })
+                }
+            },function(err){
+                if(err){
+                    return res.serverError(err);
+                }
+                else{
+                    res.json(detailgenre.datagenre)
+                }
+            })
+        })
+    }
+
 
 
 };
