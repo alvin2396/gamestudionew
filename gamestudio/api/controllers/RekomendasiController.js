@@ -186,7 +186,7 @@ module.exports = {
                                                         // console.log(get_genre.length)
                                                         // console.log(get_genre[0])
                                                         // console.log(recommendationdata)
-                                                        console.log(korelasigenre)
+                                                        // console.log(korelasigenre)
                                                         //console.log(genre)
                                                         // return res.json(korelasigenre)
                                                         // return res.json(recommendationdata)

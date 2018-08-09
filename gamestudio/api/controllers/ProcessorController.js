@@ -19,7 +19,18 @@ module.exports = {
                 return res.json(processor);
             }
         })
-    }
+    },
+
+    findproc : function(req,res){
+        Processor.findOne({id : req.param('proc_id')}).exec(function(err, findproc){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                res.json(findproc)
+            }
+        })
+      }
 
 
 };

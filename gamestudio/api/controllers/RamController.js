@@ -19,6 +19,17 @@ module.exports = {
                 return res.json(ram);
             }
         })
+    },
+
+    findram : function(req,res){
+        Ram.findOne({id : req.param('ram_id')}).exec(function(err, findram){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                res.json(findram)
+            }
+        })
     }
 
 };

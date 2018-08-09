@@ -49,6 +49,17 @@ module.exports = {
             return res.json(vga);
         }
     })
+},
+
+findvga : function(req,res){
+  Vga.findOne({id : req.param('vga_id')}).exec(function(err, findvga){
+      if(err){
+          return res.serverError(err);
+      }
+      else{
+          res.json(findvga)
+      }
+  })
 }
 
 };
