@@ -168,6 +168,16 @@ module.exports.routes = {
 'POST /games/detailGameMobile/:id' : {
   controller : 'games',
   action : "detailGameMobile",
+},
+
+'GET /admin/adminpanel' : {
+  controller : 'admin',
+  action : "userdata",
+},
+
+'GET /admin/gamepanel' : {
+  controller : 'admin',
+  action : "gamedata",
 }
 
  

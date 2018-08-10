@@ -1,0 +1,15 @@
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #151515 !important;
+    background-color: #ccc !important;
+    border-radius: 0px !important;
+}
+a{
+    color:#ccc !important;
+}
+.nav-link{
+    font-size: 20px !important;
+}
+.kotak{
+    background: #ccc;
+}
