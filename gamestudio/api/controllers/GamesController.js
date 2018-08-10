@@ -681,19 +681,22 @@ module.exports = {
                                                                                                                                                                         userprefrence.push(datauser.genre[i])
                                                                                                                                                                     }
                                                                                                                                                                     var recommendationdata = []
+                                                                                                                                                                    var datarelasi = []
                                                                                                                                                             for(var i =0 ;i<get_genre.length;i++){
                                                                                                                                                                 var recompoint = 0;
-                                                                                                                                                                var datarelasi = []
+                                                                                                                                                                
                                                                                                                                                                 var dataVn = 0;
                                                                                                                                                                 getsama = false;
                                                                                                                                                                 for(var j=0;j<userprefrence.length;j++){
+                                                                                                                                                                    var beda = 0;
+                                                                                                                                                                    var sama = 0;
+                                                                                                                                                                    var vbeda =0
                                                                                                                                                                     var vsama = 0
                                                                                                                                                                     for(var k=0; k<get_genre[i].length;k++){
-                                                                                                                                                                        var beda = 0;
-                                                                                                                                                                        var sama = 0;
+                                                                                                                                                                        
                                                                                                                                                                         if(userprefrence[j].toString() == get_genre[i][k].toString() ){
                                                                                                                                                                             vsama = 100;
-                                                                                                                                                                            sama +=1;
+                                                                                                                                                                            sama =1;
                                                                                                                                                                             getsama = true;
                                                                                                                                                                             //datarelasi.push(vsama)
                                                                                                                                                                         }
@@ -703,11 +706,21 @@ module.exports = {
                                                                                                                                                                                     beda += korelasigenre[gen1][2];
                                                                                                                                                                                 }
                                                                                                                                                                             }
+                                                                                                    
                                                                                                                                                                         }
-                                                                                                                                                                        dataVn += (vsama + (beda/get_genre[i].length-sama));
+                                                                                                                                                                        
                                                                                                                                                                         //dataVn.push(datarelasi)
                                                                                                                                                                     }
-                                                                                                            
+                                                                                                                                                                    vbeda += beda/(get_genre[i].length-sama)
+                                                                                                                                                                    dataVn += (vsama + vbeda);
+                                                                                                                                                                    datarelasi.push({
+                                                                                                                                                                        datavn : dataVn,
+                                                                                                                                                                        rating : listgame[i].rating,
+                                                                                                                                                                        UP : userprefrence.length,
+                                                                                                                                                                        angkabeda : beda,
+                                                                                                                                                                        game : listgame[i].game_name
+                                                                                                                                                                    })
+                                                                                                    
                                                                                                                                                                 }
                                                                                                                                                                 recompoint = (dataVn*listgame[i].rating)/userprefrence.length;
                                                                                                                                                                 recommendationdata.push({id : listgame[i]._id,rp :recompoint,game_name : listgame[i].game_name,photo_url : listgame[i].photo_url,rating : listgame[i].rating,release_date :listgame[i].release_date, harga : listgame[i].harga})
