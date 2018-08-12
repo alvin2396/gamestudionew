@@ -225,11 +225,7 @@
                   </b>
                 </h6>
               </div>
-              <input type="hidden" value="<%= popular.id %>" name="id_game">
-              <input type="hidden" name="photo_url" value="<%= popular.photo_url %>">
-              <input type="hidden" value="<%=req.session.User.id%>" name="user_id">
-              <input type="hidden" value="<%= popular.game_name %>" name="nama_game">
-              <input type="hidden" value="<%= popular.harga %>" name="harga">
+              
               <div class="col-md-4 m-0" style="padding-right:0px; padding-top:0px; padding-bottom:0px; float: left;">
                 <a href="/games/detailGame/<%= popular.id %>"><img class="img-fluid d-block" src="<%= popular.photo_url %>" width="100%">
                 </a> </div>
@@ -253,6 +249,11 @@
                   </div>
                   <div class="text-right col-md-5">
                       <form method="POST" action="/cart/checkcart">
+                        <input type="hidden" value="<%= popular.id %>" name="id_game">
+                        <input type="hidden" name="photo_url" value="<%= popular.photo_url %>">
+                        <input type="hidden" value="<%=req.session.User.id%>" name="user_id">
+                        <input type="hidden" value="<%= popular.game_name %>" name="nama_game">
+                        <input type="hidden" value="<%= popular.harga %>" name="harga">
                       <% if(owngame.length == 0){%>
                         <button class="btn btn-success btn-sm" type="submit">Add</button>
                       <%}

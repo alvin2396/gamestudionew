@@ -178,6 +178,11 @@ module.exports.routes = {
 'GET /admin/gamepanel' : {
   controller : 'admin',
   action : "gamedata",
+},
+
+'POST /cart/getCartmobile' : {
+  controller : 'cart',
+  action : "getCartmobile",
 }
 
  

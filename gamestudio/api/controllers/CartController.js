@@ -103,6 +103,36 @@ module.exports = {
 				})
 			}
 		})
+	},
+
+	getCartmobile : function(req,res){
+		User.findOne({email : req.param('email')}).exec(function(err,user){
+			if(err){
+				return res.serverError(err)
+			}
+			else{
+				Cart.find({user_id : user.id}).exec(function(err,cart){
+					if(err){
+						return res.serverError(err);
+					}
+					else{
+						res.json(cart)
+					}
+				})
+			}
+		})
+	},
+
+	addcartmobile : function(req,res){
+		Cart.create(req.allParams()).exec(function(err, newcart){
+			if(err){
+				return res.serverError(err);
+			}
+			else{
+				console.log('cart added')
+				res.json(newcart)
+			}
+		})
 	}
 
 };
