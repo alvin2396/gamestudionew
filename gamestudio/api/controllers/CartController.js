@@ -133,7 +133,20 @@ module.exports = {
 				res.json(newcart)
 			}
 		})
-	}
+	},
+
+	removecartmobile : function(req,res,next){
+		Cart.destroy({id : req.param('id')}).exec(function(err, deleteitem){
+			if(err){
+				return res.serverError(err);
+			}
+			else{
+				res.json(deleteitem)
+			}
+		})
+
+		
+	},
 
 };
 
