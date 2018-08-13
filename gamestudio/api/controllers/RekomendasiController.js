@@ -203,7 +203,7 @@ module.exports = {
                                                         // console.log(korelasigenre)
                                                         //console.log(genre)
                                                         // return res.json(korelasigenre)
-                                                        return res.json(recommendationdata)
+                                                        return res.json(korelasigenre)
                                                         Cart.find({user_id : req.session.User.id}).exec(function(err,updatecart){
                                                             Owngame.find({user_id : req.session.User.id}).exec(function(err,owngame){
                                                                 console.log(get_genre)

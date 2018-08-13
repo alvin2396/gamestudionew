@@ -27,18 +27,20 @@
                 </div>
               <% } %>
               <h2 class="mb-4 m-0 text-center">Register</h2>
-              <form method="post" action="user/create">
+              <form method="post" action="user/create" >
                 <div class="form-group">
-                  <input type="text" class="form-control" name="email" placeholder="Email"> </div>
+                    <input type="text" class="form-control" name="email" placeholder="Email" required id="emailaddress" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" >
+                </div>
+
                 <div class="form-group">
-                  <input type="password" class="form-control" name="password" placeholder="Password"> </div>
+                  <input type="password" class="form-control" name="password" placeholder="Password" required> </div>
                   <input type="hidden" name="wallet" value="0">
                   <div class="row my-1">
                     <div class="col-md-4">
                       <h6 class="text-left">Processor</h6>
                     </div>
                     <div class="col-md-8">
-                      <select class="form-control" id="sel1" name="processor_id">
+                      <select class="form-control" id="sel1" name="processor_id" required>
                         <%  _.each(processor,function(processor){ %>
                           <option value="<%= processor.id %>"><%= processor.processor_name %></option>
                           <%})%>
@@ -50,7 +52,7 @@
                       <h6 class="text-left">VGA</h6>
                     </div>
                     <div class="col-md-8">
-                      <select class="form-control" id="sel1" name="vga_id">
+                      <select class="form-control" id="sel1" name="vga_id" required>
                         <%  _.each(vga,function(vga){ %>
                           <option value="<%= vga.id %>"><%= vga.vga_name %></option>
                           <%})%>
@@ -62,7 +64,7 @@
                       <h6 class="text-left">RAM</h6>
                     </div>
                     <div class="col-md-8">
-                      <select class="form-control" id="sel1" name="ram_id">
+                      <select class="form-control" id="sel1" name="ram_id" required>
                         <%  _.each(ram,function(ram){ %>
                           <option value="<%= ram.id %>"><%= ram.ram_size %></option>
                           <%})%>
@@ -89,6 +91,25 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function ValidateEmail(mail) 
+    {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.emailAddr.value))
+      {
+        return (true)
+      }
+        alert("You have entered an invalid email address!")
+        return (false)
+    }
+
+    function continueOrNot() {
+    if(ValidateEmail(document.getElementById('emailaddress').value)){
+    alert('valid'); return true;
+    }else{ alert("email not valid"); return false;}
+ }
+  </script>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

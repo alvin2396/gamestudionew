@@ -183,6 +183,11 @@ module.exports.routes = {
 'POST /cart/getCartmobile' : {
   controller : 'cart',
   action : "getCartmobile",
+},
+
+'GET /admin/korelasipanel' : {
+  controller : 'admin',
+  action : "matriks",
 }
 
  
