@@ -135,6 +135,33 @@ module.exports = {
 		})
 	},
 
+	checkcartmobile : function(req,res){
+		User.findOne({email : req.param('email')}).exec(function(err,user){
+			Cart.findOne({user_id : user.id}).where({id_game : req.param('id_game')}).exec(function(err,added){
+				if(!added){
+					res.status(204);
+					res.send('game not in cart');
+				}
+				else{
+					res.json(added);
+				}
+			})
+		})
+	},
+
+	checkowngamemobile : function(req,res){
+		Owngame.findOne({user_id : req.param('user_id')}).where({game_id : req.param('game_id')}).exec(function(err, owned){
+			console.log(owned)
+			if(!owned){
+				res.status(204);
+				res.send('game already owned');
+			}
+			else{
+				res.json(owned)
+			}
+		})
+	},
+
 	removecartmobile : function(req,res,next){
 		Cart.destroy({id : req.param('id')}).exec(function(err, deleteitem){
 			if(err){
