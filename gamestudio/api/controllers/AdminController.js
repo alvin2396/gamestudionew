@@ -55,21 +55,28 @@ module.exports = {
             return res.serverError(err);
         }
         else{
-            console.log(datauser)
             User.count().exec(function(err, usercount){
              Games.count().exec(function(err,gamescount){
                  Owngame.count().exec(function(err, owngamecount){
-                     Games.find().populateAll().exec(function(err,datagame){
-                         console.log(datagame)
-                        res.view('admin/gamepanel',{
-                            status : 'OK',
-                            title : 'Dashboard',
-                            layout : false,
-                            datauser : datauser,
-                            usercount : usercount,
-                            gamescount :gamescount,
-                            owngamecount : owngamecount,
-                            datagame : datagame,
+                     Games.find().populateAll().sort('createdAt DESC').exec(function(err,datagame){
+                        Processor.find().sort('processor_name ASC').populateAll().exec(function(err, processor){
+                            Vga.find().sort('vga_name ASC').populateAll().exec(function(err,vga){
+                                Ram.find().sort('ram_size ASC').populateAll().exec(function(err, ram){
+                                    res.view('admin/gamepanel',{
+                                        status : 'OK',
+                                        title : 'Dashboard',
+                                        layout : false,
+                                        datauser : datauser,
+                                        usercount : usercount,
+                                        gamescount :gamescount,
+                                        owngamecount : owngamecount,
+                                        datagame : datagame,
+                                        processor : processor,
+                                        vga : vga,
+                                        ram : ram,
+                                    })
+                                })
+                            })
                         })
                      })
                  })
@@ -78,6 +85,121 @@ module.exports = {
             
         }
     })
+   },
+
+   addgame : function(req,res){
+       var genre = []
+       var release_date = req.param('release_date')
+       var rated = "100";
+       var gameplay = "8.5"
+       var music = "7.3"
+       var controls = "8.0"
+       var story = "8.3"
+       var graphic = "8.8"
+
+       genre = req.param('genre')
+       
+       Games.findOne({game_name : req.param('game_name')}).exec(function(err, gamefound){
+           if(gamefound){
+            var gameexist = [
+                'Game already exist'
+              ]
+              req.session.flash = {
+                err: gameexist
+              }
+              res.redirect('admin/gamepanel')
+           }
+           else{
+            Games.create({
+                game_name : req.param('game_name'),
+                release_date : release_date.toString(),
+                screenshot1_url : req.param('screenshot1_url'),
+                screenshot2_url : req.param('screenshot2_url'),
+                screenshot3_url : req.param('screenshot3_url'),
+                photo_url : req.param('photo_url'),
+                video_url : req.param('video_url'),
+                harga : req.param('harga'),
+                description : req.param('description'),
+                OS : req.param('OS'),
+                HDD_space : req.param('HDD_space'),
+                rating : req.param('rating'),
+                rated : rated,
+                publisher : req.param('publisher')
+
+            }).exec(function(err, gamecreated){
+                if(err){
+                    return res.serverError(err);
+                }
+                else{
+                    for(var i = 0;i<genre.length;i++){
+                        Genrelist.create({
+                            game_id : gamecreated.id,
+                            genre_id : genre[i]
+                        }).exec(function(err, genrecreated){
+                            if(err){
+                                return res.serverError(err)
+                                
+                            }
+                            else{
+                                
+                            }
+                        })
+                        
+                    }
+                    Feature.create({
+                        game_id : gamecreated.id,
+                        gameplay : gameplay,
+                        graphic : graphic,
+                        controls : controls,
+                        story : story,
+                        music : music
+                    }).exec(function(err,featureadd){
+                        if(err){
+                            return res.serverError;
+                        }
+                        else{
+                            Spesifikasi.create({
+                                ram_id : req.param('ramminimum'),
+                                vga_id : req.param('vgaminimum'),
+                                processor_id : req.param('procminimum'),
+                                game_id : gamecreated.id,
+                                status : "minimum"
+                            }).exec(function(err,minpsek){
+                                if(err){
+                                    return res.serverError(err);
+                                }
+                                else{
+                                    Spesifikasi.create({
+                                        ram_id : req.param('ramrec'),
+                                        vga_id : req.param('vgarec'),
+                                        processor_id : req.param('procrec'),
+                                        game_id : gamecreated.id,
+                                        status : "recommend"
+                                    }).exec(function(err,recspek){
+                                        if(err){
+                                            return res.serverError(err);
+                                        }
+                                        else{
+                                            var gameexist = [
+                                                'Game added'
+                                              ]
+                                              req.session.flash = {
+                                                err: gameexist
+                                              }
+                                              res.redirect('admin/gamepanel')
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+           }
+       })
+    
+       
+
    },
 
    matriks : function(req,res){
@@ -303,6 +425,41 @@ module.exports = {
         }
     })
 },
+
+userdelete : function(req,res){
+    User.destroy({id : req.param('user_id')}).exec(function(err){
+        if(err){
+            return res.serverError(err);
+        }
+        else{
+            res.redirect('/admin/adminpanel');
+        }
+    })
+},
+
+gamedelete : function(req,res){
+    Genrelist.destroy({game_id : req.param('game_id')}).exec(function(err,genredeleted){
+        if(err){
+            return res.serverError(err)
+        }
+        else{
+            Games.destroy({id: req.param('game_id')}).exec(function(err,deleted){
+                if(err){
+                    return res.serverError(err);
+                }
+                else{
+                    var deleted = [
+                        'Game deleted'
+                      ]
+                      req.session.flash = {
+                        err: deleted
+                      }
+                    res.redirect('/admin/gamepanel');
+                }
+            })
+        }
+    })
+}
 
 
 

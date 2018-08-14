@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="p-0 col-md-3 bg-dark">
+        <div class="p-0 col-md-2 bg-dark">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
               <a href="/admin/adminpanel" class="nav-link">DATA USER</a>
@@ -38,7 +38,7 @@
               <a href="Admin jual.html" class="nav-link">DATA GAME TERJUAL</a>
             </li>
             <li class="nav-item">
-              <a href="&lt;li class=&quot;nav-item&quot;&gt;&#10;              &lt;a href=&quot;Admin korelasi.html&quot; class=&quot;nav-link&quot;&gt;KORELASI GENRE&lt;/a&gt;&#10;            &lt;/li&gt;Admin korelasi.html" class="nav-link">KORELASI GENRE</a>
+              <a href="/admin/korelasipanel" class="nav-link">KORELASI GENRE</a>
             </li>
             <li class="nav-item">
               <a href="Admin frekuensi.html" class="nav-link">FREKUENSI GENRE</a>
@@ -48,8 +48,9 @@
             </li>
           </ul>
         </div>
-        <div class="bg-light col-md-9" style="min-height:768px;">
+        <div class="bg-light col-md-10" style="min-height:768px;">
           <div class="row">
+              
             <div class="bg-light col-md-4 p-3">
               <div class="bg-info p-3">
                 <div class="row">
@@ -85,8 +86,16 @@
             <div class="bg-light p-3 col-md-6">
               <h2 class="text-dark m-0 text-left">DATA GAME</h2>
             </div>
+            <% if(flash && flash.err) { %>
+              <div class="alert alert-warning alert-dismissible">
+                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <% Object.keys(flash.err).forEach(function(error) { %>
+                <h6 class="text-dark"><%- JSON.stringify(flash.err[error]) %></h6>
+                <% }) %>
+              </div>
+            <% } %>
             <div class="bg-light p-3 text-right col-md-2">
-              <a class="btn btn-success text-white" href="#myModal" data-toggle="modal">Add</a>
+              <a class="btn btn-success text-white" href="#myModal" data-toggle="modal">Add Game</a>
             </div>
             <div class="bg-light p-3 col-md-4">
               <form class="form-inline m-0">
@@ -95,67 +104,45 @@
           </div>
           <div class="row">
             <div class="bg-light px-3 col-md-10">
-              <table class="table">
+              <table class="table table table-hover">
                 <thead>
                   <tr>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>ID</th>
                     <th>Tanggal</th>
                     <th>Harga</th>
                     <th>Rating</th>
                     <th>Publisher</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <% var k = 0; %>
                   <%  _.each(datagame,function(datagame){ %>
+                    <% k += 1; %>
                   <tr>
+                    <td><%= k%></td>
                     <td><%= datagame.game_name%></td>
                     <td><%= datagame.id%></td>
                     <td><%= datagame.release_date%></td>
                     <td>Rp.<%= datagame.harga%></td>
                     <td><%= datagame.rating%></td>
                     <td><%= datagame.publisher%></td>
+                    
+                    <td><button type="submit">Edit</button></td>
+                   
+                    <form method="POST" action="/admin/gamedelete" onsubmit="return confirm('Do you really want to delete <%= datagame.game_name%>?');"  >
+                      <input type="hidden" name="game_id" value="<%= datagame.id%>">
+                      <td><button type="submit">Delete</button></td>
+                    </form>
                   </tr>
                   <%})%>
                 </tbody>
               </table>
             </div>
-            <div class="bg-light p-0 col-md-2">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="text-center">Edit</th>
-                    <th class="text-center">Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="text-center p-0">
-                      <a class="btn btn-success text-white" href="Admin edit.html">Edit</a>
-                    </td>
-                    <td class="text-center">
-                      <i class="fa fa-trash" style="font-size:24px;"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center p-0">
-                      <a class="btn btn-success text-white" href="Admin edit.html">Edit</a>
-                    </td>
-                    <td class="text-center">
-                      <i class="fa fa-trash" style="font-size:24px;"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center p-0">
-                      <a class="btn btn-success text-white" href="Admin edit.html">Edit</a>
-                    </td>
-                    <td class="text-center">
-                      <i class="fa fa-trash" style="font-size:24px;"></i>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+           
           </div>
         </div>
       </div>
@@ -171,76 +158,83 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <form>
+          <form method="POST" action="/admin/addgame" name="addgame" >
             <div class="row my-1">
               <div class="col-md-4">
-                <h5 class="text-left">Judul Game</h5>
+                <h5 class="text-left">Game Name</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                <input type="text" name="game_name" placeholder="Input Game Name" class="form-control" required > </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
                 <h5 class="text-left">Publisher</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                <input type="text" name="publisher" placeholder="Input Publisher Name" class="form-control" required > </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
-                <h5 class="text-left">Tahun</h5>
+                <h5 class="text-left">Release Date</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                <input type="date" name="release_date" placeholder="input release date" class="form-control" required > </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
                 <h5 class="text-left">Rating</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                <input type="text" name="rating" placeholder="input rating" class="form-control" required > </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
-                <h5 class="text-left">Harga</h5>
+                <h5 class="text-left">Price</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                <input type="text" name="harga" placeholder="input price" class="form-control" required > </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Photo Url</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="photo_url" placeholder="input photo url" class="form-control"> </div>
+              </div>
+            <div class="row my-1">
+              <div class="col-md-4">
+                <h5 class="text-left">Video Url</h5>
+              </div>
+              <div class="col-md-8">
+                <input type="text" name="video_url" placeholder="input video url" class="form-control"> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
-                <h5 class="text-left">Video</h5>
+                <h5 class="text-left">Screenshot 1 url</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                <input type="text" name="screenshot1_url" placeholder="input screenshot" class="form-control"> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
-                <h5 class="text-left">Gambar 1</h5>
+                <h5 class="text-left">Screenshot 2 url</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                  <input type="text" name="screenshot2_url" placeholder="input screenshot" class="form-control"> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
-                <h5 class="text-left">Gambar 2</h5>
+                <h5 class="text-left">Screenshot 3 url</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                  <input type="text" name="screenshot3_url" placeholder="input screenshot" class="form-control"> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-4">
-                <h5 class="text-left">Gambar 3</h5>
+                <h5 class="text-left">Description</h5>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-4">
-                <h5 class="text-left">Deskripsi</h5>
-              </div>
-              <div class="col-md-8">
-                <input type="email" class="form-control"> </div>
+                <input type="text" name="description" placeholder="input game description" class="form-control"> </div>
             </div>
             <div class="row my-1">
               <div class="col-md-12">
@@ -248,91 +242,91 @@
               </div>
             </div>
             <div class="row my-1">
-              <div class="col-md-3">
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Action</label>
+                <div class="col-md-3">
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1d1f7460b278469cc33" name="genre[]">
+                    <label>Action</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1d8f7460b278469cc37" name="genre[]">
+                    <label>RPG</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1def7460b278469cc3b" name="genre[]">
+                    <label>Sports</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f248f7460b278469cc3f" name="genre[]">
+                    <label>Open Wo...</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f250f7460b278469cc43" name="genre[]">
+                    <label>FPS</label>
+                  </div>
                 </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">RPG</label>
+                <div class="col-md-3">
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1d3f7460b278469cc34" name="genre[]">
+                    <label>Adventure</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1d9f7460b278469cc38" name="genre[]">
+                    <label>Violent</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1e0f7460b278469cc3c" name="genre[]">
+                    <label>Racing</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f24af7460b278469cc40" name="genre[]">
+                    <label>Fantasy</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f253f7460b278469cc44" name="genre[]">
+                    <label>Mystery</label>
+                  </div>
                 </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Sports</label>
+                <div class="col-md-3">
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1d5f7460b278469cc35" name="genre[]">
+                    <label>Strategy</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1dbf7460b278469cc39" name="genre[]">
+                    <label>Singleplayer</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f244f7460b278469cc3d" name="genre[]">
+                    <label>Multiplayer</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f24cf7460b278469cc41" name="genre[]">
+                    <label>Sci-fi</label>
+                  </div>
+                  <div class="text-left">
+                      <input type="checkbox" class="test" id="same-address" value="5b34f255f7460b278469cc45" name="genre[]">
+                      <label>Crime</label>
+                    </div>
                 </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Open Wo...</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">FPS</label>
+                <div class="col-md-3">
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1d6f7460b278469cc36" name="genre[]">
+                    <label>Simulation</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f1ddf7460b278469cc3a" name="genre[]">
+                    <label>Massively...</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f246f7460b278469cc3e" name="genre[]">
+                    <label>Horror</label>
+                  </div>
+                  <div class="text-left">
+                    <input type="checkbox" class="test" id="same-address" value="5b34f24ef7460b278469cc42" name="genre[]">
+                    <label>Indie</label>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Adventure</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Violent</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Racing</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Fantasy</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Mystery</label>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Strategy</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Singleplayer</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Multiplayer</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Sci-fi</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Action</label>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Simulation</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Massively...</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Horror</label>
-                </div>
-                <div class="text-left">
-                  <input type="checkbox" id="same-address" value="on">
-                  <label for="same-address">Indie</label>
-                </div>
-              </div>
-            </div>
             <div class="row my-1">
               <div class="col-md-12">
                 <h5 class="text-left m-0">Minimum Requirement</h5>
@@ -343,11 +337,8 @@
                 <h5 class="text-left">OS</h5>
               </div>
               <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                <select class="form-control" name="OS" id="sel1" required >
+                  <option>Windows 7 / 8 (8.1)/ 10 64Bit</option>
                 </select>
               </div>
             </div>
@@ -356,11 +347,10 @@
                 <h5 class="text-left">Processor</h5>
               </div>
               <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                <select class="form-control" id="sel1" name="procminimum" required >
+                    <%  _.each(processor,function(processor){ %>
+                      <option value="<%= processor.id %>"><%= processor.processor_name %></option>
+                      <%})%>
                 </select>
               </div>
             </div>
@@ -369,11 +359,10 @@
                 <h5 class="text-left">Memory</h5>
               </div>
               <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                <select class="form-control" id="sel1" name="ramminimum" required >
+                  <<%  _.each(ram,function(ram){ %>
+                    <option value="<%= ram.id %>"><%= ram.ram_size %></option>
+                    <%})%>
                 </select>
               </div>
             </div>
@@ -382,11 +371,10 @@
                 <h5 class="text-left">Graphics</h5>
               </div>
               <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                <select class="form-control" id="sel1" name="vgaminimum" required >
+                    <%  _.each(vga,function(vga){ %>
+                      <option value="<%= vga.id %>"><%= vga.vga_name %></option>
+                      <%})%>
                 </select>
               </div>
             </div>
@@ -395,12 +383,7 @@
                 <h5 class="text-left">Storage</h5>
               </div>
               <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
+                  <input type="text" name="HDD_space" placeholder="Input Storage" class="form-control" required >
               </div>
             </div>
             <div class="row my-1">
@@ -409,82 +392,91 @@
               </div>
             </div>
             <div class="row my-1">
-              <div class="col-md-4">
-                <h5 class="text-left">OS</h5>
+                <div class="col-md-4">
+                  <h5 class="text-left">OS</h5>
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control" id="sel1" required >
+                    <option>Windows 7 / 8 (8.1)/ 10 64Bit</option>
+                  </select>
+                </div>
               </div>
-              <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Processor</h5>
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control" id="sel1" name="procrec" required >
+                      <%  _.each(processor,function(processor){ %>
+                        <option value="<%= processor.id %>"><%= processor.processor_name %></option>
+                        <%})%>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-4">
-                <h5 class="text-left">Processor</h5>
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Memory</h5>
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control" id="sel1" name="ramrec" required >
+                    <<%  _.each(ram,function(ram){ %>
+                      <option value="<%= ram.id %>"><%= ram.ram_size %></option>
+                      <%})%>
+                  </select>
+                </div>
               </div>
-              <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Graphics</h5>
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control" id="sel1" name="vgarec" required >
+                      <%  _.each(vga,function(vga){ %>
+                        <option value="<%= vga.id %>"><%= vga.vga_name %></option>
+                        <%})%>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-4">
-                <h5 class="text-left">Memory</h5>
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Storage</h5>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" placeholder="Input Storage" class="form-control" required >
+                </div>
               </div>
-              <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-              </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-4">
-                <h5 class="text-left">Graphics</h5>
-              </div>
-              <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-              </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-4">
-                <h5 class="text-left">Storage</h5>
-              </div>
-              <div class="col-md-8">
-                <select class="form-control" id="sel1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-              </div>
-            </div>
-          </form>
+          
         </div>
         <!-- Modal footer -->
         <div class="modal-footer text-center">
-          <button type="button" class="btn btn-success btn-block btn-sm text-center">Save</button>
+          <button type="submit" class="btn btn-success btn-block btn-sm text-center">Save</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+      $('.test').change(function(){
+      if($('input.test').filter(':checked').length == 4)
+          $('input.test:not(:checked)').attr('disabled', 'disabled');
+      else
+          $('input.test').removeAttr('disabled');
+  });
+</script>
+<script>
+  $(document).ready(function(){
+  $("form[name = 'addgame' ]").submit(function(){
+  if ($('input:checkbox').filter(':checked').length < 1){
+      alert("Check at least one Genre!");
+  return false;
+  }
+  });
+});
+</script>
+
 
 </body>
 
