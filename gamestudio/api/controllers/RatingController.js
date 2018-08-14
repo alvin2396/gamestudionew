@@ -125,6 +125,35 @@ module.exports = {
                 
             }
         })
+    },
+
+    showratingmobile : function(req,res){
+        Rating.find({game_id : req.param('game_id')}).exec(function(err,rating){
+            if(err){
+                return res.serverError(err);
+            }
+            else{
+                datarating = []
+                async.each(rating,function(getuser,callback){
+                    User.findOne({id : getuser.user_id}).exec(function(err, userdata){
+                        datarating.push({
+                            user_name : userdata.nama,
+                            rating : getuser.rating_value,
+                            photo_url : userdata.photo_url,
+                            review : getuser.review
+                        })
+                        callback()
+                    })
+                },function(err){
+                    if(err){
+                        return res.serverError(err);
+                    }
+                    else{
+                        res.json(datarating)
+                    }
+                })
+            }
+        })
     }
 
 };
