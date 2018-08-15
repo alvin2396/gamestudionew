@@ -87,7 +87,7 @@ module.exports = {
                                                                                 console.log(updatecart)
                                                                                 
                                                                                 Feature.findOne({game_id : games.id}).exec(function(err, feature){
-                                                                                    Rating.find({game_id : games.id}).sort('createdAt ASC').exec(function(err,review){
+                                                                                    Rating.find({game_id : games.id}).sort('updatedAt DESC').exec(function(err,review){
                                                                                         review.namauser = []
                                                                                         async.each(review,function(userreview,callback){
                                                                                             User.findOne({id : userreview.user_id}).exec(function(err, datareview){
@@ -182,7 +182,7 @@ module.exports = {
                                                                     return res.serverError(err)
                                                                 }
                                                                 else{
-                                                                    Rating.find({game_id : games.id}).exec(function(err,review){
+                                                                    Rating.find({game_id : games.id}).sort('updatedAt DESC').exec(function(err,review){
                                                                         review.namauser = []
                                                                         async.each(review,function(userreview,callback){
                                                                             User.findOne({id : userreview.user_id}).exec(function(err, datareview){

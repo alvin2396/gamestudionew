@@ -443,6 +443,198 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="myModal">
+        <form method="POST" action="/rating/addreview" >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title text-center w-100">Rating &amp; Review</h4>
+                <button type="button" class="close m-0 p-0" data-dismiss="modal">×</button>
+              </div>
+              <input type="hidden" name="game_id" value="<%= games.id %>">
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div class="row my-1">
+                  <div class="col-md-12">
+                    <h5 class="text-left">My Rating&nbsp;
+                      <select id="combostar" name="rating_value" >
+                        <option value="2" >2</option>
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                      </select>
+                      <p>
+                        Current rating: <span id="starcount">0</span> stars
+                      </p>
+                    </h5>
+                  </div>
+                </div>
+                <div class="row my-1">
+                  <div class="col-md-12">
+                    <h5 class="text-left">1. Do you like the Gameplay?</h5>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="9" name="gameplay_value" checked>
+                      <label for="same-address">
+                        <span>Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="7" name="gameplay_value">
+                      <label for="same-address">
+                        <span>Not Sure</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="5" name="gameplay_value">
+                      <label for="same-address">
+                        <span>No</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-1">
+                  <div class="col-md-12">
+                    <h5 class="text-left">2. Do you like the Graphic?</h5>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="9" name="graphic_value" checked>
+                      <label for="same-address">
+                        <span>Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="7" name="graphic_value" >
+                      <label for="same-address">
+                        <span>Not Sure</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="5" name="graphic_value" >
+                      <label for="same-address">
+                        <span>No</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-1">
+                  <div class="col-md-12">
+                    <h5 class="text-left">3. Is the Control easy to use?</h5>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="9" name="controls_value" checked >
+                      <label for="same-address">
+                        <span>Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="7" name="controls_value" >
+                      <label for="same-address">
+                        <span>Not Sure</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="5" name="controls_value" >
+                      <label for="same-address">
+                        <span>No</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-1">
+                  <div class="col-md-12">
+                    <h5 class="text-left">4. Do you like the Story?</h5>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="9" name="story_value" checked >
+                      <label for="same-address">
+                        <span>Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="7" name="story_value" >  
+                      <label for="same-address">
+                        <span>Not Sure</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="5" name="story_value" >
+                      <label for="same-address">
+                        <span>No</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-1">
+                  <div class="col-md-12">
+                    <h5 class="text-left">5. Do you like the Music?</h5>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="9" name="music_value" checked >
+                      <label for="same-address">
+                        <span>Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="7" name="music_value" >
+                      <label for="same-address">
+                        <span>Not Sure</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-left">
+                      <input type="radio" id="same-address" value="5" name="music_value" >
+                      <label for="same-address">
+                        <span>No</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-1">
+                  <div class="col-md-12">
+                    <h5 class="text-left">Write Your Review :</h5>
+                  </div>
+                  <div class="col-md-12">
+                    <textarea class="form-control" rows="5" id="review" name="review" ></textarea>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="user_id" value="<%=req.session.User.id%>">
+              <!-- Modal footer -->
+              <div class="modal-footer text-center">
+                <button type="submit" class="btn btn-success btn-block btn-sm text-center">Submit</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        </div>
     <%}
      else{%>
      <body class="bg-dark">
@@ -806,196 +998,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="myModal">
-    <form method="POST" action="/rating/addreview" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title text-center w-100">Rating &amp; Review</h4>
-            <button type="button" class="close m-0 p-0" data-dismiss="modal">×</button>
-          </div>
-          <input type="hidden" name="game_id" value="<%= games.id %>">
-          <!-- Modal body -->
-          <div class="modal-body">
-            <div class="row my-1">
-              <div class="col-md-12">
-                <h5 class="text-left">My Rating&nbsp;
-                  <select id="combostar" name="rating_value" >
-                    <option value="2" >2</option>
-                    <option value="4">4</option>
-                    <option value="6">6</option>
-                    <option value="8">8</option>
-                    <option value="10">10</option>
-                  </select>
-                  <p>
-                    Current rating: <span id="starcount">0</span> stars
-                  </p>
-                </h5>
-              </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-12">
-                <h5 class="text-left">1. Do you like the Gameplay?</h5>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="9" name="gameplay_value" checked>
-                  <label for="same-address">
-                    <span>Yes</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="7" name="gameplay_value">
-                  <label for="same-address">
-                    <span>Not Sure</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="5" name="gameplay_value">
-                  <label for="same-address">
-                    <span>No</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-12">
-                <h5 class="text-left">2. Do you like the Graphic?</h5>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="9" name="graphic_value" checked>
-                  <label for="same-address">
-                    <span>Yes</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="7" name="graphic_value" >
-                  <label for="same-address">
-                    <span>Not Sure</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="5" name="graphic_value" >
-                  <label for="same-address">
-                    <span>No</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-12">
-                <h5 class="text-left">3. Is the Control easy to use?</h5>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="9" name="controls_value" checked >
-                  <label for="same-address">
-                    <span>Yes</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="7" name="controls_value" >
-                  <label for="same-address">
-                    <span>Not Sure</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="5" name="controls_value" >
-                  <label for="same-address">
-                    <span>No</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-12">
-                <h5 class="text-left">4. Do you like the Story?</h5>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="9" name="story_value" checked >
-                  <label for="same-address">
-                    <span>Yes</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="7" name="story_value" >  
-                  <label for="same-address">
-                    <span>Not Sure</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="5" name="story_value" >
-                  <label for="same-address">
-                    <span>No</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-12">
-                <h5 class="text-left">5. Do you like the Music?</h5>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="9" name="music_value" checked >
-                  <label for="same-address">
-                    <span>Yes</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="7" name="music_value" >
-                  <label for="same-address">
-                    <span>Not Sure</span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="text-left">
-                  <input type="radio" id="same-address" value="5" name="music_value" >
-                  <label for="same-address">
-                    <span>No</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row my-1">
-              <div class="col-md-12">
-                <h5 class="text-left">Write Your Review :</h5>
-              </div>
-              <div class="col-md-12">
-                <textarea class="form-control" rows="5" id="review" name="review" ></textarea>
-              </div>
-            </div>
-          </div>
-          <!-- Modal footer -->
-          <div class="modal-footer text-center">
-            <button type="submit" class="btn btn-success btn-block btn-sm text-center">Submit</button>
-          </div>
-        </div>
-      </div>
-    </form>
-    </div>
+  
   <script>
     function onClick(element) {
       document.getElementById("img01").src = element.src;

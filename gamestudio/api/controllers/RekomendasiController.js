@@ -203,7 +203,6 @@ module.exports = {
                                                         // console.log(korelasigenre)
                                                         //console.log(genre)
                                                         // return res.json(korelasigenre)
-                                                        return res.json(korelasigenre)
                                                         Cart.find({user_id : req.session.User.id}).exec(function(err,updatecart){
                                                             Owngame.find({user_id : req.session.User.id}).exec(function(err,owngame){
                                                                 console.log(get_genre)
@@ -266,15 +265,13 @@ module.exports = {
                                                         //console.log(datakorelasi)
                                                         //console.log(genre)
                                                         // res.json(recommendationdata)
-                                                            Cart.find({user_id : req.session.User.id}).exec(function(err, updatecart){
-                                                                res.view('user/recommend', {
-                                                                    status : 'OK',
-                                                                    title : 'rekomendasi',
-                                                                    recommendationdata : recommendationdata,
-                                                                    updatecart : updatecart,
-                        
-                                                                })
-                                                            })
+                                                        res.view('user/recommend', {
+                                                            status : 'OK',
+                                                            title : 'rekomendasi',
+                                                            recommendationdata : recommendationdata,
+                                                            
+                
+                                                        })
                                                      
                                                         }
                                                         

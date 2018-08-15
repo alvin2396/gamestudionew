@@ -188,6 +188,21 @@ module.exports.routes = {
 'GET /admin/korelasipanel' : {
   controller : 'admin',
   action : "matriks",
+},
+
+'GET /admin/salespanel' : {
+  controller : 'admin',
+  action : "listowngameweb",
+},
+
+'GET /admin/frekuensipanel' : {
+  controller : 'admin',
+  action : "frekuensigenre",
+},
+
+'GET /admin/adminrekomendasi' : {
+  controller : 'admin',
+  action : "rekomendasi",
 }
 
  
