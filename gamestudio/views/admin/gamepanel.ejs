@@ -131,7 +131,13 @@
                     <td><%= datagame.rating%></td>
                     <td><%= datagame.publisher%></td>
                     
-                    <td><button type="submit">Edit</button></td>
+                    <td>
+                      <form method="POST" action="/admin/gameedit" >
+                          <input type="hidden" name="game_id" value="<%= datagame.id%>"> 
+                          <button type="submit">Edit</button>
+                      </form>
+                      
+                    </td>
                    
                     <form method="POST" action="/admin/gamedelete" onsubmit="return confirm('Do you really want to delete <%= datagame.game_name%>?');"  >
                       <input type="hidden" name="game_id" value="<%= datagame.id%>">

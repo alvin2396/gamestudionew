@@ -203,6 +203,11 @@ module.exports.routes = {
 'GET /admin/adminrekomendasi' : {
   controller : 'admin',
   action : "rekomendasi",
+},
+
+'POST /admin/gameedit' : {
+  controller : 'admin',
+  action : "editgame",
 }
 
  

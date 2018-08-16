@@ -824,18 +824,18 @@ module.exports = {
     },
 
     search: function (req, res, next) {
-        var perPage = 20
-            if (!req.params.page) {
+        var perPage = 15
+            if (!req.param('page')) {
                 var page = 1
             }
             else {
-                var page = req.params.page
+                var page = req.param('page')
             }
         if(req.session.User){
             
             Games.find({ like: { game_name: '%' + req.param('search') + '%' } })
             .skip((perPage * page) - perPage)
-            .limit(perPage).populateAll()
+            .limit(perPage)
             .exec(function (err, search) {
                 if (err) {
                     return res.serverError(err);
@@ -866,7 +866,7 @@ module.exports = {
          
             Games.find({ like: { game_name: '%' + req.param('search') + '%' } })
             .skip((perPage * page) - perPage)
-            .limit(perPage).populateAll()
+            .limit(perPage)
             .exec(function (err, search) {
                 if (err) {
                     return res.serverError(err);

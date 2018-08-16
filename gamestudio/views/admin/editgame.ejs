@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/styles/custom.css" type="text/css">
+  <link rel="stylesheet" href="/styles/admin.css" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="/styles/theme.css" type="text/css"> </head>
+
+<body class="bg-info">
+  <div class="">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 bg-dark p-3">
+          <img class="img-fluid d-block mx-2" src="/image/Logo Gaming Studio.png" style="width:60px; margin-left:0px !important; float:left;">
+          <h3 class="text-left m-0 py-2" style="float:left;">
+            <a href="/admin/adminpanel">GAMING STUDIO</a>
+          </h3>
+          <h6 class="text-left m-0 py-3" style="float:right;">
+            <b>LOG OUT</b>
+          </h6>
+          <div class="row"> </div>
+        </div>
+      </div>
+      <form method="POST" action="/admin/updategame" >
+        <input type="hidden" name="id" value="<%= datagame.id%>">
+      <div class="row">
+        <div class="bg-light col-md-12" style="padding-bottom:20px;">
+          <div class="row">
+            <div class="bg-light col-md-12 py-2">
+              <h1 class="text-dark m-0 text-center">Edit Game</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Judul Game</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="game_name"class="form-control" value="<%= datagame.game_name%>" > </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Publisher</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="publisher" value="<%= datagame.publisher%>" class="form-control"> </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Tahun</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="date" name="release_date" value="<%= datagame.release_date%>" class="form-control"> </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Rating</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="rating" value="<%= datagame.rating%>" class="form-control"> </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Harga</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="harga" value="<%= datagame.harga%>" class="form-control"> </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Photo</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="photo_url" value="<%= datagame.photo_url%>" class="form-control"> </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Video</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="video_url" value="<%= datagame.video_url%>" class="form-control"> </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Screenshot 1</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="screenshot1_url" value="<%= datagame.screenshot1_url%>" class="form-control"> </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Screenshot 2</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="screenshot2_url" value="<%= datagame.screenshot2_url%>" class="form-control"> </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Screenshot 3</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="screenshot3_url" value="<%= datagame.screenshot3_url%>" class="form-control"> </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="bg-light col-md-4">
+              <div class="row my-1">
+                <div class="col-md-4">
+                  <h5 class="text-left">Deskripsi</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="description" value="<%= datagame.description%>" class="form-control"> </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-4 py-2"></div>
+            <div class="bg-light col-md-4 py-2"></div>
+          </div>
+         
+          <div class="row">
+            <div class="bg-light col-md-6">
+              <div class="row my-1">
+                <div class="col-md-12">
+                  <div class="row my-1">
+                    <div class="col-md-12">
+                      <h5 class="text-left m-0">Minimum Requirement</h5>
+                    </div>
+                  </div>
+                  <div class="row my-1">
+                    <div class="col-md-4">
+                      <h5 class="text-left">OS</h5>
+                    </div>
+                    <div class="col-md-8">
+                    <select class="form-control" name="OS" id="sel1" required >
+                        <option>Windows 7 / 8 (8.1)/ 10 64Bit</option>
+                    </select>
+                    </div>
+                  </div>
+                  <div class="row my-1">
+                    <div class="col-md-4">
+                      <h5 class="text-left">Processor</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" name="processor_id_min" id="procmin">
+                            <%  _.each(processor,function(processor){ %>
+                                 <option value="<%= processor.id %>"><%= processor.processor_name %></option>
+                            <%})%>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="row my-1">
+                    <div class="col-md-4">
+                      <h5 class="text-left">Memory</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" name="ram_id_min" id="rammin">
+                            <%  _.each(ram,function(ram){ %>
+                                <option value="<%= ram.id %>"><%= ram.ram_size %></option>
+                             <%})%>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="row my-1">
+                    <div class="col-md-4">
+                      <h5 class="text-left">Graphics</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" name="vga_id_min" id="vgamin">
+                            <%  _.each(vga,function(vga){ %>
+                                 <option value="<%= vga.id %>"><%= vga.vga_name %></option>
+                            <%})%>
+                         </select>
+                    </div>
+                  </div>
+                  <div class="row my-1">
+                    <div class="col-md-4">
+                      <h5 class="text-left">Storage</h5>
+                    </div>
+                    <div class="col-md-8">
+                         <input type="text" name="HDD_space" value="<%= datagame.HDD_space%>" class="form-control"> </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-light col-md-6">
+              <div class="row my-1">
+                <div class="col-md-12">
+                  <div class="row my-1">
+                    <div class="col-md-12">
+                      <h5 class="text-left m-0">Recommended Requirement</h5>
+                    </div>
+                  </div>
+                  <div class="row my-1">
+                        <div class="col-md-4">
+                          <h5 class="text-left">OS</h5>
+                        </div>
+                        <div class="col-md-8">
+                        <select class="form-control"  id="sel1" required >
+                            <option>Windows 7 / 8 (8.1)/ 10 64Bit</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="row my-1">
+                        <div class="col-md-4">
+                          <h5 class="text-left">Processor</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="processor_id_rec" id="procreq">
+                                <%  _.each(processor,function(processor){ %>
+                                     <option value="<%= processor.id %>"><%= processor.processor_name %></option>
+                                <%})%>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="row my-1">
+                        <div class="col-md-4">
+                          <h5 class="text-left">Memory</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="ram_id_rec" id="ramrec">
+                                <%  _.each(ram,function(ram){ %>
+                                    <option value="<%= ram.id %>"><%= ram.ram_size %></option>
+                                 <%})%>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="row my-1">
+                        <div class="col-md-4">
+                          <h5 class="text-left">Graphics</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="vga_id_rec" id="vgarec">
+                                <%  _.each(vga,function(vga){ %>
+                                     <option value="<%= vga.id %>"><%= vga.vga_name %></option>
+                                <%})%>
+                             </select>
+                        </div>
+                      </div>
+                      <div class="row my-1">
+                        <div class="col-md-4">
+                          <h5 class="text-left">Storage</h5>
+                        </div>
+                        <div class="col-md-8">
+                             <input type="text" value="<%= datagame.HDD_space%>" class="form-control"> </div>
+                        </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-success text-center btn-lg">Save</button>
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script type='text/javascript'>
+    $(document).ready(function(){
+    $('#procmin option[value=<%= minpsek.processor_id %>]').prop('selected',true);
+    $('#rammin option[value=<%= minpsek.ram_id %>]').prop('selected',true);
+    $('#vgamin option[value=<%= minpsek.vga_id %>]').prop('selected',true);
+    $('#procreq option[value=<%= recspek.processor_id %>]').prop('selected',true);
+    $('#ramrec option[value=<%= recspek.ram_id %>]').prop('selected',true);
+    $('#vgarec option[value=<%= recspek.vga_id %>]').prop('selected',true);
+    });
+
+  </script>
+</body>
+
+</html>

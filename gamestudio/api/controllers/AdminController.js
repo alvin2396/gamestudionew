@@ -87,6 +87,98 @@ module.exports = {
     })
    },
 
+   editgame : function(req,res){
+    Games.findOne({id : req.param('game_id')}).populateAll().exec(function(err,datagame){
+        Processor.find().sort('processor_name ASC').populateAll().exec(function(err, processor){
+            Vga.find().sort('vga_name ASC').populateAll().exec(function(err,vga){
+                Ram.find().sort('ram_size ASC').populateAll().exec(function(err, ram){
+                    Spesifikasi.findOne({game_id : req.param('game_id')}).where({ status : 'minimum'}).exec(function(err,minspek){
+                        Spesifikasi.findOne({game_id : req.param('game_id')}).where({status : 'recommend'}).exec(function(err,recspek){
+                            
+                            res.view('admin/editgame',{
+                                status : 'OK',
+                                title : 'Dashboard',
+                                layout : false,
+                                datagame : datagame,
+                                processor : processor,
+                                vga : vga,
+                                ram : ram,
+                                minpsek : minspek,
+                                recspek : recspek,
+                            })
+                        })
+                        
+                    })
+                    
+                })
+            })
+        })
+     })
+   },
+
+   updategame : function(req,res){
+    var gamesObj = {
+        game_name: req.param('game_name'),
+        release_date: req.param('release_date'),
+        harga : req.param('harga'),
+        publisher : req.param('publisher'),
+        photo_url : req.param('photo_url'),
+        screenshot1_url : req.param('screenshot1_url'),
+        screenshot2_url : req.param('screenshot2_url'),
+        screenshot3_url : req.param('screenshot3_url'),
+        video_url : req.param('video_url'),
+        rating : req.param('rating'),
+        description : req.param('description'),
+        HDD_space : req.param('HDD_space'),
+        OS : req.param('OS')
+      }
+
+      var spesifikasiminObj = {
+          processor_id : req.param('processor_id_min'),
+          ram_id : req.param('ram_id_min'),
+          vga_id : req.param('vga_id_min')
+      }
+
+      var spesifikasirecObj = {
+        processor_id : req.param('processor_id_rec'),
+        ram_id : req.param('ram_id_rec'),
+        vga_id : req.param('vga_id_rec')
+      }
+
+      Games.update(req.param('id'),gamesObj,function(err){
+          if(err){
+              return res.serverError(err);
+          }
+          else{
+              Spesifikasi.findOne({game_id : req.param('id')}).where({status : 'minimum'}).exec(function(err, minspek){
+                  Spesifikasi.findOne({game_id : req.param('id')}).where({status : 'recommend'}).exec(function(err,recpsek){
+                      Spesifikasi.update(minspek.id,spesifikasiminObj,function(err){
+                          if(err){
+                              return res.serverError(err);
+                          }
+                          else{
+                              Spesifikasi.update(recpsek.id,spesifikasirecObj,function(err){
+                                  if(err){
+                                      return res.serverError(err);
+                                  }
+                                  else{
+                                    var gameupdate = [
+                                        'Game updated'
+                                      ]
+                                      req.session.flash = {
+                                        err: gameupdate
+                                      }
+                                      res.redirect('admin/gamepanel')
+                                  }
+                              })
+                          }
+                      })
+                  })
+              })
+          }
+      })
+   },
+
    addgame : function(req,res){
        var genre = []
        var release_date = req.param('release_date')
